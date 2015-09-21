@@ -1,0 +1,9 @@
+dimension 	29 18 1
+
+lattice 	hcp graphene
+
+alat 		2.46
+
+cta 		10
+
+output 		crystal lammps

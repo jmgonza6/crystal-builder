@@ -1,0 +1,13 @@
+>>> common.o
+>>> main.o
+>>> interface.o
+>>> gui.o
+>>> render.o
+>>> lattice.o
+>>> cubic.o
+>>> orthorhombic.o
+>>> tetragonal.o
+>>> structue_lib.o
+>>> mathns.o
+>>> write.o
+.
