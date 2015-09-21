@@ -41,7 +41,7 @@ follow the directions below to install them.
 a) Fedora 21/RHEL 6.X/CentOS 6.X
 Run the following command,
 
-	yum install gtk2*
+	yum install gtk+-devel gtk2-devel
 
 
 a) Debian/Ubuntu
