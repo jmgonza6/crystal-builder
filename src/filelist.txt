@@ -6,9 +6,6 @@ cubic.cpp
 tetragonal.h
 tetragonal.cpp
 
-trigonal.h
-trigonal.cpp
-
 orthorhombic.h
 orthorhombic.cpp
 
@@ -25,6 +22,7 @@ lattice.h
 lattice.cpp
 
 common.h
+common.cpp
 errors.cpp
 
 write.h

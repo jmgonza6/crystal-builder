@@ -5,6 +5,7 @@
 >>> render.o
 >>> lattice.o
 >>> cubic.o
+>>> custom.o
 >>> orthorhombic.o
 >>> tetragonal.o
 >>> structue_lib.o
