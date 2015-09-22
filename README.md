@@ -122,7 +122,7 @@ Currently, three options are available for using this application:
    since the file written is named *POSCAR*.
 
 
-###3)
+**3)**
     Define a custom crystal with the *Custom crystal* button
 
    To build a custom crystal, click the *Custom crystal* button in the *Lattice* tab.  A pop-up  
