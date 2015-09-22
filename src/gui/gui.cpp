@@ -11,34 +11,25 @@ char *g_bravais;
 char *g_lstyle;
 char *g_pd_struct;
 
-// string to hold the custom stoichiometry
-std::string g_entryString;
-
-// which species ?
+// species for defining a single atom basis
 char *g_element;
+
 // latttice parameter a (Å)
 double g_alat;
 double g_blat;
 double g_clat;
 
+// lattice angles (˚)
 double g_alpha;
 double g_beta;
 double g_gamma;
-
-// c/a ratio
-double g_cta;
-
-int hide;
-
-// number of basis atoms
-int g_lbasis;
 
 // reset count, for debugging
 int g_resets;
 // run count, for debugging
 int g_run_count;
 
-// periodic extensions
+// supercell extensions
 int g_nx;
 int g_ny;
 int g_nz;
@@ -50,7 +41,14 @@ int g_view;
 
 int g_fract;
 
+// graphene globals
 int g_graphene;
+// c/a ratio
+double g_cta;
+// number of basis atoms
+int g_lbasis;
+
+int g_custom;
 
 std::string elements[110] = 
     {"EM",
@@ -70,18 +68,23 @@ std::string formats[3] = { "dmol (.car)", "lammps (.input)", "vasp (POSCAR)"};
 
 std::string crystals[6] = {"Cubic", "Hexagonal", "Monoclinic", "Orthorhombic", "Tetragonal", "Library"};
 
-// std::vector<std::vector<double> > customBasis;
+// container for the text entry of a basis atoms coordinates
 std::vector<std::string> basisList;
 
+// string to hold the custom stoichiometry
+std::string g_entryString;
 
-int g_custom;
-int g_ntypes;
-int g_apcell;
 
+/*
+--
+Constructor launches an instances of the parser class to handle the string maniupulations
+It also defines all of the global variables to a reasonable value so that the app can be
+run with as little interaction as possible
+--
+*/
 Gui::Gui()
 {
     parser = new Parser();
-    hide = 0;
 
     g_graphene = 0;
     g_custom = 0;
@@ -101,7 +104,7 @@ Gui::Gui()
     g_lstyle = NULL;
     g_element = NULL;
 
-    g_alat = g_blat = g_clat = 0;
+    g_alat = g_blat = g_clat = 1;
     g_alpha = g_beta = g_gamma = 90;
     g_cta = 1;
     g_lbasis = 2;
@@ -120,7 +123,7 @@ Gui::~Gui()
 void 
 Gui::display_in(GtkWidget *window)
 {
-    // ;
+
     GtkWidget *button;
     GtkWidget *table;
     GtkWidget *notebook;
@@ -140,9 +143,6 @@ Gui::display_in(GtkWidget *window)
     char bufferl[32];
     char windowTitle[50];
     sprintf(bufferf, "::::");
-
-    // set some default values
-
 
     char message[MAX_STRING_LENGTH];
 
@@ -346,7 +346,7 @@ Gui::display_in(GtkWidget *window)
     gtk_widget_show (frame);
 
     char mesg[] = "=============================================================\n" \
-                          "                                        Crystal Builder v. 3.3.0                   \n\n" \
+                          "                                        Crystal Builder v. 3.5.0                   \n\n" \
                           "            This is a utility designed to construct various common crystal \n" \
                           "        structures and produce them in the format of several popular simulation\n" \
                           "        packages.  \n" \
@@ -425,7 +425,7 @@ Gui::add_atom_window(GtkWidget *widget, gpointer data)
 
     gtk_container_set_border_width (GTK_CONTAINER (window), 10);
 
-    gtk_widget_set_size_request (window, 200, 250);
+    gtk_widget_set_size_request (window, 200, 200);
 
     sprintf(windowTitle,"Add new atom");
 
@@ -442,17 +442,16 @@ Gui::add_atom_window(GtkWidget *widget, gpointer data)
 
 
     GtkWidget *e1;
-    label = gtk_label_new("element");
-    e1 = gtk_entry_new();
-    hbox = gtk_hbox_new (FALSE, 0);
-    gtk_box_pack_start(GTK_BOX(hbox),label,1,1,0);
-    gtk_widget_set_size_request (label, 5,5);
-    gtk_box_pack_start(GTK_BOX(hbox),e1,1,1,0);
-    gtk_widget_set_size_request (e1, 10,20);
-    gtk_widget_set_tooltip_text(e1, "Enter the elemental symbol");
-    gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, TRUE, 5);
-    // g_signal_connect(e1, "activate",G_CALLBACK(set_custom_species), e1);
-
+        // label = gtk_label_new("element");
+        // e1 = gtk_entry_new();
+        // hbox = gtk_hbox_new (FALSE, 0);
+        // gtk_box_pack_start(GTK_BOX(hbox),label,1,1,0);
+        // gtk_widget_set_size_request (label, 5,5);
+        // gtk_box_pack_start(GTK_BOX(hbox),e1,1,1,0);
+        // gtk_widget_set_size_request (e1, 10,20);
+        // gtk_widget_set_tooltip_text(e1, "Enter the elemental symbol");
+        // gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, TRUE, 5);
+        // g_signal_connect(e1, "activate",G_CALLBACK(set_custom_species), e1);
 
     label = gtk_label_new("atomic positions");
     e1 = gtk_entry_new();
@@ -463,7 +462,7 @@ Gui::add_atom_window(GtkWidget *widget, gpointer data)
     gtk_widget_set_size_request (e1, 10,20);
     gtk_widget_set_tooltip_text(e1, "Enter the fractional positions separated by commas \n i.e. x,y,z");
     gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, TRUE, 5);
-    g_signal_connect(e1, "activate",G_CALLBACK(set_custom_basis), e1);
+    g_signal_connect(e1, "activate",G_CALLBACK(add_atom), e1);
 
     hbox = gtk_hbox_new (FALSE, 15);
     button = gtk_button_new_with_label ("Reset");
@@ -480,43 +479,6 @@ Gui::add_atom_window(GtkWidget *widget, gpointer data)
 
     gtk_widget_show_all(window);
 
-}
-
-void
-Gui::reset_basis(GtkWidget *widget, gpointer data)
-{
-    g_print("GUI::EXE       >>> RESET (basis)\n");
-    basisList.erase(basisList.begin(),basisList.end());
-}
-
-void 
-Gui::set_custom_basis(GtkWidget *entry, gpointer data)
-{
-    std::string entryList((char*) gtk_entry_get_text(GTK_ENTRY(data)));
-
-    basisList.push_back( entryList );
-
-    if (GMSG) g_print("GUI::MODIFY    >>> adding atom to basis position: ( %s )\n",entryList.c_str());
-
-    gtk_editable_select_region(GTK_EDITABLE(data), 0,-1); // text from 0 to the end
-    gtk_editable_copy_clipboard(GTK_EDITABLE(data));
-}
-
-void
-Gui::define_basis_atoms()
-{
-    std::vector<double> row(3);
-
-    for (int i=0;i<basisList.size();i++) {
-        std::vector<std::string> coordinates = parser->split_list(basisList[i],',');
-        row[0] = parser->str2num<double>(coordinates[0]);
-        row[1] = parser->str2num<double>(coordinates[1]);
-        row[2] = parser->str2num<double>(coordinates[2]);
-        if (DMSG)
-            fprintf (FDEBUG,"GUI::DEBUG::MESG: row %i = %f %f %f \n ",i,row[0],row[1],row[2]);
-        customBasis.push_back( row );
-    }
-    
 }
 
 void 
@@ -709,7 +671,7 @@ Gui::graphene_dialog()
     gtk_box_pack_start(GTK_BOX(hbox),label,1,1,0);
     gtk_box_pack_start(GTK_BOX(hbox),entry,1,1,0);
     gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, TRUE, 15);
-    g_signal_connect(entry, "activate",G_CALLBACK(set_basis), entry);
+    g_signal_connect(entry, "activate",G_CALLBACK(set_graphene_basis), entry);
     gtk_widget_set_tooltip_text(entry,"Enter 2 for hexagonal, 4 for rectangular");
 
     label = gtk_label_new("c/a ratio");
@@ -928,14 +890,6 @@ Gui::set_cart( GtkToggleButton *swtch )
     }
 }
 
-void 
-Gui::set_out_name(GtkWidget *widget, gpointer data)
-{
-    if (GMSG) g_print("GUI::PARAMETER >>  writing to [ %s.* ]\n", gtk_entry_get_text(GTK_ENTRY(data)));
-    g_out_name = (char*)gtk_entry_get_text(GTK_ENTRY(data));
-    gtk_editable_select_region(GTK_EDITABLE(data), 0,-1); // text from 0 to the end
-    gtk_editable_copy_clipboard(GTK_EDITABLE(data));
-}
 
 void 
 Gui::set_bravais( GtkComboBox *dropdown, gpointer data )
@@ -991,14 +945,6 @@ Gui::set_pd_struct( GtkComboBox *dropdown, gpointer data )
     g_free( selection );
 }
 
-void
-Gui::define_atom(GtkWidget *entry, gpointer data)
-{
-    if (GMSG) g_print("GUI::PARAMETER >>  definining new atom as [ %s ]\n", gtk_entry_get_text(GTK_ENTRY(data)));
-    g_out_name = (char*)gtk_entry_get_text(GTK_ENTRY(data));
-    gtk_editable_select_region(GTK_EDITABLE(data), 0,-1); // text from 0 to the end
-    gtk_editable_copy_clipboard(GTK_EDITABLE(data));
-}
 
 void 
 Gui::set_custom_species(GtkWidget *entry, gpointer data)
@@ -1072,7 +1018,7 @@ Gui::set_gamma(GtkWidget *widget, gpointer data)
 
 
 void 
-Gui::set_basis(GtkWidget *widget, gpointer data)
+Gui::set_graphene_basis(GtkWidget *widget, gpointer data)
 {
     g_lbasis = atoi((char*) gtk_entry_get_text(GTK_ENTRY(data)));
     if (g_lbasis == 2 || g_lbasis == 4) {
@@ -1188,12 +1134,48 @@ Gui::save_browser(GtkWidget* button, gpointer window)
     gtk_widget_destroy(dialog);
 }
 
+void
+Gui::reset_basis(GtkWidget *widget, gpointer data)
+{
+    g_print("GUI::EXECUTE   >>> RESET (basis)\n");
+    basisList.erase(basisList.begin(),basisList.end());
+}
+
+void 
+Gui::add_atom(GtkWidget *entry, gpointer data)
+{
+    std::string entryList((char*) gtk_entry_get_text(GTK_ENTRY(data)));
+
+    basisList.push_back( entryList );
+
+    if (GMSG) g_print("GUI::MODIFY    >>> adding atom to basis position: ( %s )\n",entryList.c_str());
+
+    gtk_editable_select_region(GTK_EDITABLE(data), 0,-1); // text from 0 to the end
+    gtk_editable_copy_clipboard(GTK_EDITABLE(data));
+}
+
+void
+Gui::define_basis_atoms()
+{
+    std::vector<double> row(3);
+
+    for (int i=0;i<basisList.size();i++) {
+        std::vector<std::string> coordinates = parser->split_list(basisList[i],',');
+        row[0] = parser->str2num<double>(coordinates[0]);
+        row[1] = parser->str2num<double>(coordinates[1]);
+        row[2] = parser->str2num<double>(coordinates[2]);
+        if (DMSG)
+            fprintf (FDEBUG,"GUI::DEBUG::MESG: row %i = %f %f %f \n ",i,row[0],row[1],row[2]);
+        customBasis.push_back( row );
+    }
+}
+
 void 
 Gui::reset_parameters(GtkWidget* button, gpointer data)
 {
     g_resets++;
 
-    g_print("GUI::EXE       >>> RESET (all)\n");
+    g_print("GUI::EXECUTE   >>> RESET (all)\n");
 
     g_pd_struct = NULL;
     g_out_name = NULL;
@@ -1202,7 +1184,7 @@ Gui::reset_parameters(GtkWidget* button, gpointer data)
     g_lstyle = NULL;
     g_element = NULL;
 
-    g_alat = g_blat = g_clat = 0;
+    g_alat = g_blat = g_clat = 1;
     g_alpha = g_beta = g_gamma = 90;
     g_cta = 0;
     g_lbasis = 2;
@@ -1221,7 +1203,9 @@ Gui::quit_main(GtkWidget *button, gpointer data)
 void 
 Gui::render_crystal(GtkWidget *button, gpointer data)
 {
+
     g_view = 1;
+    if (GMSG) g_print("GUI::EXECUTE   >> building and rendering crystal\n");
     gtk_main_quit();
 }
 
@@ -1258,7 +1242,7 @@ GtkWidget
 void Gui::build_crystal(GtkWidget* button, gpointer window)
 {
     g_view = 0;
-    if (GMSG) g_print("GUI::EXE       >> building crystal\n");
+    if (GMSG) g_print("GUI::EXECUTE   >> building crystal\n");
     gtk_main_quit();
 }
 
@@ -1290,17 +1274,30 @@ void Gui::save_settings()
     ny = g_ny;
     nz = g_nz;
 
-
-
-
     graphene = g_graphene;
 
     std::vector<std::string> g_elemList;
     std::vector<std::string> g_elemCount;
 
 
-    // set the default Library parameters 
-    if (strcmp(bravais,"Library")==0) {
+    custom = g_custom;
+
+    if (custom) {
+        define_basis_atoms();
+        // parse the custom list of species and stoichiometric coefficients
+        parser->scan_list(g_entryString, ',', ':', g_elemList,g_elemCount);
+        std::string unit;
+        for (int i=0;i<g_elemList.size();i++) {
+            // if there is only 1 of a species, print only the element symbol
+            if (parser->str2num<int>(g_elemCount[i])==1) unit = g_elemList[i];
+            else unit = g_elemList[i] + g_elemCount[i];
+
+            elemList.push_back(g_elemList[i]);
+            elemCount.push_back(parser->str2num<int>(g_elemCount[i]));
+            customName += unit;
+        }
+    } else if (strcmp(bravais,"Library")==0) {
+        // set the default Library parameters 
         if (strncmp(g_pd_struct,"graphene",8)==0) {
             elemList.push_back("C");
             if (lbasis==2) elemCount.push_back(2);
@@ -1338,22 +1335,6 @@ void Gui::save_settings()
         }
     } 
 
-    custom = g_custom;
-
-    if (custom) {
-        define_basis_atoms();
-        // parse the custom list of species and stoichiometric coefficients
-        parser->scan_list(g_entryString, ',', ':', g_elemList,g_elemCount);
-        std::string unit;
-        for (int i=0;i<g_elemList.size();i++) {
-            // if there is only 1 of a species, print only the element symbol
-            if (parser->str2num<int>(g_elemCount[i])==1) unit = g_elemList[i];
-            else unit = g_elemList[i] + g_elemCount[i];
-
-            elemList.push_back(g_elemList[i]);
-            elemCount.push_back(parser->str2num<int>(g_elemCount[i]));
-            customName += unit;
-        }
-    }
+    
 
 }

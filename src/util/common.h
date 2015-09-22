@@ -12,7 +12,7 @@
   *
   * \author Joseph M. Gonzalez
   *
-  * \version 0.1
+  * \version 0.2
   *
   * \date Sep 13, 2015 19:16:20
   *
@@ -49,7 +49,7 @@
 
 
 #define SOFT "crystal builder"  //!< application name
-#define VERS "3.5.0"            //!< current version of the application
+#define VERS "3.5.1"            //!< current version of the application
 
 #define MAX_LOG_ENTRIES 30
 #define MAX_THERMO_LIST 50
@@ -76,13 +76,6 @@
 #define SMESG stdout
 #define WMESG stdout
 #define EMESG stderr
-
-// define the default background to black
-// #if !defined(WHITEBACK) || !defined(BLACKBACK)
-//     #define BLACKBACK
-// #endif
-
-
 
 
 // define how much info is printed to the terminal
@@ -281,6 +274,17 @@ class Memory {
         {
             int ii,jj;
             array = new TYPE*[length];
+            for(ii=0;ii<length;++ii) 
+                array[ii] = 0.;
+            return array;
+        }
+
+        template<typename retVal>
+        retVal 
+        *new_flat(int length)
+        {
+          int ii;
+            retVal *array = new retVal[length];
             for(ii=0;ii<length;++ii) 
                 array[ii] = 0.;
             return array;

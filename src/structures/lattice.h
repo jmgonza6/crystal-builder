@@ -49,7 +49,7 @@ class LATTICE {
         std::vector<double>      a3;           //!< c lattice vector, somewhere along [111]
 
         // atomic and type accounting
-        int                      *type_count;  //!< pointer to keep track of how many of each type, `type_count[0] -> type 1 ...`
+        int                      *typeCount;   //!< pointer to keep track of how many of each type, `typeCount[0] -> type 1 ...`
         int                      *nt;          //!< pointer to keep track of how many unique types
         int                      *atom_type;   //!< pointer to hold all unique types
         int                      *type_list;   //!< type numbers
@@ -90,9 +90,6 @@ class LATTICE {
           */
         void 
         build_crystal();
-
-        int
-        build_nn_list();
 
     private:
         /** \brief Convert the cartesian coordinates to fractional before writing the data 

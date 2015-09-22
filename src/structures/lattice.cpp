@@ -46,35 +46,54 @@ LATTICE::build_crystal()
     memory->new_2d(coords,natom,3);
     memory->new_1d(type_list,natom);
 
-    memory->new_1d(type_count,ntype);
+    memory->new_1d(typeCount,ntype);
 
     int n = 0;
+
+    if (DMSG) fprintf(FDEBUG, "LATTICE::DEBUG   >>");
+    for (n=0;n<ntype;n++) {
+        if (DMSG) fprintf(FDEBUG, " %i",nx*ny*nz*elemCount[n] );
+        typeCount[n] = nx*ny*nz*elemCount[n];
+    }
+    if (DMSG) fprintf(FDEBUG, "\n");
+
+    
     // write in the order needed by VASP
-    // type_1 type_2 .... type_npcell
+    // type_1 type_2 .... type_n
     // build in xy plane first, then add layers
-    for (int u=0; u<apcell; u++){
-        for (int k=0; k<nz; k++){
-            for (int j=0; j<ny; j++){
-                for (int i=0; i<nx; i++){
-                    type_list[n] = atom_type[u];
-                    coords[n][0] = basis[u][0] + double(i);
-                    coords[n][1] = basis[u][1] + double(j);
-                    coords[n][2] = basis[u][2] + double(k);
+    int x,y,z,b;
+    for (b=0; b<apcell; b++){
+        for (z=0; z<nz; z++){
+            for (x=0; x<nx; x++){
+                for (y=0; y<ny; y++){
+                    type_list[n] = atom_type[b];
+                    coords[n][0] = basis[b][0] + x;
+                    coords[n][1] = basis[b][1] + y;
+                    coords[n][2] = basis[b][2] + z;
                     n++;
                 }
             }
         }
     }
 
+    double *ncords = memory->new_flat<double>(natom*3);
+
+    // memory->flat_2d(coords,natom*3);
+    // for (b=0; b<apcell; b++){
+    //     for (z=0; z<nz; z++){
+    //         for (x=0; x<nx; x++){
+    //             for (y=0; y<ny; y++){
+    //                 type_list[n] = atom_type[b];
+    //                 coords[n][0] = basis[b][0] + x;
+    //                 coords[n][1] = basis[b][1] + y;
+    //                 coords[n][2] = basis[b][2] + z;
+    //                 n++;
+    //             }
+    //         }
+    //     }
+    // }
 
 
-
-    if (DMSG) fprintf(FDEBUG, "LATTICE::DEBUG   >>");
-    for (n=0;n<ntype;n++) {
-        if (DMSG) fprintf(FDEBUG, " %i",nx*ny*nz*nt[n] );
-        type_count[n] = nx*ny*nz*elemCount[n];
-    }
-    if (DMSG) fprintf(FDEBUG, "\n");
 
     // particle n position
     std::vector<double> P(3);
@@ -217,17 +236,4 @@ LATTICE::cart2fract(std::vector<double> a1, std::vector<double> a2, std::vector<
         positions[ii][2] = P[2];
     }
     memory->destroy(T);
-}
-
-int
-LATTICE::build_nn_list()
-{
-    // nn_search();
-    return 1;
-}
-
-void
-LATTICE::nn_search()
-{
-    
 }

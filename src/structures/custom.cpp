@@ -20,12 +20,12 @@ Custom::Custom(double                              latPars[3],
 
     
     ntype = elemList.size();
-    memory->new_1d(nt,ntype);
+
 
     apcell =0;
     for (int i=0;i<typeCount.size();i++) {
         apcell += typeCount[i];
-        elemCount[i] = typeCount[i];
+        elemCount.push_back(typeCount[i]);
 
     }
 

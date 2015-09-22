@@ -1,6 +1,6 @@
 #include "render.h"
 //
-// v 3.5.0
+// v 3.5.1
 // supporting:
 // full rotation
 // full zoom ability
@@ -8,6 +8,7 @@
 // particles radius increase/decrease
 // coloring by atomic element 
 // smooth shading and ambient lighting
+// bonds with an adjustable uniform cutoff
 //
 
 float   pradius = 0.3;                   // starting particle radius
@@ -18,17 +19,17 @@ float   TransXYZ[3];                     // translation vectors for moving the o
 float   deltaMove = 0;                   // to move the camera or not for translation
 float   stheta = 0;                      // rotation about x axis 
 float   sphi = 0;                        // rotation about y axis
-float   sgamma = 0;                  // rotation about z axis
+float   sgamma = 0;                      // rotation about z axis
 float   aspect = 4./3.;                  // aspect ratio of the window
-float   segments = 80;
-float   cutoff = 1.6;
+float   segments = 100;                  // how many segments for rendering spheres and cylinders
+float   cutoff = 1.6;                    // cutoff distance for 1st nearest neighbor (Å)
 
 
-float   Xp = 1.0f, Yp = 1.0f, Zp = 1.0f;
+float   Xp = 1.0f, Yp = 1.0f, Zp = 1.0f; // absolute position coordinates for the camera
 
-GLfloat ambientColor[] = 
+GLfloat ambientColor[] =                 // light for the room
 		{ 0.1f, 0.1f, 0.1f, 1.0f };
-GLfloat light0Color[] = 
+GLfloat light0Color[] =                  // light 2 for the room
 		{ 0.3f, 0.3f, 0.3f, 1.0f };
 
 
