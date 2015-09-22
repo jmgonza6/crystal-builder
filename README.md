@@ -1,5 +1,7 @@
 #Crystal builder v. 3.5.0
 
+![alt text](logos/tatb-white2.png "2x1x1 TATB Crustal")
+
 ##Capabilities
 
     Crystal Builder - Simple program to build several crystal structures for use in many popular 
@@ -67,18 +69,14 @@ ________________________________________________________________________________
 
 Simply run the following command in the top-level directory,
 
-	make install 
+	make 
 
+Alternatively, type the following to see a list of options available to `make`,
 
+    make help
 
-If you wish to build just the application and not have it installed, run the following,
-	
-	make all 
-
-
-
-In both cases, the executable  will be placed in the `build/` directory
-located in the top-level of this distribution
+Once complete, the executable will be placed in the `build/` directory
+located in the top-level of this distribution.
 
 __________________________________________________________________________________
 
