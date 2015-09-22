@@ -1,7 +1,6 @@
+#Crystal builder v. 3.5.0:
+![alt text](logos/tatb-white2.png "2x1x1 TATB Crustal")
 
-
-![alt text](logos/tatb-white2.png "2x1x1 TATB Crustal") #Crystal builder v. 3.5.0
-#Crystal builder v. 3.5.0
 
 ##Capabilities
 
