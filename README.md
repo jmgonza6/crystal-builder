@@ -91,7 +91,9 @@ To use the program, simply execute the following in a terminal,
 
 Currently, three options are available for using this application:
 
-1) Define all the relevant parameters in the *Lattice*, *Modify*, and *Output* tabs
+###1)
+
+    Define all the relevant parameters in the *Lattice*, *Modify*, and *Output* tabs
 
    To begin, select one of the crystals from the drop down and fill in the relevant parameters
    presented in the pop-up menu.  Then nvaigate to the modify tab to define a chemical element. 
