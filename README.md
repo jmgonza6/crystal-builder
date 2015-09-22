@@ -1,9 +1,7 @@
-#Crystal builder v. 3.5.0:
 <p align="center">
   <img src="logos/tatb-white2.png">
 </p>
-
-
+#Crystal builder v. 3.5.0:
 
 ##Capabilities
 
