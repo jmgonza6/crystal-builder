@@ -92,7 +92,6 @@ To use the program, simply execute the following in a terminal,
 Currently, three options are available for using this application:
 
 ###1)
-
     Define all the relevant parameters in the *Lattice*, *Modify*, and *Output* tabs
 
    To begin, select one of the crystals from the drop down and fill in the relevant parameters
@@ -104,7 +103,8 @@ Currently, three options are available for using this application:
    this is unnecessary since the file written is named *POSCAR*.
 
 
-2) Select a library structure from the dropdown in the *Lattice* tab.
+###2) 
+    Select a library structure from the dropdown in the *Lattice* tab.
 
    To begin, select *Library* from the *Crystals* dropdown menu.  If building one of the 2D 
    materials, some interaction may be necessary.  In the case of graphene, the *a* lattice 
@@ -122,7 +122,8 @@ Currently, three options are available for using this application:
    since the file written is named *POSCAR*.
 
 
-3) Define a custom crystal with the *Custom crystal* button
+###3)
+    Define a custom crystal with the *Custom crystal* button
 
    To build a custom crystal, click the *Custom crystal* button in the *Lattice* tab.  A pop-up  
    menu containing entries for the pertinant data will appear. In this scenario, *a,b,c* and *α,β,γ,*  
@@ -144,7 +145,7 @@ Currently, three options are available for using this application:
    tab, and select a format from the dropdown. If choosing the *LAMMPS* or *DMol* format, then you  
    must specify a file name, using the *Save as* button, for the *VASP* format, this is unnecessary  
    since the file written is named *POSCAR*.
-
+-------
 
 Once the crystal has been defined and other relevant parameters are set, you can chose to simply build the crystal and have it saved to your file.
 
