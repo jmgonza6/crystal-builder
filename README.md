@@ -127,7 +127,7 @@ Currently, three options are available for using this application:
    the stoichiometry and the basis have no defaults and must be explictly defined.  For the  
    stoichiometry, the syntax is the as above,  
 
-    Type1:n1,Type2:n2,Type3:n3,... i.e.  C:3 or Mo:1,S:2 or  C:10,H:16,N:8,O:24.    
+   _Type1:n1,Type2:n2,Type3:n3_... i.e.  C:3 or Mo:1,S:2 or  C:10,H:16,N:8,O:24.    
 
    Once the lattice paramters, angles and stoichiometry are defined, click the *Add atom* button  
    to begin defining the basis.  To define the coordinates, use the fractional system and enter  
