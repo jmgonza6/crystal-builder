@@ -129,25 +129,24 @@ Currently, three options are available for using this application:
 
     Type1:n1,Type2:n2,Type3:n3,... i.e.  C:3 or Mo:1,S:2 or  C:10,H:16,N:8,O:24.    
 
-   Once the lattice paramters, angles and stoichiometry are defined, click the `Add atom` button  
+   Once the lattice paramters, angles and stoichiometry are defined, click the *Add atom* button  
    to begin defining the basis.  To define the coordinates, use the fractional system and enter  
    them as a comma separated field, i.e. (0.5, 0.25, 0).  To save the coordinates, hit the enter  
-   button after all three coordinates are defined.  If a mistake is made, hit the `Reset` button  
+   button after all three coordinates are defined.  If a mistake is made, hit the *Reset* button  
    below this entry field.  This will reset only the basis atoms entered so far, and nothing else.  
 
-    ** NOTE The order of atoms added is relevant here and should follow the
-            stoichiometric relationship defined above.
+   NOTE:_** The order of atoms added is relevant here and should follow the stoichiometric relationship defined above.
 
    If you wish to create a supercell, then fill in any of the three empty boxes.  By default, these  
    are set to 1x1x1, and so any of can of them be left empty.  To finish, navigate to the `Output`  
    tab, and select a format from the dropdown. If choosing the *LAMMPS* or *DMol* format, then you  
-   must specify a file name, using the `Save as` button, for the `VASP` format, this is unnecessary  
-   since the file written is named `POSCAR`.
+   must specify a file name, using the *Save as* button, for the *VASP* format, this is unnecessary  
+   since the file written is named *POSCAR*.
 
 
 Once the crystal has been defined and other relevant parameters are set, you can chose to simply build the crystal and have it saved to your file.
 
-Alternatively, if the `Open GL` library was used in building this application, the crystal can be viewed in an interactive window by clicking the `Build+render` tab, see below for keyboard and mouse commands.  Upon closing this rendering window the crystal data will be written to the file you specified and the main program will terminate.
+Alternatively, if the *Open GL* library was used in building this application, the crystal can be viewed in an interactive window by clicking the *Build+render* tab, see below for keyboard and mouse commands.  Upon closing this rendering window the crystal data will be written to the file you specified and the main program will terminate.
 
 
 
