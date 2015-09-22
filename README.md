@@ -135,7 +135,7 @@ Currently, three options are available for using this application:
    button after all three coordinates are defined.  If a mistake is made, hit the *Reset* button  
    below this entry field.  This will reset only the basis atoms entered so far, and nothing else.  
 
-   **NOTE: The order of atoms added is relevant here and should follow the stoichiometric relationship defined above._**
+   **NOTE: The order of atoms added is relevant here and should follow the stoichiometric relationship defined above**
 
    If you wish to create a supercell, then fill in any of the three empty boxes.  By default, these  
    are set to 1x1x1, and so any of can of them be left empty.  To finish, navigate to the `Output`  
