@@ -93,31 +93,31 @@ Currently, three options are available for using this application:
 
 1) Define all the relevant parameters in the *Lattice*, *Modify*, and *Output* tabs
 
-    To begin, select one of the crystals from the drop down and fill in the relevant parameters
-    presented in the pop-up menu.  Then nvaigate to the modify tab to define a chemical element. 
-    If you wish to create a supercell, then fill in any of the three empty boxes.  By default, 
-    these are set to 1x1x1, and so any of can of them be left empty.  To finish, navigate to the 
-    `Output` tab, and select a format from the dropdown. If choosing the `LAMMPS` or `DMol` 
-    format, then you must specify a file name, using the `Save as` button, for the `VASP` format, 
-    this is unnecessary since the file written is named `POSCAR`.
+   To begin, select one of the crystals from the drop down and fill in the relevant parameters
+   presented in the pop-up menu.  Then nvaigate to the modify tab to define a chemical element. 
+   If you wish to create a supercell, then fill in any of the three empty boxes.  By default, 
+   these are set to 1x1x1, and so any of can of them be left empty.  To finish, navigate to the 
+   *Output* tab, and select a format from the dropdown. If choosing the *LAMMPS* or *DMol* 
+   format, then you must specify a file name, using the *Save as* button, for the *VASP* format, 
+   this is unnecessary since the file written is named *POSCAR*.
 
 
 2) Select a library structure from the dropdown in the *Lattice* tab.
 
-    To begin, select `Library` from the `Crystals` dropdown menu.  If building one of hte 2D 
-    materials, some interaction may be necessary.  In the case of graphene, the `a` lattice 
-    parameter is required.  For the layered (T)MDC structures, the default is to use MoS2, and 
-    a lattice parameters of 3.19 Å for all four cases.  If you wish to build a different crystal, 
-    then define the stoichiometry on the bottom of the `Modify` tab.  The syntax for defining the 
-    stoichiometry is the following:
+   To begin, select *Library* from the *Crystals* dropdown menu.  If building one of the 2D 
+   materials, some interaction may be necessary.  In the case of graphene, the *a* lattice 
+   parameter is required.  For the layered (T)MDC structures, the default is to use MoS2, and 
+   a lattice parameters of 3.19 Å for all four cases.  If you wish to build a different crystal, 
+   then define the stoichiometry on the bottom of the *Modify* tab.  The syntax for defining the 
+   stoichiometry is the following:
 
-          Type1:n1,Type2:n2 i.e.  Mo:1,S:2 or  Sn:1,Se:2.
+   *Type1:n1,Type2:n2* i.e.  *Mo:1,S:2* or  *Sn:1,Se:2*
 
-    If you wish to create a supercell, then fill in any of the three empty boxes.  By default, 
-    these are set to 1x1x1, and so any of can of them be left empty.  To finish, navigate to the 
-    `Output` tab, and select a format from the dropdown. If choosing the `LAMMPS` or `DMol` format, 
-    then you must specify a file name, using the `Save as` button, for the `VASP` format, this is 
-    unnecessary since the file written is named `POSCAR`.
+   If you wish to create a supercell, then fill in any of the three empty boxes.  By default, these  
+   are set to 1x1x1, and so any of can of them be left empty.  To finish, navigate to the *Output*  
+   tab, and select a format from the dropdown. If choosing the *LAMMPS* or *DMol* format, then you  
+   must specify a file name, using the *Save as* button, for the *VASP* format, this is unnecessary  
+   since the file written is named *POSCAR*.
 
 
 3) Define a custom crystal with the *Custom crystal* button
@@ -138,7 +138,7 @@ Currently, three options are available for using this application:
    **NOTE: The order of atoms added is relevant here and should follow the stoichiometric relationship defined above**
 
    If you wish to create a supercell, then fill in any of the three empty boxes.  By default, these  
-   are set to 1x1x1, and so any of can of them be left empty.  To finish, navigate to the `Output`  
+   are set to 1x1x1, and so any of can of them be left empty.  To finish, navigate to the *Output*  
    tab, and select a format from the dropdown. If choosing the *LAMMPS* or *DMol* format, then you  
    must specify a file name, using the *Save as* button, for the *VASP* format, this is unnecessary  
    since the file written is named *POSCAR*.
