@@ -145,9 +145,9 @@ Currently, three options are available for using this application:
    tab, and select a format from the dropdown. If choosing the *LAMMPS* or *DMol* format, then you  
    must specify a file name, using the *Save as* button, for the *VASP* format, this is unnecessary  
    since the file written is named *POSCAR*.
--------
 
-Once the crystal has been defined and other relevant parameters are set, you can chose to simply build the crystal and have it saved to your file.
+
+After following the steps in **1)**, **2)**, or **3)**, you can chose to simply build the crystal and have it saved to your file.
 
 Alternatively, if the *Open GL* library was used in building this application, the crystal can be viewed in an interactive window by clicking the *Build+render* tab, see below for keyboard and mouse commands.  Upon closing this rendering window the crystal data will be written to the file you specified and the main program will terminate.
 
