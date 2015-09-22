@@ -150,8 +150,7 @@ Alternatively, if the *Open GL* library was used in building this application, t
 
 
 
-    ** NOTE: If building a crystal with > 5000 atoms, rendering is a little slow.  Advise
-             to use the build without rendering option.
+**NOTE: If building a crystal with > 5000 atoms, rendering is a little slow.  Advise to use the build without rendering option.**
 
 
 ###Crystal/scene interaction
