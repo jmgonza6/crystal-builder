@@ -123,11 +123,11 @@ Currently, three options are available for using this application:
 3) Define a custom crystal with the *Custom crystal* button
 
    To build a custom crystal, click the *Custom crystal* button in the *Lattice* tab.  A pop-up  
-   menu containing entries for the pertinant data will appear. In this scenario, a,b,c and  α,β,γ,  
+   menu containing entries for the pertinant data will appear. In this scenario, *a,b,c* and *α,β,γ,*  
    the stoichiometry and the basis have no defaults and must be explictly defined.  For the  
    stoichiometry, the syntax is the as above,  
 
-   _Type1:n1,Type2:n2,Type3:n3_... i.e.  C:3 or Mo:1,S:2 or  C:10,H:16,N:8,O:24.    
+   *Type1:n1,Type2:n2,Type3:n3*... i.e.  *C:3* or *Mo:1,S:2* or *C:10,H:16,N:8,O:24*    
 
    Once the lattice paramters, angles and stoichiometry are defined, click the *Add atom* button  
    to begin defining the basis.  To define the coordinates, use the fractional system and enter  
