@@ -82,7 +82,7 @@ located in the top-level of this distribution.
 __________________________________________________________________________________
 
 ##Usage
-To see extensive documentation on the contents and how to use the code, navigate to the toplevel of this directory to the `docs/html/` directory and open the file called `index.html`.
+To see extensive documentation on the contents and how to use the code, navigate to the toplevel of this directory to the *docs/html/* directory and open the file called *index.html*.
 
 To use the program, simply execute the following in a terminal,
 	
@@ -91,7 +91,7 @@ To use the program, simply execute the following in a terminal,
 
 Currently, three options are available for using this application:
 
-1) Define all the relevant parameters in the `Lattice`, `Modify`, and `Output` tabs
+1) Define all the relevant parameters in the *Lattice*, *Modify*, and *Output* tabs
 
     To begin, select one of the crystals from the drop down and fill in the relevant parameters
     presented in the pop-up menu.  Then nvaigate to the modify tab to define a chemical element. 
@@ -102,7 +102,7 @@ Currently, three options are available for using this application:
     this is unnecessary since the file written is named `POSCAR`.
 
 
-2) Select a library structure from the dropdown in the `Lattice` tab.
+2) Select a library structure from the dropdown in the *Lattice* tab.
 
     To begin, select `Library` from the `Crystals` dropdown menu.  If building one of hte 2D 
     materials, some interaction may be necessary.  In the case of graphene, the `a` lattice 
@@ -120,29 +120,28 @@ Currently, three options are available for using this application:
     unnecessary since the file written is named `POSCAR`.
 
 
-3) Define a custom crystal with the `Custom crystal` button
+3) Define a custom crystal with the *Custom crystal* button
+   To build a custom crystal, click the *Custom crystal* button in the *Lattice* tab.  A pop-up  
+   menu containing entries for the pertinant data will appear. In this scenario, a,b,c and  α,β,γ,  
+   the stoichiometry and the basis have no defaults and must be explictly defined.  For the  
+   stoichiometry, the syntax is the as above,  
 
-    To build a custom crystal, click the `Custom crystal` button in the `Lattice` tab.  A pop-up 
-    menu containing entries for the pertinant data will appear. In this scenario, a,b,c and  α,β,γ,
-    the stoichiometry and the basis have no defaults and must be explictly defined.  For the 
-    stoichiometry, the syntax is the as above,
+    Type1:n1,Type2:n2,Type3:n3,... i.e.  C:3 or Mo:1,S:2 or  C:10,H:16,N:8,O:24.    
 
-        Type1:n1,Type2:n2,Type3:n3,... i.e.  C:3 or Mo:1,S:2 or  C:10,H:16,N:8,O:24.    
+   Once the lattice paramters, angles and stoichiometry are defined, click the `Add atom` button  
+   to begin defining the basis.  To define the coordinates, use the fractional system and enter  
+   them as a comma separated field, i.e. (0.5, 0.25, 0).  To save the coordinates, hit the enter  
+   button after all three coordinates are defined.  If a mistake is made, hit the `Reset` button  
+   below this entry field.  This will reset only the basis atoms entered so far, and nothing else.  
 
-    Once the lattice paramters, angles and stoichiometry are defined, click the `Add atom` button 
-    to begin defining the basis.  To define the coordinates, use the fractional system and enter 
-    them as a comma separated field, i.e. (0.5, 0.25, 0).  To save the coordinates, hit the enter 
-    button after all three coordinates are defined.  If a mistake is made, hit the `Reset` button 
-    below this entry field.  This will reset only the basis atoms entered so far, and nothing else. 
-
-    ** NOTE The order of atoms added is relevant here and should follow the 
+    ** NOTE The order of atoms added is relevant here and should follow the
             stoichiometric relationship defined above.
 
-    If you wish to create a supercell, then fill in any of the three empty boxes.  By default, these 
-    are set to 1x1x1, and so any of can of them be left empty.  To finish, navigate to the `Output` 
-    tab, and select a format from the dropdown. If choosing the `LAMMPS` or `DMol` format, then you 
-    must specify a file name, using the `Save as` button, for the `VASP` format, this is unnecessary 
-    since the file written is named `POSCAR`.
+   If you wish to create a supercell, then fill in any of the three empty boxes.  By default, these  
+   are set to 1x1x1, and so any of can of them be left empty.  To finish, navigate to the `Output`  
+   tab, and select a format from the dropdown. If choosing the *LAMMPS* or *DMol* format, then you  
+   must specify a file name, using the `Save as` button, for the `VASP` format, this is unnecessary  
+   since the file written is named `POSCAR`.
 
 
 Once the crystal has been defined and other relevant parameters are set, you can chose to simply build the crystal and have it saved to your file.
