@@ -1,8 +1,8 @@
 #Crystal builder v. 3.5.0:
-![alt text][logo]
+<p align="center">
+  <img logos/tatb-white2.png>
+</p>
 
-
-[logo]: logos/tatb-white2.png "2x1x1 TATB Crustal"
 
 
 ##Capabilities
