@@ -31,6 +31,10 @@
     - LAMMPS (.input) 
     - VASP 5.x.x (POSCAR)  
 
+<p align="center">
+  <img src="logos/CPK-periodic-table.png">
+</p>
+
 __________________________________________________________________________________
 
 
@@ -67,17 +71,19 @@ ________________________________________________________________________________
 
 ##Install main application
 
+*NOTE:* Several options are listed on line 16 of the Makefile controling the environment and dialog verbosity.  Specifically, the rendering window can be built with a default white background or black.  Additionally, there are several macros for controlling how much information is printed to the terminal during a build session.  
 
-Simply run the following command in the top-level directory,
+Once finished, simply run the following command in the top-level directory to build the application
 
-	make 
+    make all 
+
+
+This will place the executable in the `build/` directory located in the top-level of this distribution.
+
 
 Alternatively, type the following to see a list of options available to `make`,
 
     make help
-
-Once complete, the executable will be placed in the `build/` directory
-located in the top-level of this distribution.
 
 __________________________________________________________________________________
 
@@ -163,23 +169,30 @@ After following the steps in **1)**, **2)**, or **3)**, you can chose to simply 
       Right mouse           scene display menu
   
     Keyboard events:
-      'A'                   display atoms and unit cell
-      'a'                   display atoms only
-      'B'                   display bonds, uniform nearest neighbor cutoff
-      'b'                   hide bonds
-      'C'                   increase nearest neighbor cutoff
-      'c'                   decrease nearest neighbor cutoff
-      'e'                   exit and save the data from the rendering scene
-      'o'                   orthographic projection of the crystal
-      'p'                   perspective projection of the crystal
-      'r' then Left mouse   rotate the crystal in all 3 dimensions
-      'z' then Left mouse   zoom toward/away from the crystal
-      '0'                   reset orientation of crystal to looking down z toward xy plane
-      '1'                   view the xz "a-c" plane of the crystal
-      '2'                   view the yz "b-c" plane of the crystal
-      '3'                   rotate crystal about x by -45˚, and then -45˚ about z, 'psuedo' perspective view
-      '+'                   increase the particle radius uniformly
-      '-'                   decrease the particle radius uniformly
+        'A'                   display atoms and unit cell
+        'a'                   display atoms only
+        'B'                   display bonds, uniform nearest neighbor cutoff
+        'b'                   hide bonds
+        'C'                   increase nearest neighbor cutoff
+        'c'                   decrease nearest neighbor cutoff
+        'e'                   exit and save the data from the rendering scene
+        'o'                   orthographic projection of the crystal
+        'p'                   perspective projection of the crystal
+        'r' then LeftButton   rotate the crystal in all 3 dimensions
+        'W'                   change background to white and bounding box to black
+        'w'                   change background to black and bounding box to white
+        'z' then LeftButton   zoom toward/away from the crystal
+        '0'                   reset orientation of crystal to looking down z toward xy plane
+        '1'                   view the xz "a-c" plane of the crystal
+        '2'                   view the yz "b-c" plane of the crystal
+        '3'                   rotate crystal about x by -45˚, and then -45˚ about z, 'psuedo' perspective view
+        '+'                   increase the particle radius uniformly
+        '-'                   decrease the particle radius uniformly
+   
+        Up arrow              Shift the crystal in positive vertical screen direction
+        Down arrow            Shift the crystal in negative vertical screen direction
+        Left arrow            Shift the crystal in negative horizontal screen direction
+        Right arrow           Shift the crystal in positive horizontal screen direction
 
 __________________________________________________________________________________
 
