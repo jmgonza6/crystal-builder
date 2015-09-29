@@ -16,6 +16,8 @@
 
 - Define a custom lattice by specifying the lattice parameters and angles, the basis positions, and the element types
 
+- Create structures using the GUI or from the command line with a text file
+
 - Build and view large super cells (no limit on maximum atoms)
 
 - 3D graphics rendering of the crystals with real time user interaction
@@ -30,6 +32,8 @@
     - Materials Studio DMol (.car) 
     - LAMMPS (.input) 
     - VASP 5.x.x (POSCAR)  
+
+- Color and size according to atomic species.  Coloring based on CPK/Jmol standard
 
 <p align="center">
   <img src="logos/CPK-periodic-table.png">
@@ -95,7 +99,7 @@ To use the program, simply execute the following in a terminal,
 	./crysb  
 
 
-Currently, three options are available for using this application:
+Currently, four options are available for using this application:
 
 ###1)
     Define all the relevant parameters in the *Lattice*, *Modify*, and *Output* tabs
@@ -151,6 +155,8 @@ Currently, three options are available for using this application:
    tab, and select a format from the dropdown. If choosing the *LAMMPS* or *DMol* format, then you  
    must specify a file name, using the *Save as* button, for the *VASP* format, this is unnecessary  
    since the file written is named *POSCAR*.
+
+###4)
 
 ###Saving/viewing
 
