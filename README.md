@@ -157,6 +157,15 @@ Currently, four options are available for using this application:
    since the file written is named *POSCAR*.
 
 ###4)
+    Drive the application from the command line using a parameters file
+
+   To run the application in this way, you must first define the appropriate parameters in a text file
+   and pass this as an argument to the application from the command line as follows,
+
+    ./crysb -f parametersFile.in
+
+   A file containing all of the options required with documentation of each command can be found in the
+   top-level of this directory, `parametersFile.in`.
 
 ###Saving/viewing
 
