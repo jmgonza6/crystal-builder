@@ -73,22 +73,22 @@ void
 Write::lammps(   char                      outname[], 
                  char                      comment[], 
                  int                       natom, 
-                 int                       ntype, 
                  std::vector<double>       a1, 
                  std::vector<double>       a2, 
                  std::vector<double>       a3,  
-                 int                       *atom_ids, 
-                 double                    **coords, 
-                 std::vector<std::string>  species)
+                 atom_t*                   atom, 
+                 std::vector<std::string>  speciesList)
 {
     if (DMSG) fprintf (FDEBUG, "Writing inside lammps\n");
+
+    int nt = speciesList.size();
     
     FILE *fout = outname ? fopen(outname, "w" ) : NULL;
     double zero = 0.;
     double mass=0;
     fprintf(fout,"%s\n\n",comment );
     fprintf(fout, "%d  atoms\n\n", natom);
-    fprintf(fout, "%d  atom types\n\n", ntype);
+    fprintf(fout, "%d  atom types\n\n", nt);
     fprintf(fout, "%18.12f %18.12f  xlo xhi\n", zero, a1[0]);
     fprintf(fout, "%18.12f %18.12f  ylo yhi\n", zero, a2[1]);
     fprintf(fout, "%18.12f %18.12f  zlo zhi\n", zero, a3[2]);
@@ -115,35 +115,34 @@ Write::lammps(   char                      outname[],
     // Add method to print masses based on user defined types
     fprintf(fout,"\nMasses\n\n");
 
-    for(int m=0; m<ntype;m++) {
-        mass = elem2mass(species[m]);
+    for(int m=0; m<nt;m++) {
+        mass = elem2mass(speciesList[m]);
         fprintf(fout,"%i  %f\n",m+1, mass);
     }
     // fprintf(fout,"\n");
     fprintf(fout, "\nAtoms\n\n");
-    for (int i=0; i<natom; i++) fprintf(fout,"%5d %3d %18.12f %18.12f %18.12f\n", i+1, atom_ids[i], coords[i][0], coords[i][1], coords[i][2]);
+    for (int i=0; i<natom; i++) fprintf(fout,"%5d %3d %18.12f %18.12f %18.12f\n", i+1, atom[i].typeId, atom[i].x, atom[i].y, atom[i].z);
     if (fout) fclose(fout);
 }
 
 
 void 
-Write::poscar(  char                     outname[],
-                char                     comment[], 
-                int                      *type_count, 
+Write::poscar(  char                     comment[],   
                 int                      natoms, 
                 std::vector<double>      a1, 
                 std::vector<double>      a2, 
                 std::vector<double>      a3, 
-                double                   **coords, 
+                atom_t                   *atom, 
                 int                      fractional, 
-                std::vector<std::string> species)
+                std::vector<std::string> speciesList,
+                std::vector<int>         speciesCount)
 {
     char com_line[MAX_STRING_LENGTH];
 
     std::string tmp,st_str;
 
-    for (int s=0;s<species.size();s++) {
-        st_str = st_str + " " + species[s];
+    for (int s=0;s<speciesList.size();s++) {
+        st_str = st_str + " " + speciesList[s];
     }
     sprintf(com_line,"%s %s",st_str.c_str(), comment);
 
@@ -176,8 +175,8 @@ Write::poscar(  char                     outname[],
     fprintf(fout,"  %18.12f  %18.12f  %18.12f\n", a2[0], a2[1], a2[2]);
     fprintf(fout,"  %18.12f  %18.12f  %18.12f\n", a3[0], a3[1], a3[2]);
 
-    for(int n=0;n<species.size();n++) {
-        fprintf(fout,"%2i ",type_count[n]);
+    for(int n=0;n<speciesList.size();n++) {
+        fprintf(fout,"%2i ",speciesCount[n]);
     }
     fprintf(fout,"\n");
 
@@ -188,7 +187,7 @@ Write::poscar(  char                     outname[],
     else fprintf(fout,"Cartesian\n");
     
     for (int n=0;n<natoms;n++) {
-        fprintf(fout,"%18.12f   %18.12f   %18.12f\n",coords[n][0],coords[n][1],coords[n][2]);
+        fprintf(fout,"%18.12f   %18.12f   %18.12f\n",atom[n].x,atom[n].y,atom[n].z);
     }
     if(fout) fclose(fout);
 }
@@ -196,14 +195,11 @@ Write::poscar(  char                     outname[],
 
 void 
 Write::dmol(char                      outname[], 
-            char                      comment[], 
             int                       natoms, 
-            int                       ntype, 
             std::vector<double>       a1, 
             std::vector<double>       a2, 
             std::vector<double>       a3, 
-            int                       *atom_ids, 
-            double                    **coords, 
+            atom_t*                   atom, 
             std::vector<std::string>  speciesList,
             std::vector<int>          speciesCount)
 {
@@ -212,7 +208,6 @@ Write::dmol(char                      outname[],
 
     char numstr[21];
     std::string elemId,p1, p2;
-    std::string atomType;
     double Q = 0.;
     p1 = "XXXX";
     p2 = "xx";
@@ -254,7 +249,7 @@ Write::dmol(char                      outname[],
             sprintf(numstr, "%d", n+1);
             elemId = speciesList[id] + numstr;
             fprintf(outF, "%-7s %12.8lf   %12.8lf   %12.8lf %4s %-6i %-7s %s %7.3lf\n",\
-                elemId.c_str(),coords[n][0],coords[n][1],coords[n][2],p1.c_str(),typ,p2.c_str(),speciesList[id].c_str(),Q);
+                elemId.c_str(),atom[n].x,atom[n].y,atom[n].z,p1.c_str(),typ,p2.c_str(),speciesList[id].c_str(),Q);
             n++;
         }
     }

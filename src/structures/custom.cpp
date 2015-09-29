@@ -32,8 +32,7 @@ Custom::Custom(double                              latPars[3],
     if (apcell==0) {printf ("ERRRRRRRRRRR: apcell == 0\n");exit(1);}
 
     
-
-    memory->new_1d(name,MAX_STRING_LENGTH);
+    name = memory->new_1d<char>(MAX_STRING_LENGTH);
 
 
     sprintf(str,"Custom, %s",customName.c_str());
@@ -55,21 +54,20 @@ Custom::Custom(double                              latPars[3],
     }
 
 
-    
-    memory->new_2d(basis,apcell,3);
-    memory->new_1d(atom_type,apcell);
+    basis = new basis_t[apcell];
 
     int count = 0;
     int n = 0;
+    int id = 0;
 
     // loop over all types, assumed in stoichiometric order
     for (int t=0;t<ntype;t++){
-        int id = t;
-        for (int i=0;i<typeCount[t];i++) {
-            atom_type[n] = id +1;
-            basis[n][0] = positions[n][0];
-            basis[n][1] = positions[n][1];
-            basis[n][2] = positions[n][2];
+        id = t;
+        for (int i=0;i<typeCount[id];i++) {
+            basis[n].x = positions[n][0];
+            basis[n].y = positions[n][1];
+            basis[n].z = positions[n][2];
+            basis[n].typeId = id+1;
             n++;
         }
     }

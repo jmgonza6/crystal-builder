@@ -4,6 +4,7 @@
 INTERFACE::INTERFACE(int nargs, char **argv, const char *p)
 {
 	lattice = NULL;
+	write = NULL;
 	fname = NULL;
 	format = NULL;
 	stylename = NULL;
@@ -11,9 +12,13 @@ INTERFACE::INTERFACE(int nargs, char **argv, const char *p)
 	fname = new char[50];
 	format = new char[50];
 
-	write = new Write();
+	
 	errors = new Errors();
 	gui = new Gui();
+	write = new Write();
+	parser = new Parser();
+	reader = new Reader();
+
 
 	banner();
 }
@@ -23,6 +28,7 @@ INTERFACE::~INTERFACE()
 	if (lattice) delete lattice;
 	if (gui) delete gui;
 	if (write) delete write;
+	if (reader) delete reader;
 	if (errors) delete errors;
 }
 
@@ -32,28 +38,16 @@ INTERFACE::banner()
 {
 	time_t now;
     time(&now);
-    fprintf(SMESG, "___________________________________________________________\n");
-	fprintf(SMESG, "%s Ver. %s\n",SOFT,VERS);
-	fprintf(SMESG, "compiled on      %s\n",__DATE__);
-	fprintf(SMESG, "Process started: !DATE %s", ctime(&now));
-	fprintf(SMESG, "___________________________________________________________\n");
-}
-
-
-void 
-INTERFACE::show_parameters()
-{
-    if (gui->pfile!=NULL) printf("parameters file = %s \n",gui->pfile);
-    printf("bravais = %s \n",gui->bravais);
-    printf("style = %s \n",gui->lstyle);
-    printf("species = %s \n",gui->element);
-	printf("alat = %f \n",gui->alat);
-
-	printf("nx = %i \n",gui->nx);
-	printf("ny = %i \n",gui->ny);
-	printf("nz = %i \n",gui->nz);
-	printf("format = %s \n",gui->file_format);	
-	printf("out name = %s \n",gui->out_name);	
+    fprintf(SMESG, "_________________________________________________________________\n");
+    fprintf(SMESG, "         _|_|_|   _|_|_|    _|      _|    _|_|_|  _|_|_|   \n");
+    fprintf(SMESG, "       _|         _|    _|    _|  _|    _|        _|    _| \n");
+    fprintf(SMESG, "       _|         _|_|_|        _|        _|_|    _|_|_|   \n");
+    fprintf(SMESG, "       _|         _|    _|      _|            _|  _|    _| \n");
+    fprintf(SMESG, "         _|_|_|   _|      _|    _|      _|_|_|    _|_|_|   \n\n");
+	fprintf(SMESG, "  Ver. %s\n",VERS);
+	fprintf(SMESG, "  compiled on      %s\n",__DATE__);
+	fprintf(SMESG, "  Process started: !DATE %s", ctime(&now));
+	fprintf(SMESG, "_________________________________________________________________\n");
 }
 
 
@@ -84,15 +78,10 @@ INTERFACE::build()
     } else if (strcmp(gui->bravais,"Monoclinic")==0) {
     	lattice = new Monoclinic(gui->alat,gui->blat, gui->clat, gui->beta, 4, 2, gui->lstyle, gui->element);
     } else if (strcmp(gui->bravais,"Library")==0) {
-    	lattice = new StructureLib(gui->pd_struct,gui->lbasis,gui->alat,gui->cta,gui->elemList);
+    	lattice = new StructureLib(gui->pd_struct,gui->lbasis,gui->alat,gui->clat,gui->elemList);
     } else {
     	errors->kill(FERR,"INTERFACE::build()",LERR,"Nothing bravais lattice selected, nothing to do, exiting");
     }
-
-
-    // if (gui->bravais!=NULL) {
-    // 	if (gui->custom==0 && strcmp(gui->bravais,"Library")!=0) {species.push_back(lattice->species[0]);}	
-    // }
 
 
 	lattice->nx = gui->nx;
@@ -106,71 +95,157 @@ INTERFACE::build()
 	if (DMSG) {
 		printf("total atoms created %i\n\n",lattice->natom);
 		for (int n=0;n<lattice->natom;n++) {
-			printf ("C %f  %f  %f\n",lattice->coords[n][0],lattice->coords[n][1],lattice->coords[n][2]);
+			printf ("C %f  %f  %f\n",lattice->atoms[n].x,lattice->atoms[n].y,lattice->atoms[n].z);
+		}
+	}
+}
+
+void 
+INTERFACE::build_from_file()
+{
+
+	if (strcmp(reader->bravais,"custom")==0) {
+    	double latAngles[3], latPars[3];
+    	latPars[0] = reader->alat;
+    	latPars[1] = reader->blat;
+    	latPars[2] = reader->clat;
+
+    	latAngles[0] = reader->alpha;
+    	latAngles[1] = reader->beta;
+    	latAngles[2] = reader->gamma;
+
+    	lattice = new Custom(latPars, latAngles, reader->customBasis, reader->customName, reader->elemList, reader->elemCount);
+
+    } else if (strcmp(reader->bravais,"cubic")==0) {
+        lattice = new Cubic(reader->alat,reader->lstyle,parser->str2char(reader->elemList[0]));
+    } else if (strcmp(reader->bravais,"Hexagonal")==0) {
+        lattice = new Hexagonal(reader->alat, parser->str2char(reader->elemList[0]));
+    } else if (strcmp(reader->bravais,"tetragonal")==0) {
+        lattice = new Tetragonal(reader->alat,reader->clat,reader->lstyle, parser->str2char(reader->elemList[0]));
+    } else if (strcmp(reader->bravais,"ortho")==0) {
+        lattice = new Orthorhombic(reader->alat,reader->blat, reader->clat, reader->lstyle, parser->str2char(reader->elemList[0]));
+    } else if (strcmp(reader->bravais,"Monoclinic")==0) {
+    	lattice = new Monoclinic(reader->alat,reader->blat, reader->clat, reader->beta, 4, 2, reader->lstyle, parser->str2char(reader->elemList[0]));
+    } else if (strcmp(reader->bravais,"library")==0) {
+    	lattice = new StructureLib(reader->pd_struct,reader->lbasis,reader->alat,reader->clat,reader->elemList);
+    } else {
+    	errors->kill(FERR,"INTERFACE::build()",LERR,"Nothing bravais lattice selected, nothing to do, exiting\n");
+    }
+
+
+	lattice->nx = reader->nx;
+	lattice->ny = reader->ny;
+	lattice->nz = reader->nz;
+
+	lattice->fractional = reader->fractional;
+	lattice->build_crystal();
+
+
+	if (DMSG) {
+		printf("total atoms created %i\n\n",lattice->natom);
+		for (int n=0;n<lattice->natom;n++) {
+			printf ("C %f  %f  %f\n",lattice->atoms[n].x,lattice->atoms[n].y,lattice->atoms[n].z);
 		}
 	}
 
 }
 
 void 
-INTERFACE::write_data()
+INTERFACE::write_data(int src)
 {
 	char comment[MAX_STRING_LENGTH];
 	char mesg[MAX_STRING_LENGTH];
 	char oformat[] = "cartesian";
 	sprintf(comment,"[ (%dx%dx%d) %s crystal, a=%g, b=%g, c=%g ]", lattice->nx, lattice->ny, lattice->nz, lattice->name, lattice->alat, lattice->blat, lattice->clat);
 
-	// reset fractional setting if writing to lammps
-	// or dmol since they only read in cartesian
-	if ((strcmp(gui->file_format,"lammps (.input)")==0 || strcmp(gui->file_format,"dmol (.car)")==0) && lattice->fractional==1) {
+	if (src == 1) {
+		// reset fractional setting if writing to lammps
+		// or dmol since they only read in cartesian
+		if ((strcmp(gui->file_format,"lammps (.input)")==0 || strcmp(gui->file_format,"dmol (.car)")==0) && lattice->fractional==1) {
 
-		sprintf(mesg,"Fractional coordinates were selected, but the [ %s ]\nformat does not allow this, using cartesian instead\n",gui->file_format);
-		errors->warn(FERR,"INTERFACE::write_data()",LERR,mesg);
+			sprintf(mesg,"Fractional coordinates were selected, but the [ %s ]\nformat does not allow this, using cartesian instead\n",gui->file_format);
+			errors->warn(FERR,"INTERFACE::write_data()",LERR,mesg);
 
-		lattice->fractional = 0;
+			lattice->fractional = 0;
+		}
+
+		lattice->convert_coordinates(lattice->fractional);
+
+		if (strcmp(gui->file_format,"lammps (.input)")==0) {
+			write->lammps(  gui->out_name, 
+							comment, 
+							lattice->natom, 
+							lattice->a1,
+							lattice->a2,
+							lattice->a3,
+							lattice->atomsOut,
+							lattice->species);
+		} else if (strcmp(gui->file_format,"vasp (POSCAR)")==0) {
+			write->poscar(  comment, 
+							lattice->natom,  
+							lattice->a1,
+							lattice->a2,
+							lattice->a3,
+							lattice->atomsOut,
+							lattice->fractional,
+							lattice->species,
+							lattice->typeCount);
+		} else if (strcmp(gui->file_format,"dmol (.car)")==0) {
+			write->dmol(gui->out_name, 
+	                    lattice->natom, 
+	                    lattice->a1,
+						lattice->a2,
+						lattice->a3, 
+	                    lattice->atomsOut,
+	                    lattice->species,
+	                    lattice->typeCount);  
+	    }
+
+	} else {
+		// reset fractional setting if writing to lammps
+		// or dmol since they only read in cartesian
+		if ((strcmp(reader->file_format,"lammps")==0 || strcmp(reader->file_format,"dmol")==0) && lattice->fractional==1) {
+
+			sprintf(mesg,"Fractional coordinates were selected, but the [ %s ]\nformat does not allow this, using cartesian instead\n",reader->file_format);
+			errors->warn(FERR,"INTERFACE::write_data()",LERR,mesg);
+
+			lattice->fractional = 0;
+		}
+
+		lattice->convert_coordinates(lattice->fractional);
+
+		if (strcmp(reader->file_format,"lammps")==0) {
+			write->lammps(  reader->out_name, 
+							comment, 
+							lattice->natom, 
+							lattice->a1,
+							lattice->a2,
+							lattice->a3,
+							lattice->atomsOut,
+							lattice->species);
+		} else if (strcmp(reader->file_format,"vasp")==0) {
+			write->poscar(  comment, 
+							lattice->natom,  
+							lattice->a1,
+							lattice->a2,
+							lattice->a3,
+							lattice->atomsOut,
+							lattice->fractional,
+							lattice->species,
+							lattice->typeCount);
+		} else if (strcmp(reader->file_format,"dmol")==0) {
+			write->dmol(reader->out_name, 
+	                    lattice->natom, 
+	                    lattice->a1,
+						lattice->a2,
+						lattice->a3, 
+	                    lattice->atomsOut,
+	                    lattice->species,
+	                    lattice->typeCount);  
+	    }
 	}
 
-	lattice->convert_coordinates(lattice->fractional);
-
-	if (strcmp(gui->file_format,"lammps (.input)")==0) {
-		write->lammps(  gui->out_name, 
-						comment, 
-						lattice->natom, 
-						lattice->ntype, 
-						lattice->a1,
-						lattice->a2,
-						lattice->a3,
-						lattice->type_list, 
-						lattice->positions,
-						lattice->species);
-	} else if (strcmp(gui->file_format,"vasp (POSCAR)")==0) {
-		char poscar[] = "POSCAR";
-		write->poscar(  poscar,
-						comment,
-						lattice->type_count, 
-						lattice->natom,  
-						lattice->a1,
-						lattice->a2,
-						lattice->a3,
-						lattice->positions,
-						lattice->fractional,
-						lattice->species);
-	} else if (strcmp(gui->file_format,"dmol (.car)")==0) {
-		std::vector<int> typeCount;
-
-		
-		write->dmol(gui->out_name, 
-                    comment, 
-                    lattice->natom, 
-                    lattice->ntype, 
-                    lattice->a1,
-					lattice->a2,
-					lattice->a3, 
-                    lattice->type_list, 
-                    lattice->positions,
-                    lattice->species,
-                    lattice->elemCount);  
-    }
+	
 }
 
 
@@ -350,44 +425,204 @@ INTERFACE::insane()
 	}
 }
 
+// #full list of parameters order of appearance is irrelevant
+
+// # required
+// bravais			cubic or tetragonal or orthorhombic or custom or library
+
+// # required
+// bravais_style	bcc or fcc or sc or diamond for cubic, bcc or fcc or sc for tetragonal and ortho
+
+// # these are searched for if custom was selected above, other wise they are ignored
+// use_prebuilt	graphene or hBN or MDC-2H or MDC-1T or TMDC-2H or TMDC-1T or PETN or TATB or HMX
+// use_prebuilt       1     or 2   or    3   or   4    or     5   or     6   or   7  or   8  or  9
+
+// # required
+// # write the data to the specified file
+// # if writing to vasp, the filename is not needed
+// data            dmol or lammps or vasp and filename
+
+// # semi required
+// # absolutely reuqired when using the custom option
+// # if using the library structures for (T)MDC you can change the default
+// # stoichiometry and lattice parameters. i.e. Mo:1,S:2
+// # if using one of the standard cubic, tetragonal, ortho structures,
+// # define it as follows C:1 or Na:1 ...
+// stoich 			type1:n1,type2:n2,type3:n3,... 
+
+// # semi required
+// # all values below have defaults and so none are technically required
+// # even when building a custom crystal 
+// # a=1,b=1,c=1 alpha = beta = gamma = 90
+// lat_parameters	a=na,b=nb,c=nc 
+
+// lat_angle       alpha=n,beta=,gamma=
+
+// # not required, defaults are nx=ny=nz= 1
+// super_cell      nx=,ny=,nz=
+
+// # not required
+// # write the coordinates in fractional units
+// # only valid if writing to vasp
+// data_modify		fractional
+
+// # required
+// # build just writes the data and does not render the crystal
+// # render does just that, it shows you the crystal and saves the 
+// # data according to your reuqest
+// run 			build or render
 
 
-
-// void INTERFACE::input(char *p)
+// void 
+// INTERFACE::input(char *pf)
 // {
-// 	std::ifstream parms(p);
+// 	std::ifstream pfile(pf);
 // 	std::istringstream iss;
 // 	std::string keyword, line;
-// 	std::string lattice_class, istyle, ifmt, iname;
-// 	char arg1[50], arg2[50], arg3[50], arg4[50];
-// 	char arg5[50], arg6[50], arg7[50], arg8[50];
+// 	std::string lattice_class, istyle;
+// 	std::string arg1, arg2, arg3, arg4;
+// 	std::string arg5, arg6, arg7, arg8;
 
-//     double lpar,cta;
-//     int ex,ey,ez;
+//     double alat,blat,clat;
+//     double alpha,beta,gamma;
 
-//     std::string modification, t1 = "empty", t2 = "empty", t3 = "empty", t4 = "empty";
-//     double rx=-1, ry=-1, rz=-1;
-//     double angles[3];
-//     // phi      theta       psi
-//     angles[0] = angles[1] = angles[2] = 0.;
+//     std::string latticeStyle;
+//     std::string stmty;
+//     std::string blattice;
+//     std::string ifmt, iname;
+
+
+//     int nx,ny,nz;
+
 //     bool rotate = false;
 //     std::vector<std::string> species;
 // 	int lbasis;
 
-//     printf ("Reading from file ................: %s\n",p);
+// 	if (DMSG)
+//     	fprintf (FDEBUG,"Reading from file ................: %s\n",p);
 
-//     oformat = "cartesian";
 
-//     while (std::getline(parms,line)) {
+//     // search first for the required parameters
+//     // if some are not there then throw a warning
+//     while (std::getline(pfile,line)) {
 //         iss.clear();
 //         iss.str(line);
 //         iss >> keyword >> arg1 >> arg2 >> arg3 >> arg4 >> arg5 >> arg6 >> arg7 >> arg8;
+
+//         if(keyword == "bravais") {
+//         	blattice = arg1;
+//         } else if (keyword == "data") {
+//         	ifmt = arg1;
+//         	if (ifmt == "vasp") {
+//         		iname = "POSCAR";
+//         	} else {
+//         		iname = arg2;
+//         	}
+//         }
+
+//     }
+
+//     pfile.clear();                 // clear fail and eof bits
+// 	pfile.seekg(0, std::ios::beg); // back to the start!
+
+// 	std::vector<std::string> g_elemList;
+//     std::vector<std::string> g_elemCount;
+
+// 	if (blattice == "cubic") {
+// 		std::vector<std::string> stoich;
+// 		while (std::getline(pfile,line)) {
+// 	        iss.clear();
+// 	        iss.str(line);
+// 	        iss >> keyword >> arg1 >> arg2 >> arg3 >> arg4 >> arg5 >> arg6 >> arg7 >> arg8;
+
+
+// 	        if(keyword == "bravais_style") {
+// 	        	latticeStyle = arg1;
+// 	        } else if (keyword == "stoich") {
+// 	        	stmty = arg1;
+// 	        	stoich = parser->split_list(stmty,':');
+// 	      		// parser->get_substrings(stmty, ',', ':', g_elemList, g_elemCount);
+// 	        }
+
+// 	    }
+
+// 	} 
+// 	// else if (blattice == "tetragonal") {
+
+// 	// } else if (blattice == "ortho") {
+
+// 	// } else if (blattice == "custom") {
+
+// 	// } else if (blattice == "library") {
+
+// 	// } 
+
+// 	// search first for the required parameters
+//     // if some are not there then throw a warning
+//     // while (std::getline(pfile,line)) {
+//     //     iss.clear();
+//     //     iss.str(line);
+//     //     iss >> keyword >> arg1 >> arg2 >> arg3 >> arg4 >> arg5 >> arg6 >> arg7 >> arg8;
+
+//     //     if(keyword == "bravais") {
+//     //     	blattice = arg1;
+//     //     } else if (keyword == "data") {
+//     //     	ifmt = arg1;
+//     //     	if (ifmt == "vasp") {
+//     //     		iname = "POSCAR";
+//     //     	} else {
+//     //     		iname = arg2;
+//     //     	}
+//     //     }
+
+//     // }
+
+// }
+
+
+
+
+
+
+
+
+
+// void 
+// INTERFACE::input(char *p)
+// {
+	// std::ifstream parms(p);
+	// std::istringstream iss;
+	// std::string keyword, line;
+	// std::string lattice_class, istyle, ifmt, iname;
+	// char arg1[50], arg2[50], arg3[50], arg4[50];
+	// char arg5[50], arg6[50], arg7[50], arg8[50];
+
+ //    double lpar,cta;
+ //    int ex,ey,ez;
+
+ //    std::string modification, t1 = "empty", t2 = "empty", t3 = "empty", t4 = "empty";
+ //    double rx=-1, ry=-1, rz=-1;
+ //    double angles[3];
+ //    // phi      theta       psi
+ //    angles[0] = angles[1] = angles[2] = 0.;
+ //    bool rotate = false;
+ //    std::vector<std::string> species;
+	// int lbasis;
+
+ //    printf ("Reading from file ................: %s\n",p);
+
+ //    oformat = "cartesian";
+
+ //    while (std::getline(parms,line)) {
+ //        iss.clear();
+ //        iss.str(line);
+ //        iss >> keyword >> arg1 >> arg2 >> arg3 >> arg4 >> arg5 >> arg6 >> arg7 >> arg8;
 //         if(keyword == "lattice") {
 //             lattice_class = arg1;
 //             istyle = arg2;
-//             if (strncmp(arg3,"hex",3)==0 || strncmp(arg3,"hexagonal",9)==0) lbasis=1;
-//             else if (strncmp(arg3,"ac",2)==0 || strncmp(arg3,"armchair",8)==0) lbasis = 3;
-//             else if (strncmp(arg3,"zz",2)==0 || strncmp(arg3,"zigzag",6)==0) lbasis = 4;
+//             // if (strncmp(arg3,"hex",3)==0 || strncmp(arg3,"hexagonal",9)==0) lbasis=1;
+//             // else if (strncmp(arg3,"rectangular",2)==0 || strncmp(arg3,"armchair",8)==0) lbasis = 3;
+//             // else if (strncmp(arg3,"zz",2)==0 || strncmp(arg3,"zigzag",6)==0) lbasis = 4;
 //         	else lbasis = 3;
 //         } else if (keyword == "lattice_modify") {
 //             rotate = true;

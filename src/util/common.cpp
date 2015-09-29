@@ -46,7 +46,6 @@ void Errors::show_usage_info(const char *func_name)
 
 
 
-
 Parser::Parser()
 {};
 
@@ -142,7 +141,7 @@ Parser::split_list(std::string list, char delim)
 }
 
 int 
-Parser::scan_list(std::string list, char d1, char d2, std::vector<std::string> &keys, std::vector<std::string> &vals)
+Parser::get_substrings(std::string list, char d1, char d2, std::vector<std::string> &keys, std::vector<std::string> &vals)
 {
     std::vector<std::string> temp1, temp2;
     temp1 = split_list(list, d1);

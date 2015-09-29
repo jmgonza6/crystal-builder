@@ -37,7 +37,7 @@
 #include "../structures/tetragonal.h"
 
 #include "../util/write.h"
-
+#include "../util/reader.h"
 #include "../gui/gui.h"
 
 class INTERFACE {
@@ -79,10 +79,12 @@ class INTERFACE {
 	public:
 		std::vector<std::string> species;   //!< container to hold each element string defined by the user
 
-		Gui                      *gui;      //!< pointer to the gui class
-		LATTICE                  *lattice;  //!< pointer to the lattice class, each Bravais crystal inherits from LATTICE
-		Write                    *write;    //!< pointer to the write class, used for writing specific formats
-		Errors                   *errors;
+		Gui*                      gui;      //!< pointer to the gui class
+		LATTICE*                  lattice;  //!< pointer to the lattice class, each Bravais crystal inherits from LATTICE
+		Write*                    write;    //!< pointer to the write class, used for writing specific formats
+		Errors*                   errors;
+		Parser*                   parser;
+		Reader*                   reader;
 
 		/** \brief Constructor to start up all core level classes
 		  * \param[in] nargs - number of command line arguments
@@ -109,11 +111,18 @@ class INTERFACE {
 		void 
 		build();
 
+		/** \brief Store all the parameters and build the required crystal. \n
+		  * This is where each of the specific Bravais lattices are instantiated as an \n
+		  * object of the LATTICE class.
+		  */
+		void 
+		build_from_file();
+
 		/** \brief Write the as built crystal to a regular file. \n
 		  * This method accesses the requested file format and passes all the necessary data for that format.
 		  */
 		void 
-		write_data();
+		write_data(int src);
 
 		/** \brief Simple sanity check to ensure all necessary parameters have been defined .\n
 		  *  If a required parameter was not set, then a detailed message on the missing parameter\n

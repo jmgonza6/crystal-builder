@@ -35,15 +35,12 @@ Tetragonal::~Tetragonal()
 void Tetragonal::BCC()
 {
     char str[MAX_STRING_LENGTH];
-    int surftype = 1;
-    std::vector<double> row(3);
-
-    memory->new_1d(name,9);
-    strcpy(name, "BCC");
-
     apcell = 2;
     ntype  = 1;
-    memory->new_1d(nt,ntype);
+    basis = new basis_t[apcell];
+
+    name = memory->new_1d<char>(4);
+    strcpy(name, "BCC");
 
     a1.push_back(1.);
     a1.push_back(0.);
@@ -57,19 +54,17 @@ void Tetragonal::BCC()
     a3.push_back(0.);
     a3.push_back(1.);   
 
-    memory->new_2d(basis,apcell,3);
-    memory->new_1d(atom_type,apcell);
+    basis[0].x = 0.;
+    basis[0].y = 0.;
+    basis[0].z = 0.;
+    basis[0].typeId = 1;
 
-    for (int i=0; i<apcell; i++) atom_type[i] = 1;
-    basis[0][0] = 0.;
-    basis[0][1] = 0.;
-    basis[0][2] = 0.;
+    basis[1].x = 0.5;
+    basis[1].y = 0.5;
+    basis[1].z = 0.5;
+    basis[1].typeId = 1;
 
-    basis[1][0] = 0.5;
-    basis[1][1] = 0.5;
-    basis[1][2] = 0.5;
-
-    nt[0] = 2;
+    elemCount.push_back(2);
 }
 
 /* ----------------------------------------------------------------------
@@ -78,16 +73,13 @@ void Tetragonal::BCC()
 void Tetragonal::FCC()
 {
     char str[MAX_STRING_LENGTH];
-    int surftype = 1;
-    std::vector<double> row(3);
-
-    memory->new_1d(name,9);
-    strcpy(name, "FCC");
 
     apcell = 4;
     ntype  = 1;
-
-    memory->new_1d(nt,ntype);
+    basis = new basis_t[apcell];
+ 
+    name = memory->new_1d<char>(4);
+    strcpy(name, "FCC");
 
     a1.push_back(1.);
     a1.push_back(0.);
@@ -101,27 +93,28 @@ void Tetragonal::FCC()
     a3.push_back(0.);
     a3.push_back(1.);   
     
-    memory->new_2d(basis,apcell,3);
-    memory->new_1d(atom_type,apcell);
 
-    for (int i=0; i<apcell; i++) atom_type[i] = 1;
-    basis[0][0] = 0.;
-    basis[0][1] = 0.;
-    basis[0][2] = 0.;
+    basis[0].x = 0.;
+    basis[0].y = 0.;
+    basis[0].z = 0.;
+    basis[0].typeId = 1;
 
-    basis[1][0] = 0.5;
-    basis[1][1] = 0.5;
-    basis[1][2] = 0.;
+    basis[1].x = 0.5;
+    basis[1].y = 0.5;
+    basis[1].z = 0.0;
+    basis[1].typeId = 1;
 
-    basis[2][0] = 0.;
-    basis[2][1] = 0.5;
-    basis[2][2] = 0.5;
+    basis[2].x = 0.0;
+    basis[2].y = 0.5;
+    basis[2].z = 0.5;
+    basis[2].typeId = 1;
 
-    basis[3][0] = 0.5;
-    basis[3][1] = 0.;
-    basis[3][2] = 0.5;
+    basis[2].x = 0.5;
+    basis[2].y = 0.0;
+    basis[2].z = 0.5;
+    basis[2].typeId = 1;
 
-    nt[0] = 4;
+    elemCount.push_back(4);
 }
 
 /* ----------------------------------------------------------------------
@@ -130,15 +123,13 @@ void Tetragonal::FCC()
 void Tetragonal::primitive()
 {
     char str[MAX_STRING_LENGTH];
-    int surftype = 1;
-    std::vector<double> row(3);
-
-    memory->new_1d(name,9);
-    strcpy(name, "primitive");
 
     apcell = 1;
     ntype  = 1;
-    memory->new_1d(nt,ntype);
+    basis = new basis_t[apcell];
+
+    name = memory->new_1d<char>(7);
+    strcpy(name, "simple");
 
     a1.push_back(1.);
     a1.push_back(0.);
@@ -152,13 +143,10 @@ void Tetragonal::primitive()
     a3.push_back(0.);
     a3.push_back(1.);   
 
-    memory->new_2d(basis,apcell,3);
-    memory->new_1d(atom_type,apcell);
+    basis[0].x = 0.;
+    basis[0].y = 0.;
+    basis[0].z = 0.;
+    basis[0].typeId = 1;
 
-    for (int i=0; i<apcell; i++) atom_type[i] = 1;
-    basis[0][0] = 0.;
-    basis[0][1] = 0.;
-    basis[0][2] = 0.;
-
-    nt[0] = 1;
+    elemCount.push_back(1);
 }

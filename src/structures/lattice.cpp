@@ -5,6 +5,10 @@
 ------------------------------------------------------------------------- */
 LATTICE::LATTICE()
 {
+    atoms = NULL;
+    atomsOut = NULL;
+    basis = NULL;
+
     natom = apcell = 0;
     ntype = 1;
     nx = ny = nz = 1;
@@ -43,85 +47,76 @@ LATTICE::build_crystal()
     natom = nx*ny*nz*apcell;
     if (natom < 1) exit(1);
 
-    memory->new_2d(coords,natom,3);
-    memory->new_1d(type_list,natom);
-
-    memory->new_1d(typeCount,ntype);
-
     int n = 0;
 
     if (DMSG) fprintf(FDEBUG, "LATTICE::DEBUG   >>");
     for (n=0;n<ntype;n++) {
         if (DMSG) fprintf(FDEBUG, " %i",nx*ny*nz*elemCount[n] );
-        typeCount[n] = nx*ny*nz*elemCount[n];
+        typeCount.push_back(nx*ny*nz*elemCount[n]);
     }
     if (DMSG) fprintf(FDEBUG, "\n");
 
+
+    atoms = new atom_t[natom];
+    
+
+    // reset the counter for the atoms
+    n=0;
     
     // write in the order needed by VASP
     // type_1 type_2 .... type_n
     // build in xy plane first, then add layers
-    int x,y,z,b;
-    for (b=0; b<apcell; b++){
+    int x=0,y=0,z=0,i=0,t=0;
+    double b1,b2,b3;
+    for (i=0; i<apcell; i++){
+        t = basis[i].typeId;
+        b1 = basis[i].x;
+        b2 = basis[i].y;
+        b3 = basis[i].z;
         for (z=0; z<nz; z++){
-            for (x=0; x<nx; x++){
-                for (y=0; y<ny; y++){
-                    type_list[n] = atom_type[b];
-                    coords[n][0] = basis[b][0] + x;
-                    coords[n][1] = basis[b][1] + y;
-                    coords[n][2] = basis[b][2] + z;
+            for (y=0; y<ny; y++){
+                for (x=0; x<nx; x++){
+                    atoms[n].typeId = t;
+                    atoms[n].x = b1 + x;
+                    atoms[n].y = b2 + y;
+                    atoms[n].z = b3 + z;
                     n++;
                 }
             }
         }
     }
 
-    double *ncords = memory->new_flat<double>(natom*3);
-
-    // memory->flat_2d(coords,natom*3);
-    // for (b=0; b<apcell; b++){
-    //     for (z=0; z<nz; z++){
-    //         for (x=0; x<nx; x++){
-    //             for (y=0; y<ny; y++){
-    //                 type_list[n] = atom_type[b];
-    //                 coords[n][0] = basis[b][0] + x;
-    //                 coords[n][1] = basis[b][1] + y;
-    //                 coords[n][2] = basis[b][2] + z;
-    //                 n++;
-    //             }
-    //         }
-    //     }
-    // }
 
 
-
+    // convert the fractional lattice vectors to Å
+    a1[0] *= alat; a1[1] *= alat; a1[2] *= alat;
+    a2[0] *= blat; a2[1] *= blat; a2[2] *= blat;
+    a3[0] *= clat; a3[1] *= clat; a3[2] *= clat;
+    
     // particle n position
     std::vector<double> P(3);
     // ith component of lattice vectors
     std::vector<double> X(3);
-    for (int i=0; i<3; i++){
-        a1[i] = a1[i]*alat;
-        a2[i] = a2[i]*blat;
-        a3[i] = a3[i]*clat;
-    }
-
-    // tranform lattice coordinates to real space coordinates
+    // tranform from lattice coordinates to real space coordinates
     for (n=0; n<natom; n++){
-        P[0] = coords[n][0]; 
-        P[1] = coords[n][1]; 
-        P[2] = coords[n][2];
-        for (int i=0;i<3;i++) {
-            X[0] = a1[i]; X[1] = a2[i]; X[2] = a3[i];
-            coords[n][i] = MATHNS::vector_dot(X,P);
-        }
+        P[0] = atoms[n].x; 
+        P[1] = atoms[n].y; 
+        P[2] = atoms[n].z;
+
+        X[0] = a1[0]; X[1] = a2[0]; X[2] = a3[0];
+        atoms[n].x = MATHNS::vector_dot(X,P);
+
+        X[0] = a1[1]; X[1] = a2[1]; X[2] = a3[1];
+        atoms[n].y = MATHNS::vector_dot(X,P);
+
+        X[0] = a1[2]; X[1] = a2[2]; X[2] = a3[2];
+        atoms[n].z = MATHNS::vector_dot(X,P);
     }
 
     // extend the lattice vectors to their supercell dimensions
-    for (int i=0; i<3; i++){
-        a1[i] *= double(nx);
-        a2[i] *= double(ny);
-        a3[i] *= double(nz);
-    }
+    a1[0] *= nx; a1[1] *= nx; a1[2] *= nx;
+    a2[0] *= ny; a2[1] *= ny; a2[2] *= ny;
+    a3[0] *= nz; a3[1] *= nz; a3[2] *= nz;
 
     if (GMSG) fprintf(SMESG,"LATTICE::EXE   >> atoms created successfully\n");
 }
@@ -168,29 +163,40 @@ LATTICE::build_crystal()
 //         printf("%d %10.8f %10.8f %10.8f\n", atom_type[i], basis[i][0], basis[i][1], basis[i][2]);
 //     }
 // }
+atom_t* LATTICE::copy_data(atom_t * atomsI)
+{
+    atom_t *atomO = new atom_t[natom];
+    atom_t *p;
+    for(int n=0; n<natom; n++) {
+        p = &atomsI[n];
+        atomO[n].x = p->x;
+        atomO[n].y = p->y;
+        atomO[n].z = p->z;
+        atomO[n].typeId = p->typeId;
+    }
+    return atomO;
+}
+
 
 int
 LATTICE::convert_coordinates(int fractional)
 {
+    atomsOut = new atom_t[natom];
+
     if (fractional) {
-        cart2fract(a1,a2,a3,coords);
+        atomsOut = cart2fract(a1,a2,a3,atoms);
         return 1;
     } else {
-        memory->new_2d(positions,natom,3);
-        for(int ii=0; ii<natom; ii++) {
-            positions[ii][0] = coords[ii][0];
-            positions[ii][1] = coords[ii][1];
-            positions[ii][2] = coords[ii][2];
-        }
+        atomsOut = copy_data(atoms);
         return 1;
     }
 
 }
 
-void
-LATTICE::cart2fract(std::vector<double> a1, std::vector<double> a2, std::vector<double> a3, double **cartesian) 
+atom_t *
+LATTICE::cart2fract(std::vector<double> a1, std::vector<double> a2, std::vector<double> a3, atom_t *atomsI) 
 {
-    memory->new_2d(positions,natom,3);
+    atom_t *atomsO = new atom_t[natom];
 
     std::vector<double> X(3), P(3);
     char message[256];
@@ -217,23 +223,28 @@ LATTICE::cart2fract(std::vector<double> a1, std::vector<double> a2, std::vector<
     vol = sqrt( (1. - (ca*ca) - (cb*cb) - (cg*cg) + 2.*ca*cb*cg) );
 
     /* transformation matrix for fract to cart coordinates */
-    double **T;
-    memory->new_2d(T,3,3);
+    double **T = memory->new_2d<double>(3,3);
 
     T[0][0] = 1./A; T[0][1] = -cg/(A*sg); T[0][2] = (ca*cg-cb)/(A*vol*sg);
     T[1][0] = 0.;   T[1][1] = 1./(B*sg);  T[1][2] = (cb*cg-ca)/(B*vol*sg);
     T[2][0] = 0.;   T[2][0] = 0.;         T[2][2] = 1./(C*vol);
 
-
+    atom_t *atomi;
     for(int ii=0; ii<natom; ii++) {
         P.erase(P.begin(),P.end());
-        X[0] = cartesian[ii][0]; // x
-        X[1] = cartesian[ii][1]; // y
-        X[2] = cartesian[ii][2]; // z
+        atomi = &atomsI[ii];
+
+        X[0] = atomi->x;
+        X[1] = atomi->y;
+        X[2] = atomi->z;
+
         P = MATHNS::mat_vec_mult(3,T,X);
-        positions[ii][0] = P[0];
-        positions[ii][1] = P[1];
-        positions[ii][2] = P[2];
+
+        atomsO[ii].x = P[0];
+        atomsO[ii].y = P[1];
+        atomsO[ii].z = P[2];
+        atomsO[ii].typeId = atomi->typeId;
     }
     memory->destroy(T);
+    return atomsO;
 }

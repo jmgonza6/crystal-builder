@@ -37,15 +37,15 @@ Cubic::~Cubic()
 void Cubic::BCC()
 {
     char str[MAX_STRING_LENGTH];
-    int surftype = 1;
-    std::vector<double> row(3);
-
-    memory->new_1d(name,9);
-    strcpy(name, "BCC");
 
     apcell = 2;
     ntype  = 1;
-    memory->new_1d(nt,ntype);
+
+    basis = new basis_t[apcell];
+
+    name = memory->new_1d<char>(4);
+    strcpy(name, "BCC");
+
 
     a1.push_back(1.);
     a1.push_back(0.);
@@ -59,20 +59,19 @@ void Cubic::BCC()
     a3.push_back(0.);
     a3.push_back(1.);    
 
-    memory->new_2d(basis,apcell,3);
-    memory->new_1d(atom_type,apcell);
 
-    for (int i=0; i<apcell; i++) atom_type[i] = 1;
-    basis[0][0] = 0.;
-    basis[0][1] = 0.;
-    basis[0][2] = 0.;
+    basis[0].x = 0.;
+    basis[0].y = 0.;
+    basis[0].z = 0.;
+    basis[0].typeId = 1;
 
-    basis[1][0] = 0.5;
-    basis[1][1] = 0.5;
-    basis[1][2] = 0.5;
+    basis[1].x = 0.5;
+    basis[1].y = 0.5;
+    basis[1].z = 0.5;
+    basis[1].typeId = 1;
 
     elemCount.push_back(2);
-    // nt[0] = 2;
+
 }
 
 /* ----------------------------------------------------------------------
@@ -81,15 +80,12 @@ void Cubic::BCC()
 void Cubic::FCC()
 {
     char str[MAX_STRING_LENGTH];
-    int surftype = 1;
-    std::vector<double> row(3);
-
-    memory->new_1d(name,9);
+    name = memory->new_1d<char>(4);
     strcpy(name, "FCC");
 
     apcell = 4;
     ntype  = 1;
-    memory->new_1d(nt,ntype);
+    basis = new basis_t[apcell];
 
     a1.push_back(1.);
     a1.push_back(0.);
@@ -102,29 +98,28 @@ void Cubic::FCC()
     a3.push_back(0.);
     a3.push_back(0.);
     a3.push_back(1.);  
-    
-    memory->new_2d(basis,apcell,3);
-    memory->new_1d(atom_type,apcell);
 
-    for (int i=0; i<apcell; i++) atom_type[i] = 1;
-    basis[0][0] = 0.;
-    basis[0][1] = 0.;
-    basis[0][2] = 0.;
+    basis[0].x = 0.;
+    basis[0].y = 0.;
+    basis[0].z = 0.;
+    basis[0].typeId = 1;
 
-    basis[1][0] = 0.5;
-    basis[1][1] = 0.5;
-    basis[1][2] = 0.;
+    basis[1].x = 0.5;
+    basis[1].y = 0.5;
+    basis[1].z = 0.0;
+    basis[1].typeId = 1;
 
-    basis[2][0] = 0.;
-    basis[2][1] = 0.5;
-    basis[2][2] = 0.5;
+    basis[2].x = 0.0;
+    basis[2].y = 0.5;
+    basis[2].z = 0.5;
+    basis[2].typeId = 1;
 
-    basis[3][0] = 0.5;
-    basis[3][1] = 0.;
-    basis[3][2] = 0.5;
+    basis[2].x = 0.5;
+    basis[2].y = 0.0;
+    basis[2].z = 0.5;
+    basis[2].typeId = 1;
 
     elemCount.push_back(4);
-    // nt[0] = 4;
 }
 
 /* ----------------------------------------------------------------------
@@ -133,16 +128,15 @@ void Cubic::FCC()
 void Cubic::primitive()
 {
     char str[MAX_STRING_LENGTH];
-    int surftype = 1;
-    std::vector<double> row(3);
+ 
+    name = memory->new_1d<char>(13);
+    strcpy(name, "simple cubic");
 
-    memory->new_1d(name,9);
-    strcpy(name, "primitive");
 
     apcell = 1;
     ntype  = 1;
 
-    memory->new_1d(nt,ntype);
+    basis = new basis_t[apcell];
 
     a1.push_back(1.);
     a1.push_back(0.);
@@ -156,16 +150,12 @@ void Cubic::primitive()
     a3.push_back(0.);
     a3.push_back(1.);  
 
-    memory->new_2d(basis,apcell,3);
-    memory->new_1d(atom_type,apcell);
-
-    for (int i=0; i<apcell; i++) atom_type[i] = 1;
-    basis[0][0] = 0.;
-    basis[0][1] = 0.;
-    basis[0][2] = 0.;
+    basis[0].x = 0.;
+    basis[0].y = 0.;
+    basis[0].z = 0.;
+    basis[0].typeId = 1;
 
     elemCount.push_back(1);
-    // nt[0] = 1;
 }
 
 /* ----------------------------------------------------------------------
@@ -173,13 +163,12 @@ void Cubic::primitive()
 ------------------------------------------------------------------------- */
 void Cubic::Diamond()
 {
-    std::vector<double> row(3);
-    memory->new_1d(name,9);
+    name = memory->new_1d<char>(8);
     strcpy(name, "Diamond");
 
     apcell = 8;
     ntype  = 1;
-    memory->new_1d(nt,ntype);
+    basis = new basis_t[apcell];
   
     a1.push_back(1.);
     a1.push_back(0.);
@@ -192,43 +181,46 @@ void Cubic::Diamond()
     a3.push_back(0.);
     a3.push_back(0.);
     a3.push_back(1.);  
-
-    memory->new_2d(basis,apcell,3);
-    memory->new_1d(atom_type,apcell);
     
-    for (int i=0; i<apcell; i++) atom_type[i] = 1;
-    basis[0][0] = 0.;
-    basis[0][1] = 0.;
-    basis[0][2] = 0.;
-  
-    basis[1][0] = 0.5;
-    basis[1][1] = 0.5;
-    basis[1][2] = 0.;
-  
-    basis[2][0] = 0.25;
-    basis[2][1] = 0.25;
-    basis[2][2] = 0.25;
-  
-    basis[3][0] = 0.75;
-    basis[3][1] = 0.75;
-    basis[3][2] = 0.25;
-  
-    basis[4][0] = 0.5;
-    basis[4][1] = 0.0;
-    basis[4][2] = 0.5;
-  
-    basis[5][0] = 0.0;
-    basis[5][1] = 0.5;
-    basis[5][2] = 0.5;
-  
-    basis[6][0] = 0.75;
-    basis[6][1] = 0.25;
-    basis[6][2] = 0.75;
-  
-    basis[7][0] = 0.25;
-    basis[7][1] = 0.75;
-    basis[7][2] = 0.75; 
+    basis[0].x = 0.;
+    basis[0].y = 0.;
+    basis[0].z = 0.;
+    basis[0].typeId = 1;
+
+    basis[1].x = 0.5;
+    basis[1].y = 0.5;
+    basis[1].z = 0.0;
+    basis[1].typeId = 1;
+
+    basis[2].x = 0.25;
+    basis[2].y = 0.25;
+    basis[2].z = 0.25;
+    basis[2].typeId = 1;
+
+    basis[2].x = 0.75;
+    basis[2].y = 0.75;
+    basis[2].z = 0.25;
+    basis[2].typeId = 1;
+
+    basis[3].x = 0.5;
+    basis[3].y = 0.;
+    basis[3].z = 0.5;
+    basis[3].typeId = 1;
+
+    basis[4].x = 0.0;
+    basis[4].y = 0.5;
+    basis[4].z = 0.5;
+    basis[4].typeId = 1;
+
+    basis[5].x = 0.75;
+    basis[5].y = 0.25;
+    basis[5].z = 0.75;
+    basis[5].typeId = 1;
+
+    basis[6].x = 0.25;
+    basis[6].y = 0.75;
+    basis[6].z = 0.75;
+    basis[6].typeId = 1;
 
     elemCount.push_back(8);
-    // nt[0] = 8;
 }

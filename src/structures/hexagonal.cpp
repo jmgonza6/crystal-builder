@@ -15,37 +15,36 @@ Hexagonal::~Hexagonal()
 void
 Hexagonal::primitive()
 {
-    memory->new_1d(name,9);
-    strcpy(name, "hcp");
-    apcell = 2;
-    ntype  = 1;
-    memory->new_1d(nt,ntype);
-    nt[0] = 2;
 
-    a1.push_back(1.);
-    a1.push_back(0.);
-    a1.push_back(0.);
+    // apcell = 2;
+    // ntype  = 1;
+    // basis = new basis_t[apcell];
+    // name = memory->new_1d<char>(4);
+    // strcpy(name, "hcp");
 
-    alpha = beta = 90.0;
-    gamma = 120.0;
+    // a1.push_back(1.);
+    // a1.push_back(0.);
+    // a1.push_back(0.);
 
-    a2 = MATHNS::rotate_vector(a1,"z",gamma);
+    // alpha = beta = 90.0;
+    // gamma = 120.0;
 
-    a3.push_back(0.);
-    a3.push_back(0.);
-    a3.push_back(sqrt(8./3.));
+    // a2 = MATHNS::rotate_vector(a1,"z",gamma);
 
-    memory->new_2d(basis,apcell,3);
-    memory->new_1d(atom_type,apcell);
+    // a3.push_back(0.);
+    // a3.push_back(0.);
+    // a3.push_back(sqrt(8./3.));
 
-    for (int i=0; i<apcell; i++) atom_type[i] = 1;
+    // basis[0].x = 1.;
+    // basis[0].y = 0.;
+    // basis[0].z = 0.;
+    // basis[0].typeId = 1;
 
-    basis[0][0] = 1.;
-    basis[0][1] = 0.;
-    basis[0][2] = 0.;
+    // basis[1].x = 2./3.;
+    // basis[1].y = 1./3.;
+    // basis[1].z = 0.5;
+    // basis[1].typeId = 1;
 
-    basis[1][0] = 2./3.;
-    basis[1][1] = 1./3.;
-    basis[1][2] = 0.5;
+    // elemCount.push_back(2);
 
 }

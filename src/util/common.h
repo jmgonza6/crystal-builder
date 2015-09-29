@@ -27,7 +27,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <string>
+#ifdef USE_GTK
 #include <gtk/gtk.h>
+#endif
 
 #include <cstdlib>
 #include <cstdio>
@@ -49,7 +51,7 @@
 
 
 #define SOFT "crystal builder"  //!< application name
-#define VERS "3.5.1"            //!< current version of the application
+#define VERS "3.7.0"            //!< current version of the application
 
 #define MAX_LOG_ENTRIES 30
 #define MAX_THERMO_LIST 50
@@ -101,8 +103,6 @@
     #define RMSG 0
 #endif
 
-
-
 /** \struct PeriodicTable
   * \brief A structure containing strings representing up to element 110 
   * and their associated masses in AMU
@@ -110,6 +110,39 @@
 struct PeriodicTable{
     std::string elements[110];
     double amu[110];
+};
+
+/** \struct atom_t
+  * \brief x,y,z point defining the atomic coordinates, and a vector for each atoms nearest neighbors
+  */
+typedef struct {
+  double x,y,z;
+  int    typeId;
+  std::vector<int> naborIds;
+} atom_t;
+
+/** \struct basis_t
+  * \brief x,y,z point defining the basis coordinates, and the element type
+  */
+typedef struct {
+  double x,y,z;
+  int    typeId;
+} basis_t;
+
+
+/** \struct Point
+  * \brief x,y,z coordinates for a point in space
+  */
+struct Point {
+    float x[3];  
+    float n[3]; 
+};
+
+/** \struct Line
+  * \brief x,y,z point defining two vertices, used for drawing the unit cell
+  */
+struct Line {   
+    Point v[2];  
 };
 
 
@@ -166,7 +199,7 @@ class Errors {
 };
 
 /**
- * \class MEMORY memory.h "memory.h"
+ * \class MEMORY common.h "common.h"
  * \b Purpose:
   *  =============
   \verbatim 
@@ -206,13 +239,17 @@ class Memory {
           * \tparam length - Length of array 
           * \returns 1D array of type \b `TYPE`
           */
-        template <typename TYPE>
-        TYPE *new_1d(TYPE *&array, int length)
+        template<typename retVal>
+        retVal 
+        *new_1d(int length)
         {
-            int ii,jj;
-            array = new TYPE[length];
-            for(ii=0;ii<length;++ii) 
+          int ii;
+            retVal *array = new retVal[length];
+            if (sizeof(retVal) == sizeof(int)) {
+                for(ii=0;ii<length;++ii) 
                 array[ii] = 0.;
+            }
+            
             return array;
         }
 
@@ -235,19 +272,24 @@ class Memory {
           * \tparam columns - Number of columns in array 
           * \returns 2D array of type \b `TYPE`
           */
-        template <typename TYPE>
-        TYPE **new_2d(TYPE **&array, int rows, int columns)
+
+        template <typename retVal>
+        retVal
+        **new_2d(int rows, int columns) 
         {
             int ii,jj;
-            array = new TYPE*[rows*columns];
+            // allocate 
+            retVal **array = new retVal*[rows*columns];
             for(ii=0;ii<rows*columns;++ii) 
-                array[ii] = new TYPE[columns];
+                array[ii] = new retVal[columns];
 
+            // initialize
             for(ii=0; ii<rows;ii++)
                 for(jj=0; jj<columns; jj++)
                     array[ii][jj] = 0.;
             return array;
         }
+
 
         /** \brief Safe method of deleting memory allocations 
           * \tparam array - 2D array created by new_2d or using \b `new` 
@@ -258,37 +300,7 @@ class Memory {
             if (!array) return;
             delete array[0];
             delete array;
-            // safe_delete(array[0]);
-            // safe_delete(array);
-        }
-
-
-        // 2D arrays as 1D vectors, built for speed!
-        /** \brief Template to create a 2D array and mapped as a 1D array using \b `new` 
-          * \tparam array - Address of array to be allocated
-          * \tparam length - Length of array 
-          * \returns 2D array mapped to 1D array of type \b `TYPE`
-          */
-        template <typename TYPE>
-        TYPE *flat_2d(TYPE **&array, int length)
-        {
-            int ii,jj;
-            array = new TYPE*[length];
-            for(ii=0;ii<length;++ii) 
-                array[ii] = 0.;
-            return array;
-        }
-
-        template<typename retVal>
-        retVal 
-        *new_flat(int length)
-        {
-          int ii;
-            retVal *array = new retVal[length];
-            for(ii=0;ii<length;++ii) 
-                array[ii] = 0.;
-            return array;
-        }
+        }        
 };
 
 
@@ -384,6 +396,7 @@ class Parser {
         /** \brief Insert a word based on a delimeter
           * \param[in] str - string to have a word inserted
           * \param[in] insert - word to insert in `str`
+          * \param[in] delim - delimeter to use for locating the end
           * \returns a \b `char*` type containing compound word
           */
         char*
@@ -401,11 +414,11 @@ class Parser {
           * \returns \b `1` if successful, \b `0` otherwise.
           */
         int
-        scan_list(std::string              list,
-                  char                     d1, 
-                  char                     d2, 
-                  std::vector<std::string> &keys,  
-                  std::vector<std::string> &vals);
+        get_substrings(std::string              list,
+                      char                     d1, 
+                      char                     d2, 
+                      std::vector<std::string> &keys,  
+                      std::vector<std::string> &vals);
 
 };
 

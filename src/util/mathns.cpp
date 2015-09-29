@@ -2,7 +2,7 @@
 #include "mathns.h"
 
 class Errors *merrors;
-class Memory *memory;
+class Memory *mmemory;
 
 /*------------------------------------------------------------
     LEVEL-1 OPERATIONS
@@ -76,7 +76,7 @@ std::vector<double> MATHNS::rotate_vector(std::vector<double> X, std::string axi
 {
     std::vector<double> rotated;
     double **rotMatrix;
-    memory->new_2d(rotMatrix,3,3);
+    rotMatrix = mmemory->new_2d<double>(3,3);
     if (axis=="x") {
         rotMatrix[0][0] = 1;  rotMatrix[0][1] = 0;              rotMatrix[0][2] =  0;
         rotMatrix[1][0] = 0;  rotMatrix[1][1] = cos(angle*D2R); rotMatrix[1][2] = -sin(angle*D2R);
@@ -93,6 +93,6 @@ std::vector<double> MATHNS::rotate_vector(std::vector<double> X, std::string axi
 
     rotated = mat_vec_mult(3,rotMatrix,X);
 
-    memory->destroy(rotMatrix);
+    mmemory->destroy(rotMatrix);
     return rotated;
 }

@@ -11,9 +11,10 @@
   /*****************************************************************************************\
   \endverbatim
   *
-  *\b User interation:
+  *\b User interaction:
   *  =============
   * \verbatim
+  *
   *  Mouse events:
   *     Left mouse            rotate, zoom
   *     Right mouse           menu
@@ -28,8 +29,10 @@
   *     'e'                   exit and save the data from the rendering scene
   *     'o'                   orthographic projection of the crystal
   *     'p'                   perspective projection of the crystal
-  *     'r' and LeftButton    rotate the crystal in all 3 dimensions
-  *     'z' and LeftButton    zoom toward/away from the crystal
+  *     'r' then LeftButton   rotate the crystal in all 3 dimensions
+  *     'W'                   change background to white and bounding box to black
+  *     'w'                   change background to black and bounding box to white
+  *     'z' then LeftButton   zoom toward/away from the crystal
   *     '0'                   reset orientation of crystal to looking down z toward xy plane
   *     '1'                   view the xz "a-c" plane of the crystal
   *     '2'                   view the yz "b-c" plane of the crystal
@@ -37,20 +40,17 @@
   *     '+'                   increase the particle radius uniformly
   *     '-'                   decrease the particle radius uniformly
   *
-  *     gl_init()             initializes the display mode and render environment
+  *     Up arrow              Shift the crystal in positive vertical screen direction
+  *     Down arrow            Shift the crystal in negative vertical screen direction
+  *     Left arrow            Shift the crystal in negative horizontal screen direction
+  *     Right arrow           Shift the crystal in positive horizontal screen direction
   *
-  *     gl_menu_init()        initializes a pop-up menu for changing display
-  *                           paramaters in realtime, 
-  *                           (particle radius, atoms only, and atoms+cell)
-  *
-  *     render_init()         initializes the geometry data defined in the gui
-  *                           session 
-  * \endverbatim
+  \endverbatim
   * \author Joseph M. Gonzalez
   *
-  * \version 0.7
+  * \version 0.9
   *
-  * \date Sep 13, 2015 19:16:20
+  * \date Sep 27, 2015 19:16:20
   *
   * \b Contact \n    jmgonza6@mail.usf.edu
   *
@@ -60,7 +60,6 @@
 #define RENDER_H
 
 #include "../util/common.h"
-
 
 // portability for apple and linux
 // no windoze support...
@@ -77,35 +76,12 @@
 #endif
 
 // decent 4:3 aspect ratio
-#define WWIDTH 1024       //!< width of the rendering window
-#define WHEIGHT 1024       //!< height of the rendering window
-#define VPORT_SIZE 50     //!< size of the view port, VPORT_SIZExVPORT_SIZE
+#define WWIDTH 600       //!< width of the rendering window
+#define WHEIGHT 600       //!< height of the rendering window
+#define VPORT_SIZE 60     //!< size of the view port, VPORT_SIZExVPORT_SIZE
 
 
-/** \struct Point
-  * \brief x,y,z coordinates for a point in space
-  */
-struct Point {
-    float x[3];  
-    float n[3]; 
-};
-
-/** \struct Line
-  * \brief x,y,z point defining two vertices, used for drawing the unit cell
-  */
-struct Line {   
-    Point v[2];  
-};
-
-/** \struct atom_t
-  * \brief x,y,z point defining the atomic coordinates, and a vector for each atoms nearest neighbors
-  */
-typedef struct {
-  double x,y,z;
-  std::vector<int> naborIds;
-} atom_t;
-
-enum LeftButton {    ROTATE,SCALE,TRANSLATE    };
+enum LeftButton {    ROTATE,SCALE,TRANSLATE,DRAG    };
 
 enum {    SHOWALL,ATOMSONLY,BONDS,BLACKB,WHITEB    };
 
@@ -135,22 +111,22 @@ int
 build_nn_list();
 
 /** \brief Locally store the data entered by the user during the gui session 
-  * \param[in] outname - deprecated
   * \param[in] natom - total number of atoms created by lattice->build()
-  * \param[in] ntype - number of unique types created by setting basis
-  * \param[in] latvec - 2D vector containing the cell vectors, in cartesian units
-  * \param[in] atom_ids - 1D list of atomic type ids 
-  * \param[in] coords - 2D pointer to array containing the atomic positions, in cartesian units
+  * \param[in] a1 - major lattice vector, in cartesian coordinates
+  * \param[in] a2 - lattice vector, in `xy plane`, in cartesian coordinates
+  * \param[in] a3 - lattice vector, in `xyz plane`, in cartesian coordinates
+  * \param[in] atomsIn - Structure containing the atomic positions, in cartesian units, and atomic type numbers
   * \param[in] species - 1D vector containing atomic species
+  * \param[in] elemCount - 1D vector containing the count of each type in `species`
   */
 int
-render_init(char                              outname[],  
-			int                               natom, 
-			int                               ntype, 
-			std::vector<std::vector<double> > latvec, 
-			int                               *atom_ids, 
-			double                            **coords, 
-			std::vector<std::string>          species);
+render_init(int                               natom, 
+            std::vector<double>               a1,
+            std::vector<double>               a2,
+            std::vector<double>               a3,
+            atom_t*                           atomsIn,
+            std::vector<std::string>          species,
+            std::vector<int>                  elemCount);
 
 
 
@@ -159,14 +135,39 @@ render_init(char                              outname[],
 // "Private" drawing functions
 //
 
-/** \brief Initialize the atomic and unit cell data from a GUI session
+/** \brief Selectively initialize the atomic and or unit cell data from a GUI session
   * Draws the objects and stores the data in a glList.  These lists  make rendering \n
-  * much more efficient with a simple call to glCallList(glList)
-  * \returns 1 if successful
+  * much more efficient with a simple call to glCallList()
+  * \param[in] list - which list the re-create
+  * \arg 1, bounding box only
+  * \arg 2, coordinate axes only
+  * \arg 3, atomic coordinates only
+  * \arg 4, everything
+  * \returns \b 1 if successful \b 0 otherwise
   */
 int
-init_call_lists();
+init_call_lists(int list);
 
+/** \brief Initialize the coordinate axes for the scene\n
+  * x = red , y = green, blue = z\n
+  * Drawn using GL_LINE_STRIP and stores the data in a glList, `AxesList`.
+  */
+void
+init_axes_list();
+
+/** \brief Initialize the periodic unit cell\n
+  * Drawn using GL_LINE_STRIP and stores the data in a glList, `UnitCellList`.
+  */
+void
+init_bbox_list();
+
+
+/** \brief Initialize the atomic coordinates\n
+  *  The particles are drawn as gluSolidSphere() objects and stores \n
+  *  the data in a glList, `AtomsList`.
+  */
+void
+init_atoms_list();
 
 /** \brief Render unit cell, cartesian axes, and atoms in all 4 view ports
   * \param[in] vport - in which view port to draw
@@ -204,7 +205,8 @@ set_display_type(int value);
 void 
 kill_main_window(int value);
 
-/** \brief Set the display type and render the data in different orientations in 4 view ports
+/** \brief Set the display type, the projection type, initialize call lists, and handle scene modifications\n
+  *  Called by `glutDisplayFunc()`.
   */
 void 
 render_data();
@@ -217,7 +219,7 @@ render_data();
   * \param[in] x2 - ending `x` coordinate  of bond
   * \param[in] y2 - ending `y` coordinate  of bond
   * \param[in] z2 - ending `z` coordinate  of bond
-  * \param[in] pradius - bond radius, == partilce radius / 3.
+  * \param[in] radius - bond radius, == partilce radius / 3.
   * \param[in] stacks - stacks to fill in the cylinder
   */
 void 
@@ -242,27 +244,6 @@ keyboard_event(unsigned char ch,
                int           x, 
                int           y);
 
-/** \brief Track and process special keyboard signals, arrows, alt, tab, etc.
-  * \param[in] key - which special key is pressed, uses GLUT_KEY_XXXX
-  * \param[in] xx - unused
-  * \param[in] yy - unused
-  */
-void 
-keyboard_special_press(int key, 
-                       int xx, 
-                       int yy);
-
-
-/** \brief Track and process special keyboard signals, arrows, alt, tab, etc.
-  * \param[in] key - which special key was released, uses GLUT_KEY_XXXX
-  * \param[in] x - unused
-  * \param[in] y - unused
-  */
-void 
-keyboard_special_release(int key, 
-                         int x, 
-                         int y);
-
 /** \brief Track and process mouse signals
   * \param[in] button - which button was activated \n 
   *                     \arg \a left = rotate \a right = display menu \a middle = zoom
@@ -285,8 +266,35 @@ mouse_moved(int x,
             int y);
 
 
-// update camera position
+
+/** \brief Track and process special keyboard signals, arrows, alt, ctrl, etc. being pressed
+  * \param[in] key - which special key is pressed, uses GLUT_KEY_XXXX
+  * \param[in] xx - unused
+  * \param[in] yy - unused
+  */
+void
+special_key_pressed(int key, 
+                    int xx, 
+                    int yy) ;
+
+/** \brief Track and process special keyboard signals, arrows, alt, ctrl, etc. being released
+  * \param[in] key - which special key was released, uses GLUT_KEY_XXXX
+  * \param[in] x - unused
+  * \param[in] y - unused
+  */
+void
+special_key_release(int key, 
+                    int x, 
+                    int y) ;
+
+
 void 
-update();
+GetOGLPos(int x, int y);
+
+/** \brief Load an array with rgb values for coloring different atomic species.\n
+  * The coloring scheme used is CPK, which is the same as in Jmol
+  */
+void
+build_colorTable();
 
 #endif

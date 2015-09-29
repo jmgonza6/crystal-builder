@@ -1,5 +1,13 @@
 all source files currently used
 ------------
+main.cpp
+
+common.h
+common.cpp
+
+interface.h
+interface.cpp
+
 cubic.h
 cubic.cpp
 
@@ -9,32 +17,20 @@ tetragonal.cpp
 orthorhombic.h
 orthorhombic.cpp
 
-graphene.h
-graphene.cpp
-
-hexagonal.h
-hexagonal.cpp
-
 custom.h
 custom.cpp
+
+structure_lib.h
+structure_lib.cpp
 
 lattice.h
 lattice.cpp
 
-common.h
-common.cpp
-errors.cpp
-
 write.h
 write.cpp
 
+reader.h
+reader.cpp
+
 mathns.h
 mathns.cpp
-
-memory.h
-memory.cpp
-
-interface.h
-interface.cpp
-
-main.cpp

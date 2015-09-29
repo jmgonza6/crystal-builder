@@ -1,22 +1,22 @@
 /** 
   * \class LATTICE lattice.h "lattice.h"
-  *
-  *> \par Purpose:
-  *  =============
-  * \verbatim 
+  * >
+  * > \b Purpose:
+  * >
+  *  \verbatim 
   *
   *  Base class for constructing an arbitrary crystal structure based 
   *  on the fractional coordinates of the basis atoms, lattice vectors
   *  and lattice parameters a,b,c.
   *
   * \endverbatim
-  * \author Joseph M. Gonzalez
-  *
-  * \version 0.2
-  *
-  * \date Sep 13, 2015 19:16:20
-  *
-  * \b Contact \n    jmgonza6@mail.usf.edu
+  * > \author Joseph M. Gonzalez
+  * >
+  * > \version 0.2
+  * >
+  * > \date Sep 13, 2015 19:16:20
+  * >
+  * > \b Contact \n    jmgonza6@mail.usf.edu
   *
   */
 
@@ -33,9 +33,9 @@ class LATTICE {
         Memory                   *memory;       //!< pointer to memory allocation handler
 
         // atomic data
-        double                   **positions;  //!< final set of coordinates to write (fractional or cartesian)
-        double                   **coords;     //!< cartesian coordinates for data file
-        double                   **basis;      //!< basis atoms in single unit cell
+        atom_t*                  atoms;         //!< internal structure to hold atomic info
+        atom_t*                  atomsOut;      //!< structure for output atomic info 
+        basis_t*                 basis;         //!< structure for basis atoms in single unit cell
 
         // cell info
         double                   alat;         //!< a lattice constant
@@ -49,10 +49,7 @@ class LATTICE {
         std::vector<double>      a3;           //!< c lattice vector, somewhere along [111]
 
         // atomic and type accounting
-        int                      *typeCount;   //!< pointer to keep track of how many of each type, `typeCount[0] -> type 1 ...`
-        int                      *nt;          //!< pointer to keep track of how many unique types
         int                      *atom_type;   //!< pointer to hold all unique types
-        int                      *type_list;   //!< type numbers
         int                      natom;        //!< total atoms created
         int                      apcell;       //!< number of atoms in a single unit cell
         int                      ntype;        //!< number of atoms and atomic types in a unit cell
@@ -67,9 +64,11 @@ class LATTICE {
         char                     *lstyle;      //!< style of the Bravais lattice
         std::vector<std::string> species;      //!< vector containing unique element symbols
         std::vector<int>         elemCount;
-
-        // std::vector<std::vector<int> >      nnlist;
+        std::vector<int>         typeCount;    //!< keep track of how many of each type, `typeCount[0] -> type 1 ...`
         
+
+        atom_t* copy_data(atom_t * atomsI);
+
         LATTICE();
         ~LATTICE();
 
@@ -96,13 +95,13 @@ class LATTICE {
           * \param[in] a1 - major lattice vector, in cartesian coordinates
           * \param[in] a2 - lattice vector, in `xy plane`, in cartesian coordinates
           * \param[in] a3 - lattice vector, in `xyz plane`, in cartesian coordinates
-          * \param[in] cartesian - 2D array containing the atomic postions 
+          * \param[in] atomsI - 1D struct containing the atomic coordinates in  
           */
-        void
+        atom_t *
         cart2fract(std::vector<double> a1, 
                    std::vector<double> a2, 
                    std::vector<double> a3, 
-                   double **           cartesian);
+                   atom_t*             atomsI);
 
         
 

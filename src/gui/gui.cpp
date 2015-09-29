@@ -65,8 +65,11 @@ std::string elements[110] =
      "Md", "No", "Lr", "Rf", "Db", "Sg", "Bh", "Hs", "Mt"};
 
 std::string formats[3] = { "dmol (.car)", "lammps (.input)", "vasp (POSCAR)"};
+int nformats = 3;
 
-std::string crystals[6] = {"Cubic", "Hexagonal", "Monoclinic", "Orthorhombic", "Tetragonal", "Library"};
+std::string crystals[4] = {"Cubic", "Orthorhombic", "Tetragonal", "Library"};
+int ncrystals = 4;
+
 
 // container for the text entry of a basis atoms coordinates
 std::vector<std::string> basisList;
@@ -77,7 +80,7 @@ std::string g_entryString;
 
 /*
 --
-Constructor launches an instances of the parser class to handle the string maniupulations
+Constructor launches an instance of the parser class to handle the string maniupulations
 It also defines all of the global variables to a reasonable value so that the app can be
 run with as little interaction as possible
 --
@@ -142,14 +145,14 @@ Gui::display_in(GtkWidget *window)
     char bufferf[32];
     char bufferl[32];
     char windowTitle[50];
-    sprintf(bufferf, "::::");
+    sprintf(bufferf, "<<<::::::>>>");
 
     char message[MAX_STRING_LENGTH];
 
 
     window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
 
-    g_signal_connect (window, "delete-event", G_CALLBACK (gtk_main_quit), NULL);
+    g_signal_connect (window, "delete-event", G_CALLBACK (quit_main), NULL);
 
     gtk_container_set_border_width (GTK_CONTAINER (window), 10);
 
@@ -178,10 +181,6 @@ Gui::display_in(GtkWidget *window)
 
     vbox = gtk_vbox_new(TRUE,0);
     gtk_container_set_border_width (GTK_CONTAINER (vbox), 100);
-
-    button = gtk_button_new_with_label ("Import file...");
-    gtk_box_pack_start(GTK_BOX(vbox),button,1,1,0);
-    g_signal_connect(button, "clicked",G_CALLBACK (open_browser),window);
 
     label = gtk_label_new("Crystal");
     dropdown = fill_dropdown("crystal");
@@ -346,26 +345,26 @@ Gui::display_in(GtkWidget *window)
     gtk_widget_show (frame);
 
     char mesg[] = "=============================================================\n" \
-                          "                                        Crystal Builder v. 3.5.0                   \n\n" \
+                          "                                        Crystal Builder v. 3.7.0                   \n\n" \
                           "            This is a utility designed to construct various common crystal \n" \
                           "        structures and produce them in the format of several popular simulation\n" \
                           "        packages.  \n" \
                           "      \n\n" \
-                          "        This program can be used in one of two ways from this graphical user\n" \
-                          "        interface; (1) reading crystal info from a paramters file or (2) defining\n" \
-                          "        the criteria listed in the (Lattice,Modify,Outuput) tabs.\n" \
+                          "        This application can be used in one of two ways;\n" \
+                          "        (1) from the command line by reading crystal info from a paramters file or  \n" \
+                          "        (2) from this GUI by defining the criteria listed in the (Lattice,Modify,Outuput) tabs.\n" \
                           "      \n\n" \
                           "        Once a crystal has been defined, you can either select 'Build' which \n" \
                           "        will simply write the requested data to a file.  Alternatively, you can\n" \
                           "        select 'Render+build' to view the crystal.  This option is valid iff\n" \
                           "        this package was built with the Open GL/GLUT libraries!\n"
                           "      \n\n" \
-                          "        Crystal structures....: Cubic(BCC (I), FCC (F), Primitive (P), Diamond (I+F)),\n"\
-                          "                                Tetragonal(BCC (I), FCC (F), Primitive (P)),\n" \
-                          "                                Orthorombic(BCC (I), FCC (F), Primitive (P)),\n"\
-                          "                                Graphene(hexagonal, armchair->[100], armchair->[010])\n" \
-                          "                                Structures (Load some predefined strcutures)\n"
-                          "        File formats..........: DMol, exciting, LAMMPS, VASP\n" \
+                          "        Crystal structures....: Cubic(BCC (I), FCC (F), Primitive (P), Diamond (I+F)),\n    "\
+                          "                                Tetragonal(BCC (I), FCC (F), Primitive (P)),\n    " \
+                          "                                Orthorombic(BCC (I), FCC (F), Primitive (P)),\n    "\
+                          "                                Library (Load some predefined strcutures),\n    "\
+                          "                                Custom (define a,b,c,α,β,γ and the basis atoms)\n    "
+                          "        File formats..........: DMol, LAMMPS, VASP\n    " \
                           "        Modifications.........: Create supercell, define custom stoichiometry\n"
                           "=============================================================\n";
 
@@ -442,16 +441,6 @@ Gui::add_atom_window(GtkWidget *widget, gpointer data)
 
 
     GtkWidget *e1;
-        // label = gtk_label_new("element");
-        // e1 = gtk_entry_new();
-        // hbox = gtk_hbox_new (FALSE, 0);
-        // gtk_box_pack_start(GTK_BOX(hbox),label,1,1,0);
-        // gtk_widget_set_size_request (label, 5,5);
-        // gtk_box_pack_start(GTK_BOX(hbox),e1,1,1,0);
-        // gtk_widget_set_size_request (e1, 10,20);
-        // gtk_widget_set_tooltip_text(e1, "Enter the elemental symbol");
-        // gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, TRUE, 5);
-        // g_signal_connect(e1, "activate",G_CALLBACK(set_custom_species), e1);
 
     label = gtk_label_new("atomic positions");
     e1 = gtk_entry_new();
@@ -633,8 +622,8 @@ Gui::structures_dialog()
     dropdown = gtk_combo_box_new_text();
     gtk_combo_box_append_text( GTK_COMBO_BOX( dropdown ), "PETN-I" );
     gtk_combo_box_append_text( GTK_COMBO_BOX( dropdown ), "TATB" );
-    gtk_combo_box_append_text( GTK_COMBO_BOX( dropdown ), "B-HMX" );
-    gtk_combo_box_append_text( GTK_COMBO_BOX( dropdown ), "Nitromethane" );
+    // gtk_combo_box_append_text( GTK_COMBO_BOX( dropdown ), "B-HMX" );
+    // gtk_combo_box_append_text( GTK_COMBO_BOX( dropdown ), "Nitromethane" );
 
     hbox = gtk_hbox_new (FALSE, 0);
     gtk_box_pack_start(GTK_BOX(hbox),label,1,1,0);
@@ -661,7 +650,7 @@ Gui::graphene_dialog()
 
     gtk_window_set_title (GTK_WINDOW (window), windowTitle);
 
-    GtkWidget *hbox, *vbox, *button, *entry, *label;
+    GtkWidget *hbox, *vbox, *button, *entry, *label, *e1,*e2,*l1,*l2;
 
     label = gtk_label_new("Basis atoms");
     entry = gtk_entry_new();
@@ -674,24 +663,29 @@ Gui::graphene_dialog()
     g_signal_connect(entry, "activate",G_CALLBACK(set_graphene_basis), entry);
     gtk_widget_set_tooltip_text(entry,"Enter 2 for hexagonal, 4 for rectangular");
 
-    label = gtk_label_new("c/a ratio");
-    entry = gtk_entry_new();
-
-    hbox = gtk_hbox_new (FALSE, 0);
+    label = gtk_label_new("lattice parameters");
+    hbox = gtk_hbox_new (FALSE, 10);
     gtk_box_pack_start(GTK_BOX(hbox),label,1,1,0);
-    gtk_box_pack_start(GTK_BOX(hbox),entry,1,1,0);
-    gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, TRUE, 15);
-    g_signal_connect(entry, "activate",G_CALLBACK(set_cta), entry);
+    gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, TRUE, 5);
 
-
-    label = gtk_label_new("lattice parameter 'a' (Å)");
-    entry = gtk_entry_new();
-    hbox = gtk_hbox_new (FALSE, 0);
+    label = gtk_label_new("a (Å)");
+    e1 = gtk_entry_new();
+    l2 = gtk_label_new("c (Å)");
+    e2 = gtk_entry_new();
+    hbox = gtk_hbox_new (FALSE, 10);
     gtk_box_pack_start(GTK_BOX(hbox),label,1,1,0);
-    gtk_box_pack_start(GTK_BOX(hbox),entry,1,1,0);
-    gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, TRUE, 15);
-    g_signal_connect(entry, "activate",G_CALLBACK(set_alat), entry);
-    gtk_widget_set_tooltip_text(entry,"a(Å) = sqrt(3) * rcc");
+    gtk_widget_set_size_request (label, 5,5);
+    gtk_box_pack_start(GTK_BOX(hbox),e1,1,1,0);
+    gtk_widget_set_size_request (e1, 10,20);
+    gtk_box_pack_start(GTK_BOX(hbox),l2,1,1,0);
+    gtk_widget_set_size_request (l1, 10,5);
+    gtk_box_pack_start(GTK_BOX(hbox),e2,1,1,0);
+    gtk_widget_set_size_request (e2, 10,20);
+    gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, TRUE, 5);
+    g_signal_connect(e1, "activate",G_CALLBACK(set_alat), e1);
+    g_signal_connect(e2, "activate",G_CALLBACK(set_clat), e2);
+    gtk_widget_set_tooltip_text(e1,"a(Å) = sqrt(3) * rcc");
+    gtk_widget_set_tooltip_text(e2,"amount of vaccuum");
 
 
     gtk_container_add( GTK_CONTAINER( window ), vbox );
@@ -898,13 +892,24 @@ Gui::set_bravais( GtkComboBox *dropdown, gpointer data )
     gchar *selection = gtk_combo_box_get_active_text( dropdown );
     g_bravais = (char*) gtk_combo_box_get_active_text( dropdown);
     /* Print it to the console - if nothing is selected, print NULL */
-    if (GMSG) g_print( "GUI::PARAMETER >>  selecting bravais lattice [ %s ]\n", ( selection ? selection : "NULL" ) );
 
-    char message[MAX_STRING_LENGTH] = "Please enter the following:";
-    if (strncmp(selection,"Cubic",5)==0) open_dialog("Cubic",message);
-    else if (strncmp(selection,"Tetragonal",10)==0) open_dialog("Tetragonal",message);
-    else if (strncmp(selection,"Orthorhombic",12)==0) open_dialog("Orthorhombic",message);
-    else if (strncmp(selection,"Library",10)==0) structures_dialog();
+    if (strncmp(selection,"Monoclinic",10)==0) {
+        g_print( "GUI::PARAMETER::WARNING >>  Monoclinic lattice is currently not supported in this way\n");
+        g_print( "                            Rather, use the Cutom option to define a Monoclinic cell\n");
+        g_print( "                            Bravais lattice not set!\n");
+    } else if (strncmp(selection,"Hexagonal",9)==0) {
+        g_print( "GUI::PARAMETER::WARNING >>  Hexagonal lattice is currently not supported in this way\n");
+        g_print( "                            Rather, use the Cutom option to define a Hexagonal cell\n");
+        g_print( "                            Bravais lattice not set!\n");
+    } else {
+        char message[MAX_STRING_LENGTH] = "Please enter the following:";
+        if (strncmp(selection,"Cubic",5)==0) open_dialog("Cubic",message);
+        else if (strncmp(selection,"Tetragonal",10)==0) open_dialog("Tetragonal",message);
+        else if (strncmp(selection,"Orthorhombic",12)==0) open_dialog("Orthorhombic",message);
+        else if (strncmp(selection,"Library",10)==0) structures_dialog();
+
+        if (GMSG) g_print( "GUI::PARAMETER >>  selecting bravais lattice [ %s ]\n", ( selection ? selection : "NULL" ) );
+    }
     /* Free selection */
     g_free( selection );
 }
@@ -1226,12 +1231,12 @@ GtkWidget
             gtk_combo_box_append_text( GTK_COMBO_BOX( full_menu ), id );
         }
     } else if (strncmp(style,"formats",7)==0) {
-        for (int n=0;n<3;n++) {
+        for (int n=0;n<nformats;n++) {
             char *id = parser->str2char(formats[n]);
             gtk_combo_box_append_text( GTK_COMBO_BOX( full_menu ), id );
         }
     } else if (strncmp(style,"crystal",7)==0) {
-        for (int n=0;n<6;n++) {
+        for (int n=0;n<ncrystals;n++) {
             char *id = parser->str2char(crystals[n]);
             gtk_combo_box_append_text( GTK_COMBO_BOX( full_menu ), id );
         }
@@ -1248,6 +1253,10 @@ void Gui::build_crystal(GtkWidget* button, gpointer window)
 
 void Gui::save_settings()
 {
+
+    // if the user quit before finishing, dont attempt to save the data
+    if (g_quit) exit(0);
+
     fractional = g_fract;
     quit = g_quit;
     view = g_view;
@@ -1285,7 +1294,7 @@ void Gui::save_settings()
     if (custom) {
         define_basis_atoms();
         // parse the custom list of species and stoichiometric coefficients
-        parser->scan_list(g_entryString, ',', ':', g_elemList,g_elemCount);
+        parser->get_substrings(g_entryString, ',', ':', g_elemList,g_elemCount);
         std::string unit;
         for (int i=0;i<g_elemList.size();i++) {
             // if there is only 1 of a species, print only the element symbol
@@ -1297,23 +1306,50 @@ void Gui::save_settings()
             customName += unit;
         }
     } else if (strcmp(bravais,"Library")==0) {
+
         // set the default Library parameters 
         if (strncmp(g_pd_struct,"graphene",8)==0) {
             elemList.push_back("C");
             if (lbasis==2) elemCount.push_back(2);
             else elemCount.push_back(4);
         } else if (strncmp(g_pd_struct,"MDC MX2-2H",10)==0 || strncmp(g_pd_struct,"MDC MX2-1T",10)==0) {
-            elemList.push_back("Sn");
-            elemList.push_back("S");
+            // if a custom stoichiometry was defined, then 
+            // parse the custom list of species and stoichiometric coefficients
+            if (g_entryString.empty()) {
+                elemList.push_back("Sn");
+                elemList.push_back("S");
+            } else {
+                parser->get_substrings(g_entryString, ',', ':', g_elemList,g_elemCount);
+                elemList.push_back(g_elemList[0]);
+                elemList.push_back(g_elemList[1]);
+            }
+
+            if (g_alat==1) alat = 3.684;
+
+            if (g_clat==1) clat = 5.89;
+            
             elemCount.push_back(1);
             elemCount.push_back(2);
-            alat = 3.684;
+            
         } else if (strncmp(g_pd_struct,"TMDC MX2-2H",11)==0 || strncmp(g_pd_struct,"TMDC MX2-1T",11)==0) {
-            elemList.push_back("Mo");
-            elemList.push_back("S");
+            // if a custom stoichiometry was defined, then 
+            // parse the custom list of species and stoichiometric coefficients
+            if (g_entryString.empty()) {
+                elemList.push_back("Mo");
+                elemList.push_back("S");
+            } else {
+                parser->get_substrings(g_entryString, ',', ':', g_elemList,g_elemCount);
+                elemList.push_back(g_elemList[0]);
+                elemList.push_back(g_elemList[1]);
+            }
+
+            if (g_alat==1) alat = 3.19;
+
+            if (g_clat==1) clat = 12.3;
+
             elemCount.push_back(1);
             elemCount.push_back(2);
-            alat = 3.19;
+
         } else if (strncmp(g_pd_struct,"PETN-I",6)==0) {
             elemList.push_back("C");
             elemList.push_back("H");

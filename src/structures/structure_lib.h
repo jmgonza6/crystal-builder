@@ -39,13 +39,15 @@ class StructureLib : public LATTICE {
 
 		/** \brief Constructor for the graphene class when accessed from a gui session or when reading a parameters file
 		  * \param[in] i_lstyle - which crystal to build \arg `h-BN` or `MDC 2H/1T` or `TMDC 2H/1T` or `PETN-I` or `TATB` or `β-HMX`
+          * \param[in] basisAtoms - total number of basis atoms used for building graphene, \arg 2 or 4
           * \param[in] i_alat - `a` lattice parameter
+          * \param[in] i_clat - `c` lattice parameter
           * \param[in] elements - list of element symbols
           */
 		StructureLib(char                     i_lstyle[],  
                      int                      basisAtoms,
                      double                   i_alat,
-                     double                   i_cta,
+                     double                   i_clat,
                      std::vector<std::string> elements);
 
 		~StructureLib();
@@ -64,10 +66,12 @@ class StructureLib : public LATTICE {
                   2                           4                                           
            \endverbatim
           * \param[in] i_alat - lattice parameter for `a`, Å
+          * \param[in] i_clat - `c` lattice parameter
           * \param[in] basisAtoms - \arg \b `2` for hexagonal, \arg \b `4` rectangular
           */
         void
         graphene(double i_alat, 
+                 double i_clat,
                  int    basisAtoms);
 
         /** \brief Define the basis atoms and lattice for hexagonal Boron Nitride
@@ -78,38 +82,46 @@ class StructureLib : public LATTICE {
 
         /** \brief Define the basis atoms and lattice for a single layer of a metal dichalcogenide, \n 
           *  i.e. (Pb,Sn)(S,Se,Te)2 in the 2H polytype
-          * \param[in] i_alat - `a` lattice parameter, assumed that `a` = `b` = `c`
+          * \param[in] i_alat - `a` lattice parameter, assumed that `a` = `b`
+          * \param[in] i_clat - `c` lattice parameter, 
           * \param[in] elements - list of element symbols
           */
 		void 
 		mdc_2h(double                    i_alat, 
+               double                    i_clat,
                 std::vector<std::string> elements);
 
         /** \brief Define the basis atoms and lattice for a single layer of a metal dichalcogenide, \n 
           *  i.e. (Pb,Sn)(S,Se,Te)2 in the 1T polytype
-          * \param[in] i_alat - `a` lattice parameter, assumed that `a` = `b` = `c`
+          * \param[in] i_alat - `a` lattice parameter, assumed that `a` = `b`
+          * \param[in] i_clat - `c` lattice parameter
           * \param[in] elements - list of element symbols
           */
 		void 
-		mdc_1t(double                    i_alat, 
+		mdc_1t(double                    i_alat,
+                double                    i_clat,
                 std::vector<std::string> elements);
 
         /** \brief Define the basis atoms and lattice for a single layer of a transition metal dichalcogenide, \n 
           *  i.e. (Mo,W)(S,Se,Te)2 in the 2H polytype
-          * \param[in] i_alat - `a` lattice parameter, assumed that `a` = `b` = `c`
+          * \param[in] i_alat - `a` lattice parameter, assumed that `a` = `b`
+          * \param[in] i_clat - `c` lattice parameter
           * \param[in] elements - list of element symbols
           */
         void
         tmdc_2h(double                   i_alat, 
+                double                    i_clat,
                 std::vector<std::string> elements);
 
         /** \brief Define the basis atoms and lattice for a single layer of a transition metal dichalcogenide, \n 
           *  i.e. (Mo,W)(S,Se,Te)2 in the 1T polytype
-          * \param[in] i_alat - `a` lattice parameter, assumed that `a` = `b` = `c`
+          * \param[in] i_alat - `a` lattice parameter, assumed that `a` = `b`
+          * \param[in] i_clat - `c` lattice parameter
           * \param[in] elements - list of element symbols
           */
         void
         tmdc_1t(double                   i_alat, 
+                double                    i_clat,
                 std::vector<std::string> elements);	
 		
 		// energetic materials
@@ -120,13 +132,12 @@ class StructureLib : public LATTICE {
 		petn();
 
         /** \brief Define the basis atoms and lattice for a single crystal of TATB
-          * \brief `a` = `b` = 9.38 Å, `c` = 6.71 Å
+          * \brief `a` = `b` = `c` = 9.01  Å
           */
 		void 
 		tatb();
 
         /** \brief Define the basis atoms and lattice for a single crystal of HMX
-          * \brief `a` = `b` = 9.38 Å, `c` = 6.71 Å
           */
 		void
 		hmx();

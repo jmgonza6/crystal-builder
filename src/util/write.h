@@ -46,29 +46,24 @@ class Write {
 	public:
 		Write();
 		~Write();
-  
+
   		/** \brief Write the crystal structure defined by the user in the DMol `.car` format
 		  * \param[in] outname - name of the regular file for writing
-		  * \param[in] comment - a comment line describing the crystal
 		  * \param[in] natoms - total number of atoms created
-		  * \param[in] ntype - total number of unique elements
 		  * \param[in] a1 - major lattice vector along x
 		  * \param[in] a2 - lattice vector in xy plane
 		  * \param[in] a3 - lattice vector in xyz plane
-		  * \param[in] atomIds - list of all atomic types, corresponds to particle ID
-		  * \param[in] coords - 2D array containing the atomic cooridinates in cartesian or fractional units
-		  * \param[in] species - list of all unique element strings
+		  * \param[in] atoms - Structure containing the atomic positions, and atomic type numbers
+		  * \param[in] speciesList - list of all unique elements
+		  * \param[in] speciesCount - 1D vector containing the count of each type in `speciesList`
 		  */
 		void 
 		dmol(char                      outname[], 
-             char                      comment[], 
              int                       natoms, 
-             int                       ntype, 
              std::vector<double>       a1, 
              std::vector<double>       a2, 
              std::vector<double>       a3, 
-             int                       *atom_ids, 
-             double                    **coords, 
+             atom_t*                   atoms, 
              std::vector<std::string>  speciesList,
              std::vector<int>          speciesCount);
 
@@ -76,49 +71,43 @@ class Write {
 		  * \param[in] outname - name of the regular file for writing
 		  * \param[in] comment - a comment line describing the crystal
 		  * \param[in] natoms - total number of atoms created
-		  * \param[in] ntype - total number of unique elements
 		  * \param[in] a1 - major lattice vector along x
 		  * \param[in] a2 - lattice vector in xy plane
 		  * \param[in] a3 - lattice vector in xyz plane
-		  * \param[in] atomIds - list of all atomic types, corresponds to particle ID
-		  * \param[in] coords - 2D array containing the atomic cooridinates in cartesian or fractional units
-		  * \param[in] species - list of all unique element strings
+		  * \param[in] atoms - Structure containing the atomic positions, and atomic type numbers
+		  * \param[in] speciesList - list of all unique element strings
 		  */
 		void 
 		lammps( char                       outname[], 
 		        char                       comment[], 
 		        int                        natoms, 
-		        int                        ntype, 
 		        std::vector<double>        a1, 
 				std::vector<double>        a2, 
 				std::vector<double>        a3,  
-		        int                        *atomIds, 
-		        double                     **coords, 
-		        std::vector<std::string>   species);
+		        atom_t*                    atoms, 
+		        std::vector<std::string>   speciesList);
 
 		/** \brief Write the crystal structure defined by the user in the VASP `POSCAR` format
-		  * \param[in] outname - name of the regular file for writing
 		  * \param[in] comment - a comment line describing the crystal
-		  * \param[in] typeCount - pointer to array which keeps track of total number of each unique type
 		  * \param[in] natoms - total number of atoms created
 		  * \param[in] a1 - major lattice vector along x
 		  * \param[in] a2 - lattice vector in xy plane
 		  * \param[in] a3 - lattice vector in xyz plane
-		  * \param[in] coords - 2D array containing the atomic cooridinates in cartesian or fractional units
+		  * \param[in] atoms - Structure containing the atomic positions, and atomic type numbers
 		  * \param[in] fractional - `coords` is in fractional units
 		  * \arg `1` = fractional `0` = cartesian
-		  * \param[in] species - list of all unique element strings
+		  * \param[in] speciesList - list of all unique element strings
+		  * \param[in] speciesCount - 1D vector containing the count of each type in `speciesList`
 		  */
 		void 
-		poscar(	char                       outname[],
-			    char                       comment[], 
-				int                        *typeCount, 
+		poscar(	char                       comment[],  
 				int                        natoms, 
 				std::vector<double>        a1, 
 				std::vector<double>        a2, 
 				std::vector<double>        a3, 
-				double                     **coords, 
+				atom_t*                    atoms, 
 				int                        fractional, 
-				std::vector<std::string>   species);
+				std::vector<std::string>   speciesList,
+				std::vector<int>           speciesCount);
 };
 #endif
