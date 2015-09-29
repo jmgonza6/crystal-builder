@@ -1,17 +1,18 @@
-## Makefile for crystal-builder, v 3.5.0
-## 09.05.15
+## Makefile for crystal-builder, v 3.7.0
+## 09.27.15
 
 ## get the current OS
 OSTYPE    := $(shell uname -s)
 
-## C/C++ compiler
+## C++ compiler/linker
 CC        := g++ 
 LD        := g++
 
+WARNINGS  := -Wno-comment -Wno-return-type
 
 ## Special modifiers to control the environment when using
 ## this application.  Simply add any of the following to 
-## the CFLAGS variable to change the behavior
+## the ENVR variable to change the behavior
 
 ## -DDEBUGMSG   - prints A LOT of information during the gui session and rendering session 
 ## -DRENDERMSG  - prints updates made during the rendering scene
@@ -19,9 +20,19 @@ LD        := g++
 ## -DWHITEBACK  - white background and black unit cell for the rendering scene
 ## -DBLACKBACK  - black background and white unit cell for the rendering scene, this is the default
 
+ENVR      := -DGUIMESG -DRENDERMSG -DBLACKBACK
 
 ## Optimizations/warnings
-CFLAGS    := -O3 -DGUIMESG -DRENDERMSG -DBLACKBACK
+CFLAGS    := -O3 
+
+
+
+
+
+#########################################################################################
+##                             Begin building the application now,                     ##
+##                             DO NOT EDIT ANYTHING BELOW !!!!!!!!                     ##
+#########################################################################################
 
 ## get the list of all object files to be made
 OBJ_FILES := src/objlist.txt
@@ -67,11 +78,6 @@ GTK=`pkg-config --cflags --libs gtk+-2.0` -DUSE_GTK
 ## path to source files, all source codes end in .cpp
 vpath %.cpp $(SRC_DIR)
 
-#########################################################################################
-##                             Begin building the application now,                     ##
-##                             DO NOT EDIT ANYTHING BELOW !!!!!!!!                     ##
-#########################################################################################
-
 
 ## create the object files individually and 
 ## place them in build/*/*.o to keep the original
@@ -81,7 +87,7 @@ $1/%.o: %.cpp
 	@echo ""
 	@echo ">> Now compiling $$<"
 	@echo "===================="
-	$(CC) $(CFLAGS) $(MACROS) $(GTK) $(GL) $(INCLUDES) -c $$< -o $$@
+	$(CC) $(ENVR) $(WARNINGS) $(CFLAGS) $(GTK) $(GL) $(INCLUDES) -c $$< -o $$@
 endef
 
 ## force make to build these targets for each invocation of make
@@ -99,7 +105,7 @@ build/crysb: $(OBJ)
 	@echo "========================"
 	@echo ">> Now linking "
 	@echo "$(OBJVAR)"
-	$(LD) $(CFLAGS) $(MACROS) $(GL) $(GTK) $^ -o $@
+	$(LD) $(ENVR) $(WARNINGS) $(CFLAGS) $(GTK) $(GL) $^ -o $@
 	@echo ">>>> Finished!"
 
 ## target for making the object folders
