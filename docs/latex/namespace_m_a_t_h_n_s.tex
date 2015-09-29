@@ -1,0 +1,196 @@
+\hypertarget{namespace_m_a_t_h_n_s}{}\section{M\+A\+T\+H\+N\+S Namespace Reference}
+\label{namespace_m_a_t_h_n_s}\index{M\+A\+T\+H\+N\+S@{M\+A\+T\+H\+N\+S}}
+
+
+Customized math operations and interfaces.  
+
+
+
+
+\subsection{Detailed Description}
+Customized math operations and interfaces. 
+
+\subsection*{{\bfseries Purpose\+:} }
+
+\begin{DoxyVerb}/*****************************************************************************\
+/  Customized math operations relevant for transforming and building crystals \
+/                                                                             \
+/*****************************************************************************\
+\end{DoxyVerb}
+
+
+\begin{DoxyAuthor}{Author}
+Joseph M. Gonzalez
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+2
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+Sep 13, 2015 19\+:16\+:20
+\end{DoxyDate}
+{\bfseries Contact} ~\newline
+ \href{mailto:jmgonza6@mail.usf.edu}{\tt jmgonza6@mail.\+usf.\+edu} \subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{namespace_m_a_t_h_n_s_acfac6bea334e370b6653af175dcbf497}{vector\+\_\+mag} (std\+::vector$<$ double $>$ v)
+\begin{DoxyCompactList}\small\item\em Compute magnitude of an n-\/dimensional vector ~\newline
+ $ \sqrt{\sum_{i}^{n} v_{i}*v_{i} } $. \end{DoxyCompactList}\item 
+double \hyperlink{namespace_m_a_t_h_n_s_ada18bcb2b79a242de1850736eae08e7d}{vector\+\_\+dot} (std\+::vector$<$ double $>$ a, std\+::vector$<$ double $>$ b)
+\begin{DoxyCompactList}\small\item\em Compute dot product of two n-\/dimensional vectors ~\newline
+ $ \sum_{i}^{n} a_{i}*b_{i} $. \end{DoxyCompactList}\item 
+double \hyperlink{namespace_m_a_t_h_n_s_a022918208f2c3ec4e5526a1df3d0ad45}{angle} (std\+::vector$<$ double $>$ a, std\+::vector$<$ double $>$ b)
+\begin{DoxyCompactList}\small\item\em Compute angle, in radians, between two n-\/dimensional vectors ~\newline
+ $ \arccos \frac{\textbf{a} \cdot \textbf{b}}{|\textbf{a}||\textbf{b}|} $. \end{DoxyCompactList}\item 
+std\+::vector$<$ double $>$ \hyperlink{namespace_m_a_t_h_n_s_a764510ef75ba546ef7b8c9b234757d39}{vector\+\_\+cross} (std\+::vector$<$ double $>$ a, std\+::vector$<$ double $>$ b)
+\begin{DoxyCompactList}\small\item\em Compute cross product of two 3-\/dimensional vectors ~\newline
+ $ \textbf{a} \times \textbf{b} = \textbf{c} $. \end{DoxyCompactList}\item 
+std\+::vector$<$ double $>$ \hyperlink{namespace_m_a_t_h_n_s_acabd6ed4c3c091dcdb2674243aa182f6}{mat\+\_\+vec\+\_\+mult} (int lda, double $\ast$$\ast$A, std\+::vector$<$ double $>$ X)
+\begin{DoxyCompactList}\small\item\em Compute matrix-\/vector product, naive implementation ~\newline
+ $ \textbf{A}\textbf{X} = \textbf{B} $. \end{DoxyCompactList}\item 
+std\+::vector$<$ double $>$ \hyperlink{namespace_m_a_t_h_n_s_a7819e69b3d2ad8694aa3990b7c9fba9b}{rotate\+\_\+vector} (std\+::vector$<$ double $>$ X, std\+::string axis, double \hyperlink{namespace_m_a_t_h_n_s_a022918208f2c3ec4e5526a1df3d0ad45}{angle})
+\begin{DoxyCompactList}\small\item\em Rotate a 3\+D {\ttfamily std\+::vector} about an axis ~\newline
+. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{namespace_m_a_t_h_n_s_a022918208f2c3ec4e5526a1df3d0ad45}{}\index{M\+A\+T\+H\+N\+S@{M\+A\+T\+H\+N\+S}!angle@{angle}}
+\index{angle@{angle}!M\+A\+T\+H\+N\+S@{M\+A\+T\+H\+N\+S}}
+\subsubsection[{angle}]{\setlength{\rightskip}{0pt plus 5cm}double M\+A\+T\+H\+N\+S\+::angle (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ double $>$}]{a, }
+\item[{std\+::vector$<$ double $>$}]{b}
+\end{DoxyParamCaption}
+)}\label{namespace_m_a_t_h_n_s_a022918208f2c3ec4e5526a1df3d0ad45}
+
+
+Compute angle, in radians, between two n-\/dimensional vectors ~\newline
+ $ \arccos \frac{\textbf{a} \cdot \textbf{b}}{|\textbf{a}||\textbf{b}|} $. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & -\/ Vector of data \\
+\hline
+{\em b} & -\/ Vector of data \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Angle between {\itshape a} and {\itshape b} in radians 
+\end{DoxyReturn}
+\hypertarget{namespace_m_a_t_h_n_s_acabd6ed4c3c091dcdb2674243aa182f6}{}\index{M\+A\+T\+H\+N\+S@{M\+A\+T\+H\+N\+S}!mat\+\_\+vec\+\_\+mult@{mat\+\_\+vec\+\_\+mult}}
+\index{mat\+\_\+vec\+\_\+mult@{mat\+\_\+vec\+\_\+mult}!M\+A\+T\+H\+N\+S@{M\+A\+T\+H\+N\+S}}
+\subsubsection[{mat\+\_\+vec\+\_\+mult}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$double$>$ M\+A\+T\+H\+N\+S\+::mat\+\_\+vec\+\_\+mult (
+\begin{DoxyParamCaption}
+\item[{int}]{lda, }
+\item[{double $\ast$$\ast$}]{A, }
+\item[{std\+::vector$<$ double $>$}]{X}
+\end{DoxyParamCaption}
+)}\label{namespace_m_a_t_h_n_s_acabd6ed4c3c091dcdb2674243aa182f6}
+
+
+Compute matrix-\/vector product, naive implementation ~\newline
+ $ \textbf{A}\textbf{X} = \textbf{B} $. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em lda} & -\/ Leading dimension of matrix A \\
+\hline
+\mbox{\tt in}  & {\em A} & -\/ Pointer to 2\+D array A \\
+\hline
+\mbox{\tt in}  & {\em X} & -\/ 1\+D S\+T\+L vector, X.\+size() must equal lda \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+S\+T\+L vector of length lda 
+\end{DoxyReturn}
+\hypertarget{namespace_m_a_t_h_n_s_a7819e69b3d2ad8694aa3990b7c9fba9b}{}\index{M\+A\+T\+H\+N\+S@{M\+A\+T\+H\+N\+S}!rotate\+\_\+vector@{rotate\+\_\+vector}}
+\index{rotate\+\_\+vector@{rotate\+\_\+vector}!M\+A\+T\+H\+N\+S@{M\+A\+T\+H\+N\+S}}
+\subsubsection[{rotate\+\_\+vector}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$double$>$ M\+A\+T\+H\+N\+S\+::rotate\+\_\+vector (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ double $>$}]{X, }
+\item[{std\+::string}]{axis, }
+\item[{double}]{angle}
+\end{DoxyParamCaption}
+)}\label{namespace_m_a_t_h_n_s_a7819e69b3d2ad8694aa3990b7c9fba9b}
+
+
+Rotate a 3\+D {\ttfamily std\+::vector} about an axis ~\newline
+. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em X} & -\/ 1\+D vector to be rotated through an {\ttfamily angle} about {\ttfamily axis} \\
+\hline
+\mbox{\tt in}  & {\em axis} & -\/ axis of rotation for current transformation \\
+\hline
+\mbox{\tt in}  & {\em angle} & -\/ angle to rotate through, in {\ttfamily (˚)} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\bfseries {\ttfamily std\+::vector}} of new coordinates 
+\end{DoxyReturn}
+\hypertarget{namespace_m_a_t_h_n_s_a764510ef75ba546ef7b8c9b234757d39}{}\index{M\+A\+T\+H\+N\+S@{M\+A\+T\+H\+N\+S}!vector\+\_\+cross@{vector\+\_\+cross}}
+\index{vector\+\_\+cross@{vector\+\_\+cross}!M\+A\+T\+H\+N\+S@{M\+A\+T\+H\+N\+S}}
+\subsubsection[{vector\+\_\+cross}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$double$>$ M\+A\+T\+H\+N\+S\+::vector\+\_\+cross (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ double $>$}]{a, }
+\item[{std\+::vector$<$ double $>$}]{b}
+\end{DoxyParamCaption}
+)}\label{namespace_m_a_t_h_n_s_a764510ef75ba546ef7b8c9b234757d39}
+
+
+Compute cross product of two 3-\/dimensional vectors ~\newline
+ $ \textbf{a} \times \textbf{b} = \textbf{c} $. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & -\/ Vector of data \\
+\hline
+{\em b} & -\/ Vector of data \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+S\+T\+L vector of length 3 
+\end{DoxyReturn}
+\hypertarget{namespace_m_a_t_h_n_s_ada18bcb2b79a242de1850736eae08e7d}{}\index{M\+A\+T\+H\+N\+S@{M\+A\+T\+H\+N\+S}!vector\+\_\+dot@{vector\+\_\+dot}}
+\index{vector\+\_\+dot@{vector\+\_\+dot}!M\+A\+T\+H\+N\+S@{M\+A\+T\+H\+N\+S}}
+\subsubsection[{vector\+\_\+dot}]{\setlength{\rightskip}{0pt plus 5cm}double M\+A\+T\+H\+N\+S\+::vector\+\_\+dot (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ double $>$}]{a, }
+\item[{std\+::vector$<$ double $>$}]{b}
+\end{DoxyParamCaption}
+)}\label{namespace_m_a_t_h_n_s_ada18bcb2b79a242de1850736eae08e7d}
+
+
+Compute dot product of two n-\/dimensional vectors ~\newline
+ $ \sum_{i}^{n} a_{i}*b_{i} $. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & -\/ Vector of data \\
+\hline
+{\em b} & -\/ Vector of data \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Dot product of {\itshape a} with {\itshape b} 
+\end{DoxyReturn}
+\hypertarget{namespace_m_a_t_h_n_s_acfac6bea334e370b6653af175dcbf497}{}\index{M\+A\+T\+H\+N\+S@{M\+A\+T\+H\+N\+S}!vector\+\_\+mag@{vector\+\_\+mag}}
+\index{vector\+\_\+mag@{vector\+\_\+mag}!M\+A\+T\+H\+N\+S@{M\+A\+T\+H\+N\+S}}
+\subsubsection[{vector\+\_\+mag}]{\setlength{\rightskip}{0pt plus 5cm}double M\+A\+T\+H\+N\+S\+::vector\+\_\+mag (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ double $>$}]{v}
+\end{DoxyParamCaption}
+)}\label{namespace_m_a_t_h_n_s_acfac6bea334e370b6653af175dcbf497}
+
+
+Compute magnitude of an n-\/dimensional vector ~\newline
+ $ \sqrt{\sum_{i}^{n} v_{i}*v_{i} } $. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em v} & -\/ Vector of data \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Magnitude of {\itshape v} 
+\end{DoxyReturn}

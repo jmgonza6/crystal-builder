@@ -1,0 +1,28 @@
+\hypertarget{mathns_8h}{}\section{src/util/mathns.h File Reference}
+\label{mathns_8h}\index{src/util/mathns.\+h@{src/util/mathns.\+h}}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespace_m_a_t_h_n_s}{M\+A\+T\+H\+N\+S}
+\begin{DoxyCompactList}\small\item\em Customized math operations and interfaces. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{namespace_m_a_t_h_n_s_acfac6bea334e370b6653af175dcbf497}{M\+A\+T\+H\+N\+S\+::vector\+\_\+mag} (std\+::vector$<$ double $>$ v)
+\begin{DoxyCompactList}\small\item\em Compute magnitude of an n-\/dimensional vector ~\newline
+ $ \sqrt{\sum_{i}^{n} v_{i}*v_{i} } $. \end{DoxyCompactList}\item 
+double \hyperlink{namespace_m_a_t_h_n_s_ada18bcb2b79a242de1850736eae08e7d}{M\+A\+T\+H\+N\+S\+::vector\+\_\+dot} (std\+::vector$<$ double $>$ a, std\+::vector$<$ double $>$ b)
+\begin{DoxyCompactList}\small\item\em Compute dot product of two n-\/dimensional vectors ~\newline
+ $ \sum_{i}^{n} a_{i}*b_{i} $. \end{DoxyCompactList}\item 
+double \hyperlink{namespace_m_a_t_h_n_s_a022918208f2c3ec4e5526a1df3d0ad45}{M\+A\+T\+H\+N\+S\+::angle} (std\+::vector$<$ double $>$ a, std\+::vector$<$ double $>$ b)
+\begin{DoxyCompactList}\small\item\em Compute angle, in radians, between two n-\/dimensional vectors ~\newline
+ $ \arccos \frac{\textbf{a} \cdot \textbf{b}}{|\textbf{a}||\textbf{b}|} $. \end{DoxyCompactList}\item 
+std\+::vector$<$ double $>$ \hyperlink{namespace_m_a_t_h_n_s_a764510ef75ba546ef7b8c9b234757d39}{M\+A\+T\+H\+N\+S\+::vector\+\_\+cross} (std\+::vector$<$ double $>$ a, std\+::vector$<$ double $>$ b)
+\begin{DoxyCompactList}\small\item\em Compute cross product of two 3-\/dimensional vectors ~\newline
+ $ \textbf{a} \times \textbf{b} = \textbf{c} $. \end{DoxyCompactList}\item 
+std\+::vector$<$ double $>$ \hyperlink{namespace_m_a_t_h_n_s_acabd6ed4c3c091dcdb2674243aa182f6}{M\+A\+T\+H\+N\+S\+::mat\+\_\+vec\+\_\+mult} (int lda, double $\ast$$\ast$A, std\+::vector$<$ double $>$ X)
+\begin{DoxyCompactList}\small\item\em Compute matrix-\/vector product, naive implementation ~\newline
+ $ \textbf{A}\textbf{X} = \textbf{B} $. \end{DoxyCompactList}\item 
+std\+::vector$<$ double $>$ \hyperlink{namespace_m_a_t_h_n_s_a7819e69b3d2ad8694aa3990b7c9fba9b}{M\+A\+T\+H\+N\+S\+::rotate\+\_\+vector} (std\+::vector$<$ double $>$ X, std\+::string axis, double angle)
+\begin{DoxyCompactList}\small\item\em Rotate a 3\+D {\ttfamily std\+::vector} about an axis ~\newline
+. \end{DoxyCompactList}\end{DoxyCompactItemize}

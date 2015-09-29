@@ -1,0 +1,535 @@
+.TH "src/gui/render.h" 3 "Tue Sep 29 2015" "Crystal Builder v 3.7.0" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/gui/render.h \- 
+.SH SYNOPSIS
+.br
+.PP
+.SH "Detailed Description"
+.PP 
+
+.SH "\fBPurpose:\fP "
+.PP
+.PP
+.PP
+.nf
+/*****************************************************************************************\
+/  Simple rendering engine to display the crystal built by the user during a GUI session  \
+/                                                                                         \
+/  Borrowed in part from example3/5.cpp of the GLUI tutorials.                            \
+/*****************************************************************************************\
+.fi
+.PP
+.PP
+.SH "\fBUser\fP interaction: "
+.PP
+.PP
+.PP
+.nf
+*
+*  Mouse events:
+*     Left mouse            rotate, zoom
+*     Right mouse           menu
+*
+*  Keyboard events:
+*     'A'                   display atoms and unit cell
+*     'a'                   display atoms only
+*     'B'                   display bonds, uniform nearest neighbor cutoff
+*     'b'                   hide bonds
+*     'C'                   increase nearest neighbor cutoff
+*     'c'                   decrease nearest neighbor cutoff
+*     'e'                   exit and save the data from the rendering scene
+*     'o'                   orthographic projection of the crystal
+*     'p'                   perspective projection of the crystal
+*     'r' then LeftButton   rotate the crystal in all 3 dimensions
+*     'W'                   change background to white and bounding box to black
+*     'w'                   change background to black and bounding box to white
+*     'z' then LeftButton   zoom toward/away from the crystal
+*     '0'                   reset orientation of crystal to looking down z toward xy plane
+*     '1'                   view the xz "a-c" plane of the crystal
+*     '2'                   view the yz "b-c" plane of the crystal
+*     '3'                   rotate crystal about x by -45˚, and then -45˚ about z, 'psuedo' perspective view
+*     '+'                   increase the particle radius uniformly
+*     '-'                   decrease the particle radius uniformly
+*
+*     Up arrow              Shift the crystal in positive vertical screen direction
+*     Down arrow            Shift the crystal in negative vertical screen direction
+*     Left arrow            Shift the crystal in negative horizontal screen direction
+*     Right arrow           Shift the crystal in positive horizontal screen direction
+*
+.fi
+.PP
+ 
+.PP
+\fBAuthor:\fP
+.RS 4
+Joseph M\&. Gonzalez
+.RE
+.PP
+\fBVersion:\fP
+.RS 4
+0\&.9
+.RE
+.PP
+\fBDate:\fP
+.RS 4
+Sep 27, 2015 19:16:20
+.RE
+.PP
+\fBContact\fP 
+.br
+ jmgonza6@mail.usf.edu 
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBWWIDTH\fP   600"
+.br
+.RI "\fIwidth of the rendering window \fP"
+.ti -1c
+.RI "#define \fBWHEIGHT\fP   600"
+.br
+.RI "\fIheight of the rendering window \fP"
+.ti -1c
+.RI "#define \fBVPORT_SIZE\fP   60"
+.br
+.RI "\fIsize of the view port, VPORT_SIZExVPORT_SIZE \fP"
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBLeftButton\fP { \fBROTATE\fP, \fBSCALE\fP, \fBTRANSLATE\fP, \fBDRAG\fP }"
+.br
+.ti -1c
+.RI "enum { \fBSHOWALL\fP, \fBATOMSONLY\fP, \fBBONDS\fP, \fBBLACKB\fP, \fBWHITEB\fP }"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBgl_init\fP ()"
+.br
+.RI "\fIInitialize the Open GL and GLUT infrastructure with window size, lighting, positions, etc\&. \fP"
+.ti -1c
+.RI "void \fBgl_menu_init\fP ()"
+.br
+.RI "\fIInitialize the right mouse button menu with scene display options\&. \fP"
+.ti -1c
+.RI "int \fBbuild_nn_list\fP ()"
+.br
+.RI "\fIConstruct a nearest neighbor list for each particle, naive n^2 algorithm\&. \fP"
+.ti -1c
+.RI "int \fBrender_init\fP (int natom, std::vector< double > a1, std::vector< double > a2, std::vector< double > a3, \fBatom_t\fP *atomsIn, std::vector< std::string > species, std::vector< int > elemCount)"
+.br
+.RI "\fILocally store the data entered by the user during the gui session\&. \fP"
+.ti -1c
+.RI "int \fBinit_call_lists\fP (int list)"
+.br
+.RI "\fISelectively initialize the atomic and or unit cell data from a GUI session Draws the objects and stores the data in a glList\&. These lists make rendering 
+.br
+much more efficient with a simple call to glCallList() \fP"
+.ti -1c
+.RI "void \fBinit_axes_list\fP ()"
+.br
+.RI "\fIInitialize the coordinate axes for the scene
+.br
+x = red , y = green, blue = z
+.br
+Drawn using GL_LINE_STRIP and stores the data in a glList, \fCAxesList\fP\&. \fP"
+.ti -1c
+.RI "void \fBinit_bbox_list\fP ()"
+.br
+.RI "\fIInitialize the periodic unit cell
+.br
+Drawn using GL_LINE_STRIP and stores the data in a glList, \fCUnitCellList\fP\&. \fP"
+.ti -1c
+.RI "void \fBinit_atoms_list\fP ()"
+.br
+.RI "\fIInitialize the atomic coordinates
+.br
+ The particles are drawn as gluSolidSphere() objects and stores 
+.br
+ the data in a glList, \fCAtomsList\fP\&. \fP"
+.ti -1c
+.RI "void \fBshow_all\fP (int vport)"
+.br
+.RI "\fIRender unit cell, cartesian axes, and atoms in all 4 view ports\&. \fP"
+.ti -1c
+.RI "void \fBatoms_only\fP (int vport)"
+.br
+.RI "\fIRender atoms only in \fCvport\fP \fP"
+.ti -1c
+.RI "void \fBreshape_window\fP (int width, int height)"
+.br
+.RI "\fIReshape the window\&. \fP"
+.ti -1c
+.RI "void \fBset_display_type\fP (int value)"
+.br
+.RI "\fISet the display type\&. \fP"
+.ti -1c
+.RI "void \fBkill_main_window\fP (int value)"
+.br
+.RI "\fIActivate/kill main rendering window\&. \fP"
+.ti -1c
+.RI "void \fBrender_data\fP ()"
+.br
+.RI "\fISet the display type, the projection type, initialize call lists, and handle scene modifications
+.br
+ Called by \fCglutDisplayFunc()\fP\&. \fP"
+.ti -1c
+.RI "void \fBdraw_nn_bond\fP (float x1, float y1, float z1, float x2, float y2, float z2, float radius, int stacks)"
+.br
+.RI "\fIDraw a solid cylinder between nearest neighbors\&. \fP"
+.ti -1c
+.RI "void \fBkeyboard_event\fP (unsigned char ch, int x, int y)"
+.br
+.RI "\fITrack and process keyboard signals\&. \fP"
+.ti -1c
+.RI "void \fBmouse_clicked\fP (int button, int state, int x, int y)"
+.br
+.RI "\fITrack and process mouse signals\&. \fP"
+.ti -1c
+.RI "void \fBmouse_moved\fP (int x, int y)"
+.br
+.RI "\fITrack and process orientation of viewports from mouse/motion events\&. \fP"
+.ti -1c
+.RI "void \fBspecial_key_pressed\fP (int key, int xx, int yy)"
+.br
+.RI "\fITrack and process special keyboard signals, arrows, alt, ctrl, etc\&. being pressed\&. \fP"
+.ti -1c
+.RI "void \fBspecial_key_release\fP (int key, int x, int y)"
+.br
+.RI "\fITrack and process special keyboard signals, arrows, alt, ctrl, etc\&. being released\&. \fP"
+.ti -1c
+.RI "void \fBGetOGLPos\fP (int x, int y)"
+.br
+.ti -1c
+.RI "void \fBbuild_colorTable\fP ()"
+.br
+.RI "\fILoad an array with rgb values for coloring different atomic species\&.
+.br
+The coloring scheme used is CPK, which is the same as in Jmol\&. \fP"
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define VPORT_SIZE   60"
+
+.PP
+size of the view port, VPORT_SIZExVPORT_SIZE 
+.SS "#define WHEIGHT   600"
+
+.PP
+height of the rendering window 
+.SS "#define WWIDTH   600"
+
+.PP
+width of the rendering window 
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "anonymous enum"
+
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fISHOWALL \fP\fP
+.TP
+\fB\fIATOMSONLY \fP\fP
+.TP
+\fB\fIBONDS \fP\fP
+.TP
+\fB\fIBLACKB \fP\fP
+.TP
+\fB\fIWHITEB \fP\fP
+.SS "enum \fBLeftButton\fP"
+
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIROTATE \fP\fP
+.TP
+\fB\fISCALE \fP\fP
+.TP
+\fB\fITRANSLATE \fP\fP
+.TP
+\fB\fIDRAG \fP\fP
+.SH "Function Documentation"
+.PP 
+.SS "void atoms_only (int vport)"
+
+.PP
+Render atoms only in \fCvport\fP 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIvport\fP - in which view port to draw 
+.RE
+.PP
+
+.SS "void build_colorTable ()"
+
+.PP
+Load an array with rgb values for coloring different atomic species\&.
+.br
+The coloring scheme used is CPK, which is the same as in Jmol\&. 
+.SS "int build_nn_list ()"
+
+.PP
+Construct a nearest neighbor list for each particle, naive n^2 algorithm\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+\fC1\fP if successful, \fC0\fP otherwise 
+.RE
+.PP
+
+.SS "void draw_nn_bond (float x1, float y1, float z1, float x2, float y2, float z2, float radius, int stacks)"
+
+.PP
+Draw a solid cylinder between nearest neighbors\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIx1\fP - starting \fCx\fP coordinate of bond 
+.br
+\fIy1\fP - starting \fCy\fP coordinate of bond 
+.br
+\fIz1\fP - starting \fCz\fP coordinate of bond 
+.br
+\fIx2\fP - ending \fCx\fP coordinate of bond 
+.br
+\fIy2\fP - ending \fCy\fP coordinate of bond 
+.br
+\fIz2\fP - ending \fCz\fP coordinate of bond 
+.br
+\fIradius\fP - bond radius, == partilce radius / 3\&. 
+.br
+\fIstacks\fP - stacks to fill in the cylinder 
+.RE
+.PP
+
+.SS "void GetOGLPos (int x, int y)"
+
+.SS "void gl_init ()"
+
+.PP
+Initialize the Open GL and GLUT infrastructure with window size, lighting, positions, etc\&. 
+.SS "void gl_menu_init ()"
+
+.PP
+Initialize the right mouse button menu with scene display options\&. 
+.SS "void init_atoms_list ()"
+
+.PP
+Initialize the atomic coordinates
+.br
+ The particles are drawn as gluSolidSphere() objects and stores 
+.br
+ the data in a glList, \fCAtomsList\fP\&. 
+.SS "void init_axes_list ()"
+
+.PP
+Initialize the coordinate axes for the scene
+.br
+x = red , y = green, blue = z
+.br
+Drawn using GL_LINE_STRIP and stores the data in a glList, \fCAxesList\fP\&. 
+.SS "void init_bbox_list ()"
+
+.PP
+Initialize the periodic unit cell
+.br
+Drawn using GL_LINE_STRIP and stores the data in a glList, \fCUnitCellList\fP\&. 
+.SS "int init_call_lists (int list)"
+
+.PP
+Selectively initialize the atomic and or unit cell data from a GUI session Draws the objects and stores the data in a glList\&. These lists make rendering 
+.br
+much more efficient with a simple call to glCallList() 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIlist\fP - which list the re-create 
+.PD 0
+
+.IP "\(bu" 2
+1, bounding box only 
+.IP "\(bu" 2
+2, coordinate axes only 
+.IP "\(bu" 2
+3, atomic coordinates only 
+.IP "\(bu" 2
+4, everything 
+.PP
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+\fB1\fP if successful \fB0\fP otherwise 
+.RE
+.PP
+
+.SS "void keyboard_event (unsigned char ch, int x, int y)"
+
+.PP
+Track and process keyboard signals\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIch\fP - which character was entered 
+.br
+\fIx\fP - unused 
+.br
+\fIy\fP - unused 
+.RE
+.PP
+
+.SS "void kill_main_window (int value)"
+
+.PP
+Activate/kill main rendering window\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIvalue\fP - use ESC to terminate 
+.RE
+.PP
+
+.SS "void mouse_clicked (int button, int state, int x, int y)"
+
+.PP
+Track and process mouse signals\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIbutton\fP - which button was activated 
+.br
+ 
+.PD 0
+
+.IP "\(bu" 2
+\fIleft\fP = rotate \fIright\fP = display menu \fImiddle\fP = zoom 
+.PP
+.br
+\fIstate\fP - state of the button, \fC1\fP = pressed , \fC0\fP released 
+.br
+\fIx\fP - current x coordinate 
+.br
+\fIy\fP - current y coordinate 
+.RE
+.PP
+
+.SS "void mouse_moved (int x, int y)"
+
+.PP
+Track and process orientation of viewports from mouse/motion events\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIx\fP - current x coordinate 
+.br
+\fIy\fP - current y coordinate 
+.RE
+.PP
+
+.SS "void render_data ()"
+
+.PP
+Set the display type, the projection type, initialize call lists, and handle scene modifications
+.br
+ Called by \fCglutDisplayFunc()\fP\&. 
+.SS "int render_init (int natom, std::vector< double > a1, std::vector< double > a2, std::vector< double > a3, \fBatom_t\fP * atomsIn, std::vector< std::string > species, std::vector< int > elemCount)"
+
+.PP
+Locally store the data entered by the user during the gui session\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fInatom\fP - total number of atoms created by lattice->build() 
+.br
+\fIa1\fP - major lattice vector, in cartesian coordinates 
+.br
+\fIa2\fP - lattice vector, in \fCxy plane\fP, in cartesian coordinates 
+.br
+\fIa3\fP - lattice vector, in \fCxyz plane\fP, in cartesian coordinates 
+.br
+\fIatomsIn\fP - Structure containing the atomic positions, in cartesian units, and atomic type numbers 
+.br
+\fIspecies\fP - 1D vector containing atomic species 
+.br
+\fIelemCount\fP - 1D vector containing the count of each type in \fCspecies\fP 
+.RE
+.PP
+
+.SS "void reshape_window (int width, int height)"
+
+.PP
+Reshape the window\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIwidth\fP - current width, from mouse/motion event 
+.br
+\fIheight\fP - current height, from mouse/motion event 
+.RE
+.PP
+
+.SS "void set_display_type (int value)"
+
+.PP
+Set the display type\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIvalue\fP - how much data to be shown \fC1\fP = all \fC2\fP = atoms only 
+.RE
+.PP
+
+.SS "void show_all (int vport)"
+
+.PP
+Render unit cell, cartesian axes, and atoms in all 4 view ports\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIvport\fP - in which view port to draw 
+.RE
+.PP
+
+.SS "void special_key_pressed (int key, int xx, int yy)"
+
+.PP
+Track and process special keyboard signals, arrows, alt, ctrl, etc\&. being pressed\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIkey\fP - which special key is pressed, uses GLUT_KEY_XXXX 
+.br
+\fIxx\fP - unused 
+.br
+\fIyy\fP - unused 
+.RE
+.PP
+
+.SS "void special_key_release (int key, int x, int y)"
+
+.PP
+Track and process special keyboard signals, arrows, alt, ctrl, etc\&. being released\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIkey\fP - which special key was released, uses GLUT_KEY_XXXX 
+.br
+\fIx\fP - unused 
+.br
+\fIy\fP - unused 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Crystal Builder v 3\&.7\&.0 from the source code\&.

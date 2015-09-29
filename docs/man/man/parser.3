@@ -1,0 +1,246 @@
+.TH "Parser" 3 "Tue Sep 29 2015" "Crystal Builder v 3.7.0" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Parser \- 
+.SH SYNOPSIS
+.br
+.PP
+.SH "Detailed Description"
+.PP 
+
+.SH "\fBPurpose:\fP "
+.PP
+.PP
+.PP
+.nf
+/*****************************************************************************\
+/  Class to process different types of strings, mainly conversion and search  \
+/  functions.                                                                 \
+/                                                                             \
+/*****************************************************************************\
+.fi
+.PP
+.PP
+\fBAuthor:\fP
+.RS 4
+Joseph M\&. Gonzalez
+.RE
+.PP
+\fBVersion:\fP
+.RS 4
+0\&.1
+.RE
+.PP
+\fBDate:\fP
+.RS 4
+Sep 13, 2015 19:16:20
+.RE
+.PP
+\fBContact\fP 
+.br
+ jmgonza6@mail.usf.edu 
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBParser\fP ()"
+.br
+.ti -1c
+.RI "\fB~Parser\fP ()"
+.br
+.ti -1c
+.RI "template<typename retVal > retVal \fBstr2num\fP (const std::string &numstr)"
+.br
+.RI "\fITemplate to convert a \fB\fCstd::string\fP\fP type to a numeric type\&. \fP"
+.ti -1c
+.RI "char * \fBstr2char\fP (std::string str)"
+.br
+.RI "\fIConverts a \fB\fCstd::string\fP\fP type to \fB\fCchar\fP *\fP \fP"
+.ti -1c
+.RI "int \fBmatch_phrase\fP (FILE *fptr, char *phrase, char *line)"
+.br
+.RI "\fISearch for a specific pattern in a text file\&. \fP"
+.ti -1c
+.RI "int \fBcount_words\fP (std::string list)"
+.br
+.RI "\fICount the number of words in a string\&. \fP"
+.ti -1c
+.RI "int \fBfind_rec\fP (std::string list, std::string pattern, int &index)"
+.br
+.RI "\fIFind a word in a list of words separated by whitespace\&. \fP"
+.ti -1c
+.RI "std::vector< std::string > \fBsplit_list\fP (std::string list, char delim)"
+.br
+.RI "\fIParse a string of words based on a delimeter\&. \fP"
+.ti -1c
+.RI "char * \fBstr_manip\fP (char *str, char *insert, char delim)"
+.br
+.RI "\fIInsert a word based on a delimeter\&. \fP"
+.ti -1c
+.RI "int \fBget_substrings\fP (std::string list, char d1, char d2, std::vector< std::string > &keys, std::vector< std::string > &vals)"
+.br
+.RI "\fIParse a string of words based on two delimeters\&. \fP"
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Parser::Parser ()"
+
+.SS "Parser::~Parser ()"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "int Parser::count_words (std::string list)"
+
+.PP
+Count the number of words in a string\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIlist\fP - strings to be parsed based on whitespace 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+number of words 
+.RE
+.PP
+
+.SS "int Parser::find_rec (std::string list, std::string pattern, int & index)"
+
+.PP
+Find a word in a list of words separated by whitespace\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIlist\fP - string of words to be parsed 
+.br
+\fIpattern\fP - pattern to match in \fClist\fP 
+.br
+\fIindex\fP - strings to be parsed based on whitespace 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+\fB\fC1\fP\fP if successful, \fB\fC0\fP\fP otherwise\&. 
+.RE
+.PP
+
+.SS "int Parser::get_substrings (std::string list, char d1, char d2, std::vector< std::string > & keys, std::vector< std::string > & vals)"
+
+.PP
+Parse a string of words based on two delimeters\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIlist\fP - string of words to be parsed 
+.br
+\fId1\fP - fisrt delimeter to use for splitting 
+.br
+\fId2\fP - second delimeter to use for splitting the result of \fCd1\fP 
+.br
+\fIkeys\fP - keywords to search for in \fClist\fP 
+.br
+\fIvals\fP - values associated with \fCkeys\fP in \fClist\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+\fB\fC1\fP\fP if successful, \fB\fC0\fP\fP otherwise\&. 
+.RE
+.PP
+
+.SS "int Parser::match_phrase (FILE * fptr, char * phrase, char * line)"
+
+.PP
+Search for a specific pattern in a text file\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIfptr\fP - Pointer to the file 
+.br
+\fIphrase\fP - Specific pattern to match 
+.br
+\fIline\fP - Entire line containing the pattern, simillar to \fCgrep\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+\fB\fC1\fP\fP if successful, \fB\fC0\fP\fP otherwise 
+.RE
+.PP
+
+.SS "std::vector<std::string> Parser::split_list (std::string list, char delim)"
+
+.PP
+Parse a string of words based on a delimeter\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIlist\fP - string of words to be parsed 
+.br
+\fIdelim\fP - delimeter to use for splitting 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+a \fB\fCstd::vector<std::string>\fP\fP type containing the words found in \fClist\fP 
+.RE
+.PP
+
+.SS "char* Parser::str2char (std::string str)"
+
+.PP
+Converts a \fB\fCstd::string\fP\fP type to \fB\fCchar\fP *\fP 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIstr\fP - the string to be converted 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+\fB\fCchar\fP *\fP if successfull, \fB\fCNULL\fP\fP otherwise 
+.RE
+.PP
+
+.SS "template<typename retVal > retVal Parser::str2num (const std::string & numstr)\fC [inline]\fP"
+
+.PP
+Template to convert a \fB\fCstd::string\fP\fP type to a numeric type\&. 
+.PP
+\fBTemplate Parameters:\fP
+.RS 4
+\fInumstr\fP - Address of the string to convert 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+a number of type \fB\fCretVal\fP\fP 
+.RE
+.PP
+
+.SS "char* Parser::str_manip (char * str, char * insert, char delim)"
+
+.PP
+Insert a word based on a delimeter\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIstr\fP - string to have a word inserted 
+.br
+\fIinsert\fP - word to insert in \fCstr\fP 
+.br
+\fIdelim\fP - delimeter to use for locating the end 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+a \fB\fCchar*\fP\fP type containing compound word 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Crystal Builder v 3\&.7\&.0 from the source code\&.

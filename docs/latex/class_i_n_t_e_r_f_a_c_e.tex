@@ -1,0 +1,323 @@
+\hypertarget{class_i_n_t_e_r_f_a_c_e}{}\section{I\+N\+T\+E\+R\+F\+A\+C\+E Class Reference}
+\label{class_i_n_t_e_r_f_a_c_e}\index{I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}}
+
+
+\subsection{Detailed Description}
+\subsection*{{\bfseries Purpose\+:} }
+
+\begin{DoxyVerb}/*****************************************************************************\
+/  Class which constructs all of the core routines needed to build a crystal. \
+/  Specifically, the Gui class, LATTICE class, and the Write class are all    \
+/  constructed when this class is constructed.  This class serves to access   \
+/  the data from Gui and send it to the LATTICE and Write classes.            \
+/*****************************************************************************\
+\end{DoxyVerb}
+
+
+\begin{DoxyAuthor}{Author}
+Joseph M. Gonzalez
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+2
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+Sep 13, 2015 19\+:16\+:20
+\end{DoxyDate}
+{\bfseries Contact} ~\newline
+ \href{mailto:jmgonza6@mail.usf.edu}{\tt jmgonza6@mail.\+usf.\+edu} \subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_i_n_t_e_r_f_a_c_e_a62b3960b528d5220fe0a52e87382cc6e}{I\+N\+T\+E\+R\+F\+A\+C\+E} (int nargs, char $\ast$$\ast$argv, const char $\ast$fptr)
+\begin{DoxyCompactList}\small\item\em Constructor to start up all core level classes. \end{DoxyCompactList}\item 
+\hyperlink{class_i_n_t_e_r_f_a_c_e_aad406ae7418ff69f2c3131c67db2c736}{$\sim$\+I\+N\+T\+E\+R\+F\+A\+C\+E} ()
+\begin{DoxyCompactList}\small\item\em Destructor to free all memory allocated for the core classes. \end{DoxyCompactList}\item 
+void \hyperlink{class_i_n_t_e_r_f_a_c_e_a17e7bd199040a2aaf2b1d7d138e53759}{show\+\_\+parameters} ()
+\begin{DoxyCompactList}\small\item\em Display all the parameters entered by the user during the G\+U\+I session. \end{DoxyCompactList}\item 
+void \hyperlink{class_i_n_t_e_r_f_a_c_e_a71c1db660fb6a11b08b9144c999cb0ed}{build} ()
+\begin{DoxyCompactList}\small\item\em Store all the parameters and build the required crystal. ~\newline
+This is where each of the specific Bravais lattices are instantiated as an ~\newline
+object of the \hyperlink{class_l_a_t_t_i_c_e}{L\+A\+T\+T\+I\+C\+E} class. \end{DoxyCompactList}\item 
+void \hyperlink{class_i_n_t_e_r_f_a_c_e_a5f9daf84cbf9f286eadf64734c7a73d4}{build\+\_\+from\+\_\+file} ()
+\begin{DoxyCompactList}\small\item\em Store all the parameters and build the required crystal. ~\newline
+This is where each of the specific Bravais lattices are instantiated as an ~\newline
+object of the \hyperlink{class_l_a_t_t_i_c_e}{L\+A\+T\+T\+I\+C\+E} class. \end{DoxyCompactList}\item 
+void \hyperlink{class_i_n_t_e_r_f_a_c_e_ae00f42c78b8ad7323745e9b0cea1971c}{write\+\_\+data} (int src)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_write}{Write} the as built crystal to a regular file. ~\newline
+This method accesses the requested file format and passes all the necessary data for that format. \end{DoxyCompactList}\item 
+int \hyperlink{class_i_n_t_e_r_f_a_c_e_a5811f0eaaa397ae3b72453774e424b67}{insane} ()
+\begin{DoxyCompactList}\small\item\em Simple sanity check to ensure all necessary parameters have been defined .~\newline
+ If a required parameter was not set, then a detailed message on the missing parameter~\newline
+ is printed to the terminal via {\bfseries {\ttfamily stderr}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ std\+::string $>$ \hyperlink{class_i_n_t_e_r_f_a_c_e_aa55e1e42a1d2309638398bb640fbf74f}{species}
+\begin{DoxyCompactList}\small\item\em container to hold each element string defined by the user \end{DoxyCompactList}\item 
+\hyperlink{class_gui}{Gui} $\ast$ \hyperlink{class_i_n_t_e_r_f_a_c_e_a194a3b0540d87580158795d6a15d916e}{gui}
+\begin{DoxyCompactList}\small\item\em pointer to the gui class \end{DoxyCompactList}\item 
+\hyperlink{class_l_a_t_t_i_c_e}{L\+A\+T\+T\+I\+C\+E} $\ast$ \hyperlink{class_i_n_t_e_r_f_a_c_e_a5e07ee2e9ab4f84a9a6ae25c023dc24b}{lattice}
+\begin{DoxyCompactList}\small\item\em pointer to the lattice class, each Bravais crystal inherits from \hyperlink{class_l_a_t_t_i_c_e}{L\+A\+T\+T\+I\+C\+E} \end{DoxyCompactList}\item 
+\hyperlink{class_write}{Write} $\ast$ \hyperlink{class_i_n_t_e_r_f_a_c_e_a6e215284876b2bb79090fd3a210a40b0}{write}
+\begin{DoxyCompactList}\small\item\em pointer to the write class, used for writing specific formats \end{DoxyCompactList}\item 
+\hyperlink{class_errors}{Errors} $\ast$ \hyperlink{class_i_n_t_e_r_f_a_c_e_aeff8d391b9df980974a10c25b7667b33}{errors}
+\item 
+\hyperlink{class_parser}{Parser} $\ast$ \hyperlink{class_i_n_t_e_r_f_a_c_e_a71e1361007b1049a1c0012e4e72a672b}{parser}
+\item 
+\hyperlink{class_reader}{Reader} $\ast$ \hyperlink{class_i_n_t_e_r_f_a_c_e_a0b2f7b62040ca212b71dc2dbc9f8729a}{reader}
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_i_n_t_e_r_f_a_c_e_a4ae48a495e45c6a6a60cd3807209c851}{menu} ()
+\begin{DoxyCompactList}\small\item\em Guide the user through an interactive command line menu to define the crystal parameters. ~\newline
+Marked deprecated as of v 0.\+3! \end{DoxyCompactList}\item 
+void \hyperlink{class_i_n_t_e_r_f_a_c_e_a2e2b70933b201b9f06ef12fc0f126035}{banner} ()
+\begin{DoxyCompactList}\small\item\em Display program info at the command line. \end{DoxyCompactList}\item 
+void \hyperlink{class_i_n_t_e_r_f_a_c_e_ae27d0174983d1e7fee1291e53858dc55}{input} (char $\ast$fptr)
+\begin{DoxyCompactList}\small\item\em Read the atomic configuration from a text file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{class_i_n_t_e_r_f_a_c_e_acf38fe97c1ca8565367564059b195ed3}{i\+\_\+alat}
+\item 
+double \hyperlink{class_i_n_t_e_r_f_a_c_e_a22d766838fbda33270ff5c2773b18022}{i\+\_\+cta}
+\item 
+int \hyperlink{class_i_n_t_e_r_f_a_c_e_a1019e8f33030b94977af9d53dd18b2a2}{lclass}
+\item 
+int \hyperlink{class_i_n_t_e_r_f_a_c_e_a963ff0d6c9ea718dee31b4ea605f95f8}{lstyle}
+\item 
+int \hyperlink{class_i_n_t_e_r_f_a_c_e_a24698e299c30a479e6652e8a3ff1d805}{i\+\_\+lorient}
+\item 
+int \hyperlink{class_i_n_t_e_r_f_a_c_e_aa15d8db18b46f162fab82aaec313e898}{i\+\_\+species}
+\item 
+std\+::string \hyperlink{class_i_n_t_e_r_f_a_c_e_a36bed6ae97a342c0ae8ead780b0dfdf3}{atom\+\_\+list}
+\item 
+char $\ast$ \hyperlink{class_i_n_t_e_r_f_a_c_e_a5f1cd73e5b1dd4eebe65065e99967237}{oformat}
+\item 
+char $\ast$ \hyperlink{class_i_n_t_e_r_f_a_c_e_ae5e5c026e286c25b4baad2267cb2809c}{format}
+\item 
+char $\ast$ \hyperlink{class_i_n_t_e_r_f_a_c_e_a37fe82e9eb07354aa0396d0b35fae8d2}{fname}
+\item 
+char $\ast$ \hyperlink{class_i_n_t_e_r_f_a_c_e_afb94f9450b89e70f8b2396ec80f339da}{stylename}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_i_n_t_e_r_f_a_c_e_a62b3960b528d5220fe0a52e87382cc6e}{}\index{I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}!I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}}
+\index{I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}!I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}}
+\subsubsection[{I\+N\+T\+E\+R\+F\+A\+C\+E}]{\setlength{\rightskip}{0pt plus 5cm}I\+N\+T\+E\+R\+F\+A\+C\+E\+::\+I\+N\+T\+E\+R\+F\+A\+C\+E (
+\begin{DoxyParamCaption}
+\item[{int}]{nargs, }
+\item[{char $\ast$$\ast$}]{argv, }
+\item[{const char $\ast$}]{fptr}
+\end{DoxyParamCaption}
+)}\label{class_i_n_t_e_r_f_a_c_e_a62b3960b528d5220fe0a52e87382cc6e}
+
+
+Constructor to start up all core level classes. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em nargs} & -\/ number of command line arguments \\
+\hline
+\mbox{\tt in}  & {\em argv} & -\/ char array containing all command line arguments \\
+\hline
+\mbox{\tt in}  & {\em fptr} & -\/ name of parameters file to read from \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_i_n_t_e_r_f_a_c_e_aad406ae7418ff69f2c3131c67db2c736}{}\index{I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}!````~I\+N\+T\+E\+R\+F\+A\+C\+E@{$\sim$\+I\+N\+T\+E\+R\+F\+A\+C\+E}}
+\index{````~I\+N\+T\+E\+R\+F\+A\+C\+E@{$\sim$\+I\+N\+T\+E\+R\+F\+A\+C\+E}!I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}}
+\subsubsection[{$\sim$\+I\+N\+T\+E\+R\+F\+A\+C\+E}]{\setlength{\rightskip}{0pt plus 5cm}I\+N\+T\+E\+R\+F\+A\+C\+E\+::$\sim$\+I\+N\+T\+E\+R\+F\+A\+C\+E (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_i_n_t_e_r_f_a_c_e_aad406ae7418ff69f2c3131c67db2c736}
+
+
+Destructor to free all memory allocated for the core classes. 
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_i_n_t_e_r_f_a_c_e_a2e2b70933b201b9f06ef12fc0f126035}{}\index{I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}!banner@{banner}}
+\index{banner@{banner}!I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}}
+\subsubsection[{banner}]{\setlength{\rightskip}{0pt plus 5cm}void I\+N\+T\+E\+R\+F\+A\+C\+E\+::banner (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{class_i_n_t_e_r_f_a_c_e_a2e2b70933b201b9f06ef12fc0f126035}
+
+
+Display program info at the command line. 
+
+\hypertarget{class_i_n_t_e_r_f_a_c_e_a71c1db660fb6a11b08b9144c999cb0ed}{}\index{I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}!build@{build}}
+\index{build@{build}!I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}}
+\subsubsection[{build}]{\setlength{\rightskip}{0pt plus 5cm}void I\+N\+T\+E\+R\+F\+A\+C\+E\+::build (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_i_n_t_e_r_f_a_c_e_a71c1db660fb6a11b08b9144c999cb0ed}
+
+
+Store all the parameters and build the required crystal. ~\newline
+This is where each of the specific Bravais lattices are instantiated as an ~\newline
+object of the \hyperlink{class_l_a_t_t_i_c_e}{L\+A\+T\+T\+I\+C\+E} class. 
+
+\hypertarget{class_i_n_t_e_r_f_a_c_e_a5f9daf84cbf9f286eadf64734c7a73d4}{}\index{I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}!build\+\_\+from\+\_\+file@{build\+\_\+from\+\_\+file}}
+\index{build\+\_\+from\+\_\+file@{build\+\_\+from\+\_\+file}!I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}}
+\subsubsection[{build\+\_\+from\+\_\+file}]{\setlength{\rightskip}{0pt plus 5cm}void I\+N\+T\+E\+R\+F\+A\+C\+E\+::build\+\_\+from\+\_\+file (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_i_n_t_e_r_f_a_c_e_a5f9daf84cbf9f286eadf64734c7a73d4}
+
+
+Store all the parameters and build the required crystal. ~\newline
+This is where each of the specific Bravais lattices are instantiated as an ~\newline
+object of the \hyperlink{class_l_a_t_t_i_c_e}{L\+A\+T\+T\+I\+C\+E} class. 
+
+\hypertarget{class_i_n_t_e_r_f_a_c_e_ae27d0174983d1e7fee1291e53858dc55}{}\index{I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}!input@{input}}
+\index{input@{input}!I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}}
+\subsubsection[{input}]{\setlength{\rightskip}{0pt plus 5cm}void I\+N\+T\+E\+R\+F\+A\+C\+E\+::input (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{fptr}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{class_i_n_t_e_r_f_a_c_e_ae27d0174983d1e7fee1291e53858dc55}
+
+
+Read the atomic configuration from a text file. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em fptr} & -\/ Filename of the configuration file \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_i_n_t_e_r_f_a_c_e_a5811f0eaaa397ae3b72453774e424b67}{}\index{I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}!insane@{insane}}
+\index{insane@{insane}!I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}}
+\subsubsection[{insane}]{\setlength{\rightskip}{0pt plus 5cm}int I\+N\+T\+E\+R\+F\+A\+C\+E\+::insane (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_i_n_t_e_r_f_a_c_e_a5811f0eaaa397ae3b72453774e424b67}
+
+
+Simple sanity check to ensure all necessary parameters have been defined .~\newline
+ If a required parameter was not set, then a detailed message on the missing parameter~\newline
+ is printed to the terminal via {\bfseries {\ttfamily stderr}}. 
+
+\begin{DoxyReturn}{Returns}
+{\ttfamily 0} if successful, {\ttfamily 1} otherwise 
+\end{DoxyReturn}
+\hypertarget{class_i_n_t_e_r_f_a_c_e_a4ae48a495e45c6a6a60cd3807209c851}{}\index{I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}!menu@{menu}}
+\index{menu@{menu}!I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}}
+\subsubsection[{menu}]{\setlength{\rightskip}{0pt plus 5cm}void I\+N\+T\+E\+R\+F\+A\+C\+E\+::menu (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{class_i_n_t_e_r_f_a_c_e_a4ae48a495e45c6a6a60cd3807209c851}
+
+
+Guide the user through an interactive command line menu to define the crystal parameters. ~\newline
+Marked deprecated as of v 0.\+3! 
+
+\hypertarget{class_i_n_t_e_r_f_a_c_e_a17e7bd199040a2aaf2b1d7d138e53759}{}\index{I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}!show\+\_\+parameters@{show\+\_\+parameters}}
+\index{show\+\_\+parameters@{show\+\_\+parameters}!I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}}
+\subsubsection[{show\+\_\+parameters}]{\setlength{\rightskip}{0pt plus 5cm}void I\+N\+T\+E\+R\+F\+A\+C\+E\+::show\+\_\+parameters (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_i_n_t_e_r_f_a_c_e_a17e7bd199040a2aaf2b1d7d138e53759}
+
+
+Display all the parameters entered by the user during the G\+U\+I session. 
+
+\hypertarget{class_i_n_t_e_r_f_a_c_e_ae00f42c78b8ad7323745e9b0cea1971c}{}\index{I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}!write\+\_\+data@{write\+\_\+data}}
+\index{write\+\_\+data@{write\+\_\+data}!I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}}
+\subsubsection[{write\+\_\+data}]{\setlength{\rightskip}{0pt plus 5cm}void I\+N\+T\+E\+R\+F\+A\+C\+E\+::write\+\_\+data (
+\begin{DoxyParamCaption}
+\item[{int}]{src}
+\end{DoxyParamCaption}
+)}\label{class_i_n_t_e_r_f_a_c_e_ae00f42c78b8ad7323745e9b0cea1971c}
+
+
+\hyperlink{class_write}{Write} the as built crystal to a regular file. ~\newline
+This method accesses the requested file format and passes all the necessary data for that format. 
+
+
+
+\subsection{Field Documentation}
+\hypertarget{class_i_n_t_e_r_f_a_c_e_a36bed6ae97a342c0ae8ead780b0dfdf3}{}\index{I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}!atom\+\_\+list@{atom\+\_\+list}}
+\index{atom\+\_\+list@{atom\+\_\+list}!I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}}
+\subsubsection[{atom\+\_\+list}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string I\+N\+T\+E\+R\+F\+A\+C\+E\+::atom\+\_\+list\hspace{0.3cm}{\ttfamily [private]}}\label{class_i_n_t_e_r_f_a_c_e_a36bed6ae97a342c0ae8ead780b0dfdf3}
+\hypertarget{class_i_n_t_e_r_f_a_c_e_aeff8d391b9df980974a10c25b7667b33}{}\index{I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}!errors@{errors}}
+\index{errors@{errors}!I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}}
+\subsubsection[{errors}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Errors}$\ast$ I\+N\+T\+E\+R\+F\+A\+C\+E\+::errors}\label{class_i_n_t_e_r_f_a_c_e_aeff8d391b9df980974a10c25b7667b33}
+\hypertarget{class_i_n_t_e_r_f_a_c_e_a37fe82e9eb07354aa0396d0b35fae8d2}{}\index{I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}!fname@{fname}}
+\index{fname@{fname}!I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}}
+\subsubsection[{fname}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ I\+N\+T\+E\+R\+F\+A\+C\+E\+::fname\hspace{0.3cm}{\ttfamily [private]}}\label{class_i_n_t_e_r_f_a_c_e_a37fe82e9eb07354aa0396d0b35fae8d2}
+\hypertarget{class_i_n_t_e_r_f_a_c_e_ae5e5c026e286c25b4baad2267cb2809c}{}\index{I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}!format@{format}}
+\index{format@{format}!I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}}
+\subsubsection[{format}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ I\+N\+T\+E\+R\+F\+A\+C\+E\+::format\hspace{0.3cm}{\ttfamily [private]}}\label{class_i_n_t_e_r_f_a_c_e_ae5e5c026e286c25b4baad2267cb2809c}
+\hypertarget{class_i_n_t_e_r_f_a_c_e_a194a3b0540d87580158795d6a15d916e}{}\index{I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}!gui@{gui}}
+\index{gui@{gui}!I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}}
+\subsubsection[{gui}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Gui}$\ast$ I\+N\+T\+E\+R\+F\+A\+C\+E\+::gui}\label{class_i_n_t_e_r_f_a_c_e_a194a3b0540d87580158795d6a15d916e}
+
+
+pointer to the gui class 
+
+\hypertarget{class_i_n_t_e_r_f_a_c_e_acf38fe97c1ca8565367564059b195ed3}{}\index{I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}!i\+\_\+alat@{i\+\_\+alat}}
+\index{i\+\_\+alat@{i\+\_\+alat}!I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}}
+\subsubsection[{i\+\_\+alat}]{\setlength{\rightskip}{0pt plus 5cm}double I\+N\+T\+E\+R\+F\+A\+C\+E\+::i\+\_\+alat\hspace{0.3cm}{\ttfamily [private]}}\label{class_i_n_t_e_r_f_a_c_e_acf38fe97c1ca8565367564059b195ed3}
+\hypertarget{class_i_n_t_e_r_f_a_c_e_a22d766838fbda33270ff5c2773b18022}{}\index{I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}!i\+\_\+cta@{i\+\_\+cta}}
+\index{i\+\_\+cta@{i\+\_\+cta}!I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}}
+\subsubsection[{i\+\_\+cta}]{\setlength{\rightskip}{0pt plus 5cm}double I\+N\+T\+E\+R\+F\+A\+C\+E\+::i\+\_\+cta\hspace{0.3cm}{\ttfamily [private]}}\label{class_i_n_t_e_r_f_a_c_e_a22d766838fbda33270ff5c2773b18022}
+\hypertarget{class_i_n_t_e_r_f_a_c_e_a24698e299c30a479e6652e8a3ff1d805}{}\index{I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}!i\+\_\+lorient@{i\+\_\+lorient}}
+\index{i\+\_\+lorient@{i\+\_\+lorient}!I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}}
+\subsubsection[{i\+\_\+lorient}]{\setlength{\rightskip}{0pt plus 5cm}int I\+N\+T\+E\+R\+F\+A\+C\+E\+::i\+\_\+lorient\hspace{0.3cm}{\ttfamily [private]}}\label{class_i_n_t_e_r_f_a_c_e_a24698e299c30a479e6652e8a3ff1d805}
+\hypertarget{class_i_n_t_e_r_f_a_c_e_aa15d8db18b46f162fab82aaec313e898}{}\index{I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}!i\+\_\+species@{i\+\_\+species}}
+\index{i\+\_\+species@{i\+\_\+species}!I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}}
+\subsubsection[{i\+\_\+species}]{\setlength{\rightskip}{0pt plus 5cm}int I\+N\+T\+E\+R\+F\+A\+C\+E\+::i\+\_\+species\hspace{0.3cm}{\ttfamily [private]}}\label{class_i_n_t_e_r_f_a_c_e_aa15d8db18b46f162fab82aaec313e898}
+\hypertarget{class_i_n_t_e_r_f_a_c_e_a5e07ee2e9ab4f84a9a6ae25c023dc24b}{}\index{I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}!lattice@{lattice}}
+\index{lattice@{lattice}!I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}}
+\subsubsection[{lattice}]{\setlength{\rightskip}{0pt plus 5cm}{\bf L\+A\+T\+T\+I\+C\+E}$\ast$ I\+N\+T\+E\+R\+F\+A\+C\+E\+::lattice}\label{class_i_n_t_e_r_f_a_c_e_a5e07ee2e9ab4f84a9a6ae25c023dc24b}
+
+
+pointer to the lattice class, each Bravais crystal inherits from \hyperlink{class_l_a_t_t_i_c_e}{L\+A\+T\+T\+I\+C\+E} 
+
+\hypertarget{class_i_n_t_e_r_f_a_c_e_a1019e8f33030b94977af9d53dd18b2a2}{}\index{I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}!lclass@{lclass}}
+\index{lclass@{lclass}!I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}}
+\subsubsection[{lclass}]{\setlength{\rightskip}{0pt plus 5cm}int I\+N\+T\+E\+R\+F\+A\+C\+E\+::lclass\hspace{0.3cm}{\ttfamily [private]}}\label{class_i_n_t_e_r_f_a_c_e_a1019e8f33030b94977af9d53dd18b2a2}
+\hypertarget{class_i_n_t_e_r_f_a_c_e_a963ff0d6c9ea718dee31b4ea605f95f8}{}\index{I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}!lstyle@{lstyle}}
+\index{lstyle@{lstyle}!I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}}
+\subsubsection[{lstyle}]{\setlength{\rightskip}{0pt plus 5cm}int I\+N\+T\+E\+R\+F\+A\+C\+E\+::lstyle\hspace{0.3cm}{\ttfamily [private]}}\label{class_i_n_t_e_r_f_a_c_e_a963ff0d6c9ea718dee31b4ea605f95f8}
+\hypertarget{class_i_n_t_e_r_f_a_c_e_a5f1cd73e5b1dd4eebe65065e99967237}{}\index{I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}!oformat@{oformat}}
+\index{oformat@{oformat}!I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}}
+\subsubsection[{oformat}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ I\+N\+T\+E\+R\+F\+A\+C\+E\+::oformat\hspace{0.3cm}{\ttfamily [private]}}\label{class_i_n_t_e_r_f_a_c_e_a5f1cd73e5b1dd4eebe65065e99967237}
+\hypertarget{class_i_n_t_e_r_f_a_c_e_a71e1361007b1049a1c0012e4e72a672b}{}\index{I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}!parser@{parser}}
+\index{parser@{parser}!I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}}
+\subsubsection[{parser}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Parser}$\ast$ I\+N\+T\+E\+R\+F\+A\+C\+E\+::parser}\label{class_i_n_t_e_r_f_a_c_e_a71e1361007b1049a1c0012e4e72a672b}
+\hypertarget{class_i_n_t_e_r_f_a_c_e_a0b2f7b62040ca212b71dc2dbc9f8729a}{}\index{I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}!reader@{reader}}
+\index{reader@{reader}!I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}}
+\subsubsection[{reader}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Reader}$\ast$ I\+N\+T\+E\+R\+F\+A\+C\+E\+::reader}\label{class_i_n_t_e_r_f_a_c_e_a0b2f7b62040ca212b71dc2dbc9f8729a}
+\hypertarget{class_i_n_t_e_r_f_a_c_e_aa55e1e42a1d2309638398bb640fbf74f}{}\index{I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}!species@{species}}
+\index{species@{species}!I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}}
+\subsubsection[{species}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$std\+::string$>$ I\+N\+T\+E\+R\+F\+A\+C\+E\+::species}\label{class_i_n_t_e_r_f_a_c_e_aa55e1e42a1d2309638398bb640fbf74f}
+
+
+container to hold each element string defined by the user 
+
+\hypertarget{class_i_n_t_e_r_f_a_c_e_afb94f9450b89e70f8b2396ec80f339da}{}\index{I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}!stylename@{stylename}}
+\index{stylename@{stylename}!I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}}
+\subsubsection[{stylename}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ I\+N\+T\+E\+R\+F\+A\+C\+E\+::stylename\hspace{0.3cm}{\ttfamily [private]}}\label{class_i_n_t_e_r_f_a_c_e_afb94f9450b89e70f8b2396ec80f339da}
+\hypertarget{class_i_n_t_e_r_f_a_c_e_a6e215284876b2bb79090fd3a210a40b0}{}\index{I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}!write@{write}}
+\index{write@{write}!I\+N\+T\+E\+R\+F\+A\+C\+E@{I\+N\+T\+E\+R\+F\+A\+C\+E}}
+\subsubsection[{write}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Write}$\ast$ I\+N\+T\+E\+R\+F\+A\+C\+E\+::write}\label{class_i_n_t_e_r_f_a_c_e_a6e215284876b2bb79090fd3a210a40b0}
+
+
+pointer to the write class, used for writing specific formats 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/\hyperlink{interface_8h}{interface.\+h}\end{DoxyCompactItemize}

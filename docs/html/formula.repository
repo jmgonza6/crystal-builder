@@ -1,0 +1,5 @@
+\form#0:$ \sqrt{\sum_{i}^{n} v_{i}*v_{i} } $
+\form#1:$ \sum_{i}^{n} a_{i}*b_{i} $
+\form#2:$ \arccos \frac{\textbf{a} \cdot \textbf{b}}{|\textbf{a}||\textbf{b}|} $
+\form#3:$ \textbf{a} \times \textbf{b} = \textbf{c} $
+\form#4:$ \textbf{A}\textbf{X} = \textbf{B} $
