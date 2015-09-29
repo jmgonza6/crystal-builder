@@ -1,7 +1,7 @@
 <p align="center">
   <img src="logos/tatb-white2.png">
 </p>
-#Crystal builder v. 3.5.0:
+#Crystal builder v. 3.7.0:
 
 ##Capabilities
 
@@ -94,7 +94,7 @@ ________________________________________________________________________________
 ##Usage
 To see extensive documentation on the contents and how to use the code, navigate to the toplevel of this directory to the *docs/html/* directory and open the file called *index.html*.
 
-To use the program, simply execute the following in a terminal,
+To use the program in GUI mode, simply execute the following in a terminal,
 	
 	./crysb  
 
