@@ -2,7 +2,7 @@
 <html lang="en-us">
   <head>
     <meta charset="UTF-8">
-    <title>MSL Suite - jmgonza6@github</title>
+    <title>Crystal Builder - jmgonza6@MSL</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/normalize.css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
@@ -36,26 +36,37 @@
             <li><p>Energetic materials (PETN-I, TATB, β-HMX)</p>
           </ul>
       </li>
-      <li><p><code> examples/</code> Directory containing several codes demonstrating the usage of various library methods</p></li>
-      <li><p><code> Makefile.template</code> Template to be customized for the users' environment</p></li>
+      <li><p>Define a custom lattice by specifying the lattice parameters and angles, the basis positions, and the element types</p></li>
+      <li><p>Create structures using the GUI or from the command line with a text file</p></li>
+      <li><p>Build and view large super cells (no limit on maximum atoms)</p></li>
+      <li><p>3D graphics rendering of the crystals with real time user interaction</p></li>
+      <li><p>Display as a molecule or with a periodic unit cell</p></li>
+      <li><p>Display bonds between nearest neighbors, uniform adjustable cutoff</p></li>
+      <li><p>Print output atomic coordinates as fractional or cartesian</p></li>
+      <li><p>Output to several popular Denisty Functional Theory and Molecular Dynamics packages:</p>
+          <ul> 
+            <li><p>Materials Studio DMol (.car) </p></li>
+            <li><p>LAMMPS (.input)</p></li>
+            <li><p>VASP 5.x.x (POSCAR)</p></li>
+          </ul>
+      </li>
+      <li><p>Color and size according to atomic species.  Coloring based on CPK/Jmol standard</p></li>
+    
+      <p align="center">
+        <img src="logos/CPK-periodic-table.png">
+      </p>
       </ul>
-
+      
       <h2>
-      <a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage:</h2>
-
-      <p>See the directory <code>examples/libxxx</code> for some examples of calls to the various library subroutines.  This directory also has a <code>Makefile</code> template for use in building your own codes against the library.</p>
-
-      <p>Alternatively, you can build your programs with the libraries as follows,</p>
-
-      <pre><code> icpc -L$(LIB_DIR)/libs -llammps -lmathns ... -I$(INC_DIR)/include code.cpp -o out.x </code></pre>
-
+      <a id="download" class="anchor" href="#download" aria-hidden="true">
+            <span class="octicon octicon-link"></span></a>Screenshots:</h2>
+      
       <h2>
       <a id="download" class="anchor" href="#download" aria-hidden="true">
             <span class="octicon octicon-link"></span></a>Downloads:</h2>
       <ul>
-        <li><p>   <a href="https://github.com/jmgonza6/msl-suite/archive/master.tar.gz" id="view-docs"><span>msl-suite-master-latest.tar.gz</span></a></p></li>
-        <li><p>   <a href="https://github.com/jmgonza6/msl-suite/archive/master.zip" id="view-docs"><span>msl-suite-master-latest.zip</span></a></p></li>
-        <li><p>   <a href="https://github.com/jmgonza6/msl-suite" id="view-docs"><span>Older versions</span></a></p></li>
+        <li><p>   <a href="https://github.com/jmgonza6/crystal-builder/archive/master.tar.gz" id="view-docs"><span>msl-suite-master-latest.tar.gz</span></a></p></li>
+        <li><p>   <a href="https://github.com/jmgonza6/crystal-builder/archive/master.zip" id="view-docs"><span>msl-suite-master-latest.zip</span></a></p></li>
       </ul>
 
       <footer class="site-footer">
