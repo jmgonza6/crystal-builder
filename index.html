@@ -23,15 +23,19 @@
       <h1>
       <a id="msl-suite-v-01-06062015" class="anchor" href="#msl-suite-v-01-06062015" aria-hidden="true"><span class="octicon octicon-link"></span></a>Description:</h1>
 
-      <p>This is a library which is class based, with each class focused on preparing, conducting, and analyzing Molecular Dynamics and Density Functional Theory simulations.  The entire suite is written in Ansi C and C++99 making using of only standard libraries and some STL for the C++ codes. The library is modular with a separate class for each of the various MD/DFT codes,
-      and one core set of low-level routines for all classes.</p>
+      <p>This is an utlity designed to construct a wide range of crystal structures for use in several common Density Functional Theory and Molecular Dynamics packages.</p>
 
       <h2>
-      <a id="contents" class="anchor" href="#contents" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contents:</h2>
+      <a id="capabilities" class="anchor" href="#capabilities" aria-hidden="true"><span class="octicon octicon-link"></span></a>Capabilities:</h2>
 
       <ul>
-      <li><p><code> lib/</code> Source for libraries of DMol, LAMMPS, MSL (core), and VASP</p></li>
-      <li><p><code> include/</code> Headers containing declarations of the libraries</p></li>
+      <li><p>Bravais lattices: Cubic, Orthorhombic, Tetragonal</p></li>
+      <li><p>Library structures:</p>
+          <ul> 
+            <li><p>2D materials: Graphene, h-BN, (M)etal (D)i(C)halcogenide-2H/1T (i.e. SnS2), (T)ransition (M)etal (D)i(C)halcogenide-2H/1T (i.e. MoSe2)</p></li>
+            <li><p>Energetic materials (PETN-I, TATB, β-HMX)</p>
+          </ul>
+      </li>
       <li><p><code> examples/</code> Directory containing several codes demonstrating the usage of various library methods</p></li>
       <li><p><code> Makefile.template</code> Template to be customized for the users' environment</p></li>
       </ul>
