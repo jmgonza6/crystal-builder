@@ -1,0 +1,346 @@
+\hypertarget{class_reader}{}\section{Reader Class Reference}
+\label{class_reader}\index{Reader@{Reader}}
+
+
+\subsection{Detailed Description}
+\subsection*{{\bfseries Purpose\+:} }
+
+\begin{DoxyVerb}/********************************************************************************\
+/  Class for reading crystal parameters from a file                              \
+/                                                                                \
+/********************************************************************************\
+\end{DoxyVerb}
+
+
+\begin{DoxyAuthor}{Author}
+Joseph M. Gonzalez
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+Sep 27, 2015 23\+:16\+:20
+\end{DoxyDate}
+{\bfseries Contact} ~\newline
+ \href{mailto:jmgonza6@mail.usf.edu}{\tt jmgonza6@mail.\+usf.\+edu} \subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_reader_adcda31b507720ab44044d7a21686fba2}{Reader} ()
+\item 
+\hyperlink{class_reader_a78089542fd27a0ac2df6702fffe8725c}{$\sim$\+Reader} ()
+\item 
+void \hyperlink{class_reader_afae5e105c093f58c13a558bc92fc7618}{file} (char $\ast$pf)
+\item 
+int \hyperlink{class_reader_a1967f81a208b23983d13ff8c72d453ca}{insane} ()
+\end{DoxyCompactItemize}
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{class_reader_ae27e67c8d78fb8fac565ec079529b589}{alat}
+\begin{DoxyCompactList}\small\item\em latttice parameter a (Å) \end{DoxyCompactList}\item 
+double \hyperlink{class_reader_a8e2240f9ad9a7c1423e0888e474f4c9e}{blat}
+\begin{DoxyCompactList}\small\item\em lattice parameter b (Å) \end{DoxyCompactList}\item 
+double \hyperlink{class_reader_ad10c6e643d5cb651bed0c96790099b51}{clat}
+\begin{DoxyCompactList}\small\item\em lattice parameter c (Å) \end{DoxyCompactList}\item 
+double \hyperlink{class_reader_a421cb70a4a8746a68fe2618ed597c5a0}{alpha}
+\begin{DoxyCompactList}\small\item\em angle beteween c \& b \end{DoxyCompactList}\item 
+double \hyperlink{class_reader_a47234e1e633f932334c4304cf01824a1}{beta}
+\begin{DoxyCompactList}\small\item\em angle between c \& a \end{DoxyCompactList}\item 
+double \hyperlink{class_reader_ab2127a4e365fd3528c017a76375d60c4}{gamma}
+\begin{DoxyCompactList}\small\item\em angle between a \& b \end{DoxyCompactList}\item 
+double \hyperlink{class_reader_a6eb90d21148a08f9ef4e3dc478917d63}{cta}
+\begin{DoxyCompactList}\small\item\em c/a ratio, for use with \hyperlink{class_hexagonal}{Hexagonal()}, h-\/\+B\+N(), Graphene() \end{DoxyCompactList}\item 
+int \hyperlink{class_reader_afd2686bb2f2f9eec9601287385d7159e}{lbasis}
+\begin{DoxyCompactList}\small\item\em number of basis atoms for graphene \end{DoxyCompactList}\item 
+int \hyperlink{class_reader_a85d35ff338db8e5915d7620a730df6fb}{nx}
+\begin{DoxyCompactList}\small\item\em supercell dimension along x \end{DoxyCompactList}\item 
+int \hyperlink{class_reader_a68ce806c514dd9323b66de3ca25285c2}{ny}
+\begin{DoxyCompactList}\small\item\em supercell dimension along y \end{DoxyCompactList}\item 
+int \hyperlink{class_reader_ab09026e1e834afa843386f8da4f3e5d3}{nz}
+\begin{DoxyCompactList}\small\item\em supercell dimension along z \end{DoxyCompactList}\item 
+int \hyperlink{class_reader_a913c9024181fd0fbb2dea5265fa097c1}{fractional}
+\begin{DoxyCompactList}\small\item\em fractional coordinates, 1 = true, 0 = false \end{DoxyCompactList}\item 
+int \hyperlink{class_reader_aa0c8ca660b7982ecc0fcaa673a1db16b}{graphene}
+\begin{DoxyCompactList}\small\item\em graphene structure was built, 1 = true, 0 = false \end{DoxyCompactList}\item 
+int \hyperlink{class_reader_aeffa187da9ac5feb5c3e5e078fe43fde}{custom}
+\begin{DoxyCompactList}\small\item\em a custom structure was built, 1 = true, 0 = false \end{DoxyCompactList}\item 
+int \hyperlink{class_reader_a3a38a2290db448491a46a74ca4413c71}{resets}
+\begin{DoxyCompactList}\small\item\em reset count \end{DoxyCompactList}\item 
+int \hyperlink{class_reader_a7915928dbe39a87fe9d7ef829f848acb}{run\+\_\+count}
+\begin{DoxyCompactList}\small\item\em run count, for debugging \end{DoxyCompactList}\item 
+int \hyperlink{class_reader_ada4132c63c686a21ea6eb8f05d724edc}{quit}
+\begin{DoxyCompactList}\small\item\em quit signal \end{DoxyCompactList}\item 
+int \hyperlink{class_reader_a4686a622a101960a17a1786a45b84bcd}{view}
+\begin{DoxyCompactList}\small\item\em render+build signal \end{DoxyCompactList}\item 
+char $\ast$ \hyperlink{class_reader_a2aa3818b76e5565fef7e72a5018ca084}{pfile}
+\begin{DoxyCompactList}\small\item\em parameter file to define the crystal \end{DoxyCompactList}\item 
+char $\ast$ \hyperlink{class_reader_a05d97010d814f91cffe66657e2c39ffd}{out\+\_\+name}
+\begin{DoxyCompactList}\small\item\em file name to write \end{DoxyCompactList}\item 
+char $\ast$ \hyperlink{class_reader_a8031979223c6835ee2a52be58c13f9b1}{file\+\_\+format}
+\begin{DoxyCompactList}\small\item\em type of file to write \end{DoxyCompactList}\item 
+char $\ast$ \hyperlink{class_reader_a9aa6c187535ed940397c836aacfcc0c1}{bravais}
+\begin{DoxyCompactList}\small\item\em which lattice ? \end{DoxyCompactList}\item 
+char $\ast$ \hyperlink{class_reader_aaaa3ec196647f9d79f39fac3db21d288}{lstyle}
+\begin{DoxyCompactList}\small\item\em bravais lattice style, B\+C\+C \end{DoxyCompactList}\item 
+char $\ast$ \hyperlink{class_reader_aa1f260272da17a496f1ecd3ce39281b9}{pd\+\_\+struct}
+\begin{DoxyCompactList}\small\item\em defines a library structure to use \end{DoxyCompactList}\item 
+char $\ast$ \hyperlink{class_reader_aad797cfb4296c19561d2729de8cd9333}{element}
+\begin{DoxyCompactList}\small\item\em which species ? \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::string $>$ \hyperlink{class_reader_a81df051804ba55004944e2d6f9a43cf7}{elem\+List}
+\begin{DoxyCompactList}\small\item\em define a custom stoichiometry (C,H,N,O) \end{DoxyCompactList}\item 
+std\+::vector$<$ int $>$ \hyperlink{class_reader_a81393d6441793db4fd62c7a4652518d3}{elem\+Count}
+\begin{DoxyCompactList}\small\item\em define a custom stoichiometry (2,4,1,3) \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::vector$<$ double $>$ $>$ \hyperlink{class_reader_a5f34996abadc7f998ffd1c34c4cfb380}{custom\+Basis}
+\begin{DoxyCompactList}\small\item\em container for defining a custom basis set \end{DoxyCompactList}\item 
+std\+::string \hyperlink{class_reader_a5cad9d6f8773e4ca9e6ae63b4dd7a307}{custom\+Name}
+\begin{DoxyCompactList}\small\item\em chemical formula of a custom structure \end{DoxyCompactList}\item 
+\hyperlink{class_parser}{Parser} $\ast$ \hyperlink{class_reader_a4a2ce1dccacd1cb00f0a226f4f78c9d6}{parser}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_reader_adcda31b507720ab44044d7a21686fba2}{}\index{Reader@{Reader}!Reader@{Reader}}
+\index{Reader@{Reader}!Reader@{Reader}}
+\subsubsection[{Reader}]{\setlength{\rightskip}{0pt plus 5cm}Reader\+::\+Reader (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_reader_adcda31b507720ab44044d7a21686fba2}
+\hypertarget{class_reader_a78089542fd27a0ac2df6702fffe8725c}{}\index{Reader@{Reader}!````~Reader@{$\sim$\+Reader}}
+\index{````~Reader@{$\sim$\+Reader}!Reader@{Reader}}
+\subsubsection[{$\sim$\+Reader}]{\setlength{\rightskip}{0pt plus 5cm}Reader\+::$\sim$\+Reader (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_reader_a78089542fd27a0ac2df6702fffe8725c}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_reader_afae5e105c093f58c13a558bc92fc7618}{}\index{Reader@{Reader}!file@{file}}
+\index{file@{file}!Reader@{Reader}}
+\subsubsection[{file}]{\setlength{\rightskip}{0pt plus 5cm}void Reader\+::file (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{pf}
+\end{DoxyParamCaption}
+)}\label{class_reader_afae5e105c093f58c13a558bc92fc7618}
+\hypertarget{class_reader_a1967f81a208b23983d13ff8c72d453ca}{}\index{Reader@{Reader}!insane@{insane}}
+\index{insane@{insane}!Reader@{Reader}}
+\subsubsection[{insane}]{\setlength{\rightskip}{0pt plus 5cm}int Reader\+::insane (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_reader_a1967f81a208b23983d13ff8c72d453ca}
+
+
+\subsection{Field Documentation}
+\hypertarget{class_reader_ae27e67c8d78fb8fac565ec079529b589}{}\index{Reader@{Reader}!alat@{alat}}
+\index{alat@{alat}!Reader@{Reader}}
+\subsubsection[{alat}]{\setlength{\rightskip}{0pt plus 5cm}double Reader\+::alat}\label{class_reader_ae27e67c8d78fb8fac565ec079529b589}
+
+
+latttice parameter a (Å) 
+
+\hypertarget{class_reader_a421cb70a4a8746a68fe2618ed597c5a0}{}\index{Reader@{Reader}!alpha@{alpha}}
+\index{alpha@{alpha}!Reader@{Reader}}
+\subsubsection[{alpha}]{\setlength{\rightskip}{0pt plus 5cm}double Reader\+::alpha}\label{class_reader_a421cb70a4a8746a68fe2618ed597c5a0}
+
+
+angle beteween c \& b 
+
+\hypertarget{class_reader_a47234e1e633f932334c4304cf01824a1}{}\index{Reader@{Reader}!beta@{beta}}
+\index{beta@{beta}!Reader@{Reader}}
+\subsubsection[{beta}]{\setlength{\rightskip}{0pt plus 5cm}double Reader\+::beta}\label{class_reader_a47234e1e633f932334c4304cf01824a1}
+
+
+angle between c \& a 
+
+\hypertarget{class_reader_a8e2240f9ad9a7c1423e0888e474f4c9e}{}\index{Reader@{Reader}!blat@{blat}}
+\index{blat@{blat}!Reader@{Reader}}
+\subsubsection[{blat}]{\setlength{\rightskip}{0pt plus 5cm}double Reader\+::blat}\label{class_reader_a8e2240f9ad9a7c1423e0888e474f4c9e}
+
+
+lattice parameter b (Å) 
+
+\hypertarget{class_reader_a9aa6c187535ed940397c836aacfcc0c1}{}\index{Reader@{Reader}!bravais@{bravais}}
+\index{bravais@{bravais}!Reader@{Reader}}
+\subsubsection[{bravais}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ Reader\+::bravais}\label{class_reader_a9aa6c187535ed940397c836aacfcc0c1}
+
+
+which lattice ? 
+
+\hypertarget{class_reader_ad10c6e643d5cb651bed0c96790099b51}{}\index{Reader@{Reader}!clat@{clat}}
+\index{clat@{clat}!Reader@{Reader}}
+\subsubsection[{clat}]{\setlength{\rightskip}{0pt plus 5cm}double Reader\+::clat}\label{class_reader_ad10c6e643d5cb651bed0c96790099b51}
+
+
+lattice parameter c (Å) 
+
+\hypertarget{class_reader_a6eb90d21148a08f9ef4e3dc478917d63}{}\index{Reader@{Reader}!cta@{cta}}
+\index{cta@{cta}!Reader@{Reader}}
+\subsubsection[{cta}]{\setlength{\rightskip}{0pt plus 5cm}double Reader\+::cta}\label{class_reader_a6eb90d21148a08f9ef4e3dc478917d63}
+
+
+c/a ratio, for use with \hyperlink{class_hexagonal}{Hexagonal()}, h-\/\+B\+N(), Graphene() 
+
+\hypertarget{class_reader_aeffa187da9ac5feb5c3e5e078fe43fde}{}\index{Reader@{Reader}!custom@{custom}}
+\index{custom@{custom}!Reader@{Reader}}
+\subsubsection[{custom}]{\setlength{\rightskip}{0pt plus 5cm}int Reader\+::custom}\label{class_reader_aeffa187da9ac5feb5c3e5e078fe43fde}
+
+
+a custom structure was built, 1 = true, 0 = false 
+
+\hypertarget{class_reader_a5f34996abadc7f998ffd1c34c4cfb380}{}\index{Reader@{Reader}!custom\+Basis@{custom\+Basis}}
+\index{custom\+Basis@{custom\+Basis}!Reader@{Reader}}
+\subsubsection[{custom\+Basis}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$std\+::vector$<$double$>$ $>$ Reader\+::custom\+Basis}\label{class_reader_a5f34996abadc7f998ffd1c34c4cfb380}
+
+
+container for defining a custom basis set 
+
+\hypertarget{class_reader_a5cad9d6f8773e4ca9e6ae63b4dd7a307}{}\index{Reader@{Reader}!custom\+Name@{custom\+Name}}
+\index{custom\+Name@{custom\+Name}!Reader@{Reader}}
+\subsubsection[{custom\+Name}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string Reader\+::custom\+Name}\label{class_reader_a5cad9d6f8773e4ca9e6ae63b4dd7a307}
+
+
+chemical formula of a custom structure 
+
+\hypertarget{class_reader_a81393d6441793db4fd62c7a4652518d3}{}\index{Reader@{Reader}!elem\+Count@{elem\+Count}}
+\index{elem\+Count@{elem\+Count}!Reader@{Reader}}
+\subsubsection[{elem\+Count}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$int$>$ Reader\+::elem\+Count}\label{class_reader_a81393d6441793db4fd62c7a4652518d3}
+
+
+define a custom stoichiometry (2,4,1,3) 
+
+\hypertarget{class_reader_aad797cfb4296c19561d2729de8cd9333}{}\index{Reader@{Reader}!element@{element}}
+\index{element@{element}!Reader@{Reader}}
+\subsubsection[{element}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ Reader\+::element}\label{class_reader_aad797cfb4296c19561d2729de8cd9333}
+
+
+which species ? 
+
+\hypertarget{class_reader_a81df051804ba55004944e2d6f9a43cf7}{}\index{Reader@{Reader}!elem\+List@{elem\+List}}
+\index{elem\+List@{elem\+List}!Reader@{Reader}}
+\subsubsection[{elem\+List}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$std\+::string$>$ Reader\+::elem\+List}\label{class_reader_a81df051804ba55004944e2d6f9a43cf7}
+
+
+define a custom stoichiometry (C,H,N,O) 
+
+\hypertarget{class_reader_a8031979223c6835ee2a52be58c13f9b1}{}\index{Reader@{Reader}!file\+\_\+format@{file\+\_\+format}}
+\index{file\+\_\+format@{file\+\_\+format}!Reader@{Reader}}
+\subsubsection[{file\+\_\+format}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ Reader\+::file\+\_\+format}\label{class_reader_a8031979223c6835ee2a52be58c13f9b1}
+
+
+type of file to write 
+
+\hypertarget{class_reader_a913c9024181fd0fbb2dea5265fa097c1}{}\index{Reader@{Reader}!fractional@{fractional}}
+\index{fractional@{fractional}!Reader@{Reader}}
+\subsubsection[{fractional}]{\setlength{\rightskip}{0pt plus 5cm}int Reader\+::fractional}\label{class_reader_a913c9024181fd0fbb2dea5265fa097c1}
+
+
+fractional coordinates, 1 = true, 0 = false 
+
+\hypertarget{class_reader_ab2127a4e365fd3528c017a76375d60c4}{}\index{Reader@{Reader}!gamma@{gamma}}
+\index{gamma@{gamma}!Reader@{Reader}}
+\subsubsection[{gamma}]{\setlength{\rightskip}{0pt plus 5cm}double Reader\+::gamma}\label{class_reader_ab2127a4e365fd3528c017a76375d60c4}
+
+
+angle between a \& b 
+
+\hypertarget{class_reader_aa0c8ca660b7982ecc0fcaa673a1db16b}{}\index{Reader@{Reader}!graphene@{graphene}}
+\index{graphene@{graphene}!Reader@{Reader}}
+\subsubsection[{graphene}]{\setlength{\rightskip}{0pt plus 5cm}int Reader\+::graphene}\label{class_reader_aa0c8ca660b7982ecc0fcaa673a1db16b}
+
+
+graphene structure was built, 1 = true, 0 = false 
+
+\hypertarget{class_reader_afd2686bb2f2f9eec9601287385d7159e}{}\index{Reader@{Reader}!lbasis@{lbasis}}
+\index{lbasis@{lbasis}!Reader@{Reader}}
+\subsubsection[{lbasis}]{\setlength{\rightskip}{0pt plus 5cm}int Reader\+::lbasis}\label{class_reader_afd2686bb2f2f9eec9601287385d7159e}
+
+
+number of basis atoms for graphene 
+
+\hypertarget{class_reader_aaaa3ec196647f9d79f39fac3db21d288}{}\index{Reader@{Reader}!lstyle@{lstyle}}
+\index{lstyle@{lstyle}!Reader@{Reader}}
+\subsubsection[{lstyle}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ Reader\+::lstyle}\label{class_reader_aaaa3ec196647f9d79f39fac3db21d288}
+
+
+bravais lattice style, B\+C\+C 
+
+\hypertarget{class_reader_a85d35ff338db8e5915d7620a730df6fb}{}\index{Reader@{Reader}!nx@{nx}}
+\index{nx@{nx}!Reader@{Reader}}
+\subsubsection[{nx}]{\setlength{\rightskip}{0pt plus 5cm}int Reader\+::nx}\label{class_reader_a85d35ff338db8e5915d7620a730df6fb}
+
+
+supercell dimension along x 
+
+\hypertarget{class_reader_a68ce806c514dd9323b66de3ca25285c2}{}\index{Reader@{Reader}!ny@{ny}}
+\index{ny@{ny}!Reader@{Reader}}
+\subsubsection[{ny}]{\setlength{\rightskip}{0pt plus 5cm}int Reader\+::ny}\label{class_reader_a68ce806c514dd9323b66de3ca25285c2}
+
+
+supercell dimension along y 
+
+\hypertarget{class_reader_ab09026e1e834afa843386f8da4f3e5d3}{}\index{Reader@{Reader}!nz@{nz}}
+\index{nz@{nz}!Reader@{Reader}}
+\subsubsection[{nz}]{\setlength{\rightskip}{0pt plus 5cm}int Reader\+::nz}\label{class_reader_ab09026e1e834afa843386f8da4f3e5d3}
+
+
+supercell dimension along z 
+
+\hypertarget{class_reader_a05d97010d814f91cffe66657e2c39ffd}{}\index{Reader@{Reader}!out\+\_\+name@{out\+\_\+name}}
+\index{out\+\_\+name@{out\+\_\+name}!Reader@{Reader}}
+\subsubsection[{out\+\_\+name}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ Reader\+::out\+\_\+name}\label{class_reader_a05d97010d814f91cffe66657e2c39ffd}
+
+
+file name to write 
+
+\hypertarget{class_reader_a4a2ce1dccacd1cb00f0a226f4f78c9d6}{}\index{Reader@{Reader}!parser@{parser}}
+\index{parser@{parser}!Reader@{Reader}}
+\subsubsection[{parser}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Parser}$\ast$ Reader\+::parser}\label{class_reader_a4a2ce1dccacd1cb00f0a226f4f78c9d6}
+\hypertarget{class_reader_aa1f260272da17a496f1ecd3ce39281b9}{}\index{Reader@{Reader}!pd\+\_\+struct@{pd\+\_\+struct}}
+\index{pd\+\_\+struct@{pd\+\_\+struct}!Reader@{Reader}}
+\subsubsection[{pd\+\_\+struct}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ Reader\+::pd\+\_\+struct}\label{class_reader_aa1f260272da17a496f1ecd3ce39281b9}
+
+
+defines a library structure to use 
+
+\hypertarget{class_reader_a2aa3818b76e5565fef7e72a5018ca084}{}\index{Reader@{Reader}!pfile@{pfile}}
+\index{pfile@{pfile}!Reader@{Reader}}
+\subsubsection[{pfile}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ Reader\+::pfile}\label{class_reader_a2aa3818b76e5565fef7e72a5018ca084}
+
+
+parameter file to define the crystal 
+
+\hypertarget{class_reader_ada4132c63c686a21ea6eb8f05d724edc}{}\index{Reader@{Reader}!quit@{quit}}
+\index{quit@{quit}!Reader@{Reader}}
+\subsubsection[{quit}]{\setlength{\rightskip}{0pt plus 5cm}int Reader\+::quit}\label{class_reader_ada4132c63c686a21ea6eb8f05d724edc}
+
+
+quit signal 
+
+\hypertarget{class_reader_a3a38a2290db448491a46a74ca4413c71}{}\index{Reader@{Reader}!resets@{resets}}
+\index{resets@{resets}!Reader@{Reader}}
+\subsubsection[{resets}]{\setlength{\rightskip}{0pt plus 5cm}int Reader\+::resets}\label{class_reader_a3a38a2290db448491a46a74ca4413c71}
+
+
+reset count 
+
+\hypertarget{class_reader_a7915928dbe39a87fe9d7ef829f848acb}{}\index{Reader@{Reader}!run\+\_\+count@{run\+\_\+count}}
+\index{run\+\_\+count@{run\+\_\+count}!Reader@{Reader}}
+\subsubsection[{run\+\_\+count}]{\setlength{\rightskip}{0pt plus 5cm}int Reader\+::run\+\_\+count}\label{class_reader_a7915928dbe39a87fe9d7ef829f848acb}
+
+
+run count, for debugging 
+
+\hypertarget{class_reader_a4686a622a101960a17a1786a45b84bcd}{}\index{Reader@{Reader}!view@{view}}
+\index{view@{view}!Reader@{Reader}}
+\subsubsection[{view}]{\setlength{\rightskip}{0pt plus 5cm}int Reader\+::view}\label{class_reader_a4686a622a101960a17a1786a45b84bcd}
+
+
+render+build signal 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/util/\hyperlink{reader_8h}{reader.\+h}\end{DoxyCompactItemize}
