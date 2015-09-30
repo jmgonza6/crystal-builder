@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>MSL Suite - jmgonza6@github</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/cayman.css">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Crystal Builder</h1>
+      <h2 class="project-tagline">Simple program to build crystals for DFT/MD simulations</h2>
+      <a href="index.html" class="btn">Home</a>
+      <a href="docs.html" class="btn">Documentation</a>
+      <a href="install.html" class="btn">Install</a>
+      <a href="release.html" class="btn">Release info</a>
+      <a href="https://github.com/jmgonza6/msl-suite" class="btn">View on GitHub</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+      <a id="msl-suite-v-01-06062015" class="anchor" href="#msl-suite-v-01-06062015" aria-hidden="true"><span class="octicon octicon-link"></span></a>Description:</h1>
+
+      <p>This is a library which is class based, with each class focused on preparing, conducting, and analyzing Molecular Dynamics and Density Functional Theory simulations.  The entire suite is written in Ansi C and C++99 making using of only standard libraries and some STL for the C++ codes. The library is modular with a separate class for each of the various MD/DFT codes,
+      and one core set of low-level routines for all classes.</p>
+
+      <h2>
+      <a id="contents" class="anchor" href="#contents" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contents:</h2>
+
+      <ul>
+      <li><p><code> lib/</code> Source for libraries of DMol, LAMMPS, MSL (core), and VASP</p></li>
+      <li><p><code> include/</code> Headers containing declarations of the libraries</p></li>
+      <li><p><code> examples/</code> Directory containing several codes demonstrating the usage of various library methods</p></li>
+      <li><p><code> Makefile.template</code> Template to be customized for the users' environment</p></li>
+      </ul>
+
+      <h2>
+      <a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage:</h2>
+
+      <p>See the directory <code>examples/libxxx</code> for some examples of calls to the various library subroutines.  This directory also has a <code>Makefile</code> template for use in building your own codes against the library.</p>
+
+      <p>Alternatively, you can build your programs with the libraries as follows,</p>
+
+      <pre><code> icpc -L$(LIB_DIR)/libs -llammps -lmathns ... -I$(INC_DIR)/include code.cpp -o out.x </code></pre>
+
+      <h2>
+      <a id="download" class="anchor" href="#download" aria-hidden="true">
+            <span class="octicon octicon-link"></span></a>Downloads:</h2>
+      <ul>
+        <li><p>   <a href="https://github.com/jmgonza6/msl-suite/archive/master.tar.gz" id="view-docs"><span>msl-suite-master-latest.tar.gz</span></a></p></li>
+        <li><p>   <a href="https://github.com/jmgonza6/msl-suite/archive/master.zip" id="view-docs"><span>msl-suite-master-latest.zip</span></a></p></li>
+        <li><p>   <a href="https://github.com/jmgonza6/msl-suite" id="view-docs"><span>Older versions</span></a></p></li>
+      </ul>
+
+      <footer class="site-footer">
+        <span class="site-footer-credits">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  </body>
+</html>
