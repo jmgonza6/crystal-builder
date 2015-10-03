@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Crystal Builder - jmgonza6@MSL</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/cayman.css">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Crystal Builder</h1>
+      <h2 class="project-tagline">Simple program to build crystals for DFT/MD simulations</h2>
+      <a href="index.html" class="btn">Home</a>
+      <a href="docs.html" class="btn">Documentation</a>
+      <a href="install.html" class="btn">Install</a>
+      <a href="https://github.com/jmgonza6/crystal-builder" class="btn">View on GitHub</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+      <a id="building-the-libraries" class="anchor" href="#building-the-libraries" aria-hidden="true"><span class="octicon octicon-link"></span></a>Build options</h1>
+
+      <p>This application is designed to be driven by a GUI with the final crystal structure being rendered in 3D and displayed on the screen.  However, there a 4 ways in which the application can be built:</p>
+
+      <ol> 
+        <li><p>GUI + 3D graphics rendering</p></li>
+        <li><p>GUI only, no 3D graphics rendering</p>
+        <li><p>Command line interface + 3D graphics rendering</p>
+        <li><p>Command line interface only, no 3D graphics rendering</p>
+      </ol>
+
+      <p>For option 1, the GTK+ 2.0 and Open GL libraries must be installed and in the usual path.  If they are not, see the section below on <a href="#dependencies"> Dependencies</a>.</p>
+
+      <p>For option 2, only the GTK+ 2.0 libraries are required and in the usual path.  If they are not, see the section below on <a href="#gtk"> GTK dependencies</a>.  Additionally, you must comment out the line defining the Open GL libraries in the Makefile, see below</p>
+      
+<pre><code>## Mac OS X uses "frameworks"
+ifeq ($(OSTYPE), Darwin)
+GL = -framework GLUT -framework OpenGL -DOGL
+endif
+## Linux uses "libraries"
+ifeq ($(OSTYPE), Linux)
+GL = -lGL -lGLU -lglut -DOGL
+endif</code></pre>
+
+    <p>For option 3, only the Open GL libraries are required and in the usual path.  If they are not, see the section below on <a href="#gl"> GL dependencies</a>.  Additionally, you must comment out the line defining the GTK libraries in the Makefile, see below</p>
+      
+<pre><code>## Load the GTK.  Use pkg-config to define the proper
+## CFLAGS and LD_LIB parameters
+GTK=`pkg-config --cflags --libs gtk+-2.0` -DUSE_GTK</code></pre>
+
+    <p>For option 4, none of the external libraries are required.  Additionally, you must comment out the line defining the GTK and Open GL libraries in the Makefile, see below</p>
+
+<pre><code>## Mac OS X uses "frameworks"
+ifeq ($(OSTYPE), Darwin)
+GL = -framework GLUT -framework OpenGL -DOGL
+endif
+## Linux uses "libraries"
+ifeq ($(OSTYPE), Linux)
+GL = -lGL -lGLU -lglut -DOGL
+endif
+
+
+## Load the GTK.  Use pkg-config to define the proper
+## CFLAGS and LD_LIB parameters
+GTK=`pkg-config --cflags --libs gtk+-2.0` -DUSE_GTK</code></pre>
+
+      <h1>
+      <a id="dependencies" class="anchor" href="#dependencies" aria-hidden="true"><span class="octicon octicon-link"></span></a>Dependencies</h1>
+
+      <h2>
+      <a id="gtk" class="anchor" href="#gtk" aria-hidden="true"><span class="octicon octicon-link"></span></a>GTK+ 2.0</h2>
+
+      <ol type="a">
+        <li>Linux: Fedora 21/RHEL 6.X/CentOS 6.X
+            <pre><code>yum install gtk+-devel gtk2-devel</code></pre>
+        </li>
+        <li>Linux: Debian/Ubuntu
+            <pre><code>apt-get install libgtk2*</code></pre>
+        </li>
+        <li>Mac OS X 10.9.X: Install homebrew if needed and then run the following
+            <pre><code>brew install gtk2</code></pre>
+        </li>
+        <li>Windows: Not supported</li>
+      </ol>  
+
+
+      <h2>
+      <a id="gl" class="anchor" href="#gl" aria-hidden="true"><span class="octicon octicon-link"></span></a>Open GL</h2>
+
+      <ol type="a">
+        <li>Linux: Fedora 21/RHEL 6.X/CentOS 6.X
+            <pre><code>yum install freeglut-devel mesa*</code></pre>
+        </li>
+        <li>Linux: Debian/Ubuntu
+            <pre><code>apt-get install freeglut3-dev</code></pre>
+        </li>
+        <li>Mac OS X 10.9.X:  Mac OS X comes with Open GL / GLUT installed by default</li>
+        <li>Windows: Not supported</li>
+      </ol>  
+
+
+      <h1>
+      <a id="install" class="anchor" href="#install" aria-hidden="true"><span class="octicon octicon-link"></span></a>Install</h1>
+
+      <p>
+        <b><i>NOTE :</i></b> Several options are listed on line 16 of the Makefile controling the environment and dialog verbosity. Specifically, the rendering window can be built with a default white background or black. Additionally, there are several macros for controlling how much information is printed to the terminal during a build session. 
+      </p>
+      <p>
+        Once finished, simply run the following command in the top-level directory to build the application
+        <pre><code>make all</code></pre>
+      </p>
+
+      <footer class="site-footer">
+        <span class="site-footer-credits">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  </body>
+</html>

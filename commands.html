@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Crystal Builder - jmgonza6@MSL</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/cayman.css">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Crystal Builder</h1>
+      <h2 class="project-tagline">Simple program to build crystals for DFT/MD simulations</h2>
+      <a href="index.html" class="btn">Home</a>
+      <a href="docs.html" class="btn">Documentation</a>
+      <a href="install.html" class="btn">Install</a>
+      <a href="https://github.com/jmgonza6/crystal-builder" class="btn">View on GitHub</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+      <a id="commands" class="anchor" href="#commands" aria-hidden="true"><span class="octicon octicon-link"></span></a>Parameter file commands</h1>
+
+      <p>Below is a complete listing of the available commands and their arguments when creating a parameter file.  The order of appearance in the file is irrelevant.</p>
+
+
+      <h2> Required </h3>
+
+      <p> 
+        <b><i>bravais:</i></b> &nbsp;&nbsp; define which class of Bravais lattice to build
+        <br>
+        syntax:&nbsp; bravais &nbsp;&nbsp;&nbsp;&nbsp; class
+        <ul>
+          <li>
+            class = <i>cubic</i> or <i>tetragonal</i> or <i>ortho</i> or <i>custom</i> or <i>library</i>
+          </li>
+        </ul>
+      </p>
+      <p> 
+        <b><i>bravais_style</i></b> &nbsp;&nbsp; define which Bravais lattice style to build 
+        <br>
+        syntax:&nbsp; bravais_style &nbsp;&nbsp;&nbsp;&nbsp; style
+        <ul>
+          <li>
+            style arguments:
+            <br> 
+            <i>bcc</i> or <i>fcc</i> or <i>sc</i> or <i>diamond</i> for <i>cubic</i>
+            <br> 
+            <i>bcc</i> or <i>fcc</i> or <i>sc</i> for <i>tetragonal</i> or <i>ortho</i>
+          </li>
+        </ul>
+      </p>
+      <p> 
+        <b><i>save</i></b> &nbsp;&nbsp;  write the data to the specified file
+        <br>
+        syntax:&nbsp; save &nbsp;&nbsp;&nbsp;&nbsp; format filename
+        <ul>
+          <li>
+            format = <i>dmol</i> or <i>lammps</i> or <i>vasp</i>
+          </li>
+          <li>
+            filename = <i>optional</i>, used only if format = <i>dmol</i> or <i>lammps</i>
+          </li>
+        </ul>
+      </p>
+      <p> 
+        <b><i>run</i></b> &nbsp;&nbsp;  define the behavior of how the application runs.
+        <br>
+        syntax:&nbsp; run &nbsp;&nbsp;&nbsp;&nbsp; style
+        <ul>
+          <li>
+            style = <i>build</i> or <i>render</i>
+          </li>
+        </ul>
+      </p>
+      <p> 
+        <b><i>stoich</i></b> &nbsp;&nbsp;  define the type and number of elements for the crystal
+        <br>
+        syntax:&nbsp; stoich &nbsp;&nbsp;&nbsp;&nbsp; type1:n1,type2:n2,type3:n3,...
+      </p>
+
+      <br>
+      <h2> Semi-required </h3>
+
+      <p> 
+        <b><i>use_prebuilt</i></b> &nbsp;&nbsp;  select a pre-defined crystal from the library
+        <br>
+        syntax:&nbsp; use_prebuilt &nbsp;&nbsp;&nbsp;&nbsp; name
+        <ul>
+          <li>
+            name = <i>graphene</i> or <i>hBN</i> or <i>mdc-2h</i> or <i>mdc-1t</i> or <i>tmdc-2h</i> or <i>tmdc-1t</i> or <i>petn</i> or <i>tatb</i>
+          </li>
+        </ul>
+        <b><i>NOTE:</i></b> Must be defined if <i>library</i> was selected
+      </p>
+      <p> 
+        <b><i>graphene_basis</i></b> &nbsp;&nbsp;  define the number of basis atoms in a graphene lattice
+        <br>
+        syntax:&nbsp; graphene_basis &nbsp;&nbsp;&nbsp;&nbsp; atoms
+        <ul>
+          <li>
+            atoms = <i>2</i> or <i>4</i>
+          </li>
+        </ul>
+        <b><i>NOTE:</i></b> Must be defined if <i>use_prebuilt</i> was defined to be <i>graphene</i>
+      </p>
+      <p> 
+        <b><i>begin_basis</i></b> &nbsp;&nbsp;  define the basis coordinates of each atom in the crystal
+        <br>
+        syntax:<br>
+        begin_basis<br>
+        x1,y1,z1  &nbsp;&nbsp;/// atom 1<br>
+        x2,y2,z2  &nbsp;&nbsp;/// atom 2<br>
+        .<br>
+        .<br>
+        .<br>
+        xn,yn,zn  &nbsp;&nbsp;/// atom N<br>
+        end_basis
+        <br>
+        <b><i>NOTE:</i></b> Must be defined if <i>bravais</i> was defined to be <i>custom</i>.  The coordinates must be listed in the stoichiometric order defined by <i>stoich</i>.  Anything after the z coordinate is treated as a comment.
+      </p>
+
+
+      <br>
+      <h2> Modifiers </h3>
+
+      <p> 
+        <b><i>lat_parameters</i></b> &nbsp;&nbsp;  define the magnitude of each lattice vector, in (Å)
+        <br>
+        syntax:&nbsp; lat_parameters &nbsp;&nbsp;&nbsp;&nbsp; a=X,b=Y,c=Z
+        <br>
+        <b><i>NOTE:</i></b> append, in any order 0 or more of these parameters.  By default a = b = c = 1.
+      </p>
+      <p> 
+        <b><i>lat_angles</i></b> &nbsp;&nbsp;  define the angle between each lattice vector, in (˚)
+        <br>
+        syntax:&nbsp; lat_angles &nbsp;&nbsp;&nbsp;&nbsp; alpha=X,beta=Y,gamma=Z
+        <br>
+        <b><i>NOTE:</i></b> append, in any order 0 or more of these parameters.  By default alpha = beta = gamma = 90˚.
+      </p>
+      <p> 
+        <b><i>super_cell</i></b> &nbsp;&nbsp;  extend the lattice vectors of a single unit cell
+        <br>
+        syntax:&nbsp; super_cell &nbsp;&nbsp;&nbsp;&nbsp; nx=X,ny=Y,nz=Z
+        <br>
+        <b><i>NOTE:</i></b> append, in any order 0 or more of these parameters.  By default nx = ny = nz = 1.
+      </p>
+      <p> 
+        <b><i>data_modify</i></b> &nbsp;&nbsp;  write the output data in fractional coordinates
+        <br>
+        syntax:&nbsp; data_modify &nbsp;&nbsp;&nbsp;&nbsp; fractional
+        <br>
+        <b><i>NOTE:</i></b> Only valid if writing in the <i>VASP</i> format.
+      </p>
+
+
+      <footer class="site-footer">
+        <span class="site-footer-credits">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  </body>
+</html>
