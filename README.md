@@ -106,11 +106,6 @@ Once finished, simply run the following command in the top-level directory to bu
 
 This will place the executable in the `build/` directory located in the top-level of this distribution.
 
-
-Alternatively, type the following to see a list of options available to `make`,
-
-    make help
-
 __________________________________________________________________________________
 
 ##Usage
