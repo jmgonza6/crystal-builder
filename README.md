@@ -1,10 +1,9 @@
 #Crystal builder v. 3.7.0:
 
-##Capabilities
-
     Crystal Builder - Simple program to build several crystal structures for use in many popular 
     molecular dynamics and denisty functional theory packages.  
 
+##Capabilities
 - Bravais lattices: Cubic, Hexagonal, Orthorhombic, Tetragonal
 
 - Library structures: 
@@ -248,7 +247,7 @@ ________________________________________________________________________________
 
 
 ###Date:   
-Sep 20, 2015
+Sep 30, 2015
 
 ###email:  
 jmgonza6@mail.usf.edu
