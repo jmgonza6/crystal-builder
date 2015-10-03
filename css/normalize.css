@@ -230,6 +230,7 @@ kbd,
 pre,
 samp {
   font-family: monospace, monospace;
+  font-style: normal;
   font-size: 1em;
 }
 
