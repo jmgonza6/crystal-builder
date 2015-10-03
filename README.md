@@ -48,10 +48,6 @@ However, the application can be built in one of the following configurations:
 
 ##GTK+-2.0 Libraries
 
-* NOTE: If you do not have the GTK+-2.0 libraries installed and in the usual
-path, i.e. `/usr/lib & /usr/include` for Linux or as a `Framework` on Mac OS X,
-follow the directions below to install them.
-
 ###Linux
 a) Fedora 21/RHEL 6.X/CentOS 6.X
 Run the following command,
@@ -69,6 +65,29 @@ Run the following command,
 a) Install homebrew and then run the following command,
 
 	brew install gtk2
+
+
+###Windows
+Not supported
+
+
+##Open GL Libraries
+
+###Linux
+a) Fedora 21/RHEL 6.X/CentOS 6.X
+Run the following command,
+
+    yum install freeglut-devel mesa*
+
+
+a) Debian/Ubuntu
+Run the following command,
+
+    apt-get install freeglut3-dev
+
+
+###Mac OS X
+a) Mac OS X comes with Open GL / GLUT installed by default
 
 
 ###Windows
