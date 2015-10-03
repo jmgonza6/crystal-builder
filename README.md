@@ -192,7 +192,7 @@ Currently, four options are available for using this application:
 
 ###Saving/viewing
 
-After following the steps in **1)**, **2)**, or **3)**, you can chose to simply build the crystal and have it saved to your file.Alternatively, if the *Open GL* library was used in building this application, the crystal can be viewed in an interactive window by clicking the *Build+render* tab, see below for keyboard and mouse commands.  Upon closing this rendering window the crystal data will be written to the file you specified and the main program will terminate.
+After following the steps in **1)**, **2)**, or **3)**, you can chose to simply build the crystal and have it saved to your file.Alternatively, if the *Open GL* library was used in building this application, the crystal can be viewed in an interactive window by clicking the *Build+render* tab, see below for keyboard and mouse commands.  If using option **4)**, the `run` command defines the ending behavior.  Upon closing this rendering window the crystal data will be written to the file you specified and the main program will terminate.
 
 
 
