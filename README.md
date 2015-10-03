@@ -4,7 +4,7 @@
     molecular dynamics and denisty functional theory packages.  
 
 ##Capabilities
-- Bravais lattices: Cubic, Hexagonal, Orthorhombic, Tetragonal
+- Bravais lattices: Cubic, Orthorhombic, Tetragonal
 
 - Library structures: 
     - 2D materials: Graphene, h-BN, (M)etal (D)i(C)halcogenide-2H/1T (i.e. SnS2), (T)ransition (M)etal (D)i(C)halcogenide-2H/1T (i.e. MoSe2)
