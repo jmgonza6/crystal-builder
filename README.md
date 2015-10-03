@@ -33,6 +33,17 @@
 - Color and size according to atomic species.  Coloring based on CPK/Jmol standard
 
 __________________________________________________________________________________
+#Dependencies
+This application is designed to be run with a GUI and to render the defined crystal in 3D using Open GL.  
+However, the application can be built in one of the following configurations:
+
+- GUI + 3D Graphics rendering,
+
+- GUI + no 3D Graphics rendering,
+
+- Command line + 3D graphics rendering,
+
+- Command line only
 
 
 ##GTK+-2.0 Libraries
