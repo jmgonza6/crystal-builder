@@ -1,6 +1,3 @@
-<p align="center">
-  <img src="logos/tatb-white2.png">
-</p>
 #Crystal builder v. 3.7.0:
 
 ##Capabilities
@@ -34,10 +31,6 @@
     - VASP 5.x.x (POSCAR)  
 
 - Color and size according to atomic species.  Coloring based on CPK/Jmol standard
-
-<p align="center">
-  <img src="logos/CPK-periodic-table.png">
-</p>
 
 __________________________________________________________________________________
 
