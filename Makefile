@@ -1,5 +1,5 @@
 ## Makefile for crystal-builder, v 3.7.0
-## 09.27.15
+## 09.30.15
 
 ## get the current OS
 OSTYPE    := $(shell uname -s)
@@ -26,7 +26,27 @@ ENVR      := -DGUIMESG -DRENDERMSG -DBLACKBACK
 CFLAGS    := -O3 
 
 
+## Application build characteristics.  
+## This app can be built in 4 ways: GUI + GL, GUI - GL, Command line + GL, Command line - GL
+## Comment/Uncomment the vars GL and GTK for the desired behavior.
+## GTK controls the GUI
+## GL controls the 3d graphics rendering 
 
+## Load the OpenGL library differently based on
+## which OS the user is using for the application
+
+## Mac OS X uses "frameworks"
+ifeq ($(OSTYPE), Darwin)
+GL = -framework GLUT -framework OpenGL -DOGL
+endif
+## Linux uses "libraries"
+ifeq ($(OSTYPE), Linux)
+GL = -lGL -lGLU -lglut -DOGL
+endif
+
+## Load the GTK.  Use pkg-config to define the proper
+## CFLAGS and LD_LIB parameters
+GTK=`pkg-config --cflags --libs gtk+-2.0` -DUSE_GTK
 
 
 #########################################################################################
@@ -58,22 +78,6 @@ OBJ       := $(patsubst src/%.cpp,build/%.o,$(SRC))
 ## assumed that each of them is in the appropriate
 ## source directory
 INCLUDES  := $(addprefix -I,$(SRC_DIR))
-
-## Load the OpenGL library differently based on
-## which OS the user is using for the application
-
-## Mac OS X uses "frameworks"
-ifeq ($(OSTYPE), Darwin)
-GL = -framework GLUT -framework OpenGL -DOGL
-endif
-## Linux uses "libraries"
-ifeq ($(OSTYPE), Linux)
-GL = -lGL -lGLU -lglut -DOGL
-endif
-
-## Load the GTK.  Use pkg-config to define the proper
-## CFLAGS and LD_LIB parameters
-GTK=`pkg-config --cflags --libs gtk+-2.0` -DUSE_GTK
 
 ## path to source files, all source codes end in .cpp
 vpath %.cpp $(SRC_DIR)
