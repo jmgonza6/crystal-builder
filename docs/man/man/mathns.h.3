@@ -1,0 +1,59 @@
+.TH "src/util/mathns.h" 3 "Wed Sep 30 2015" "Crystal Builder v 3.7.0" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/util/mathns.h \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI " \fBMATHNS\fP"
+.br
+.RI "\fICustomized math operations and interfaces\&. \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "double \fBMATHNS::vector_mag\fP (std::vector< double > v)"
+.br
+.RI "\fICompute magnitude of an n-dimensional vector 
+.br
+ $ \sqrt{\sum_{i}^{n} v_{i}*v_{i} } $\&. \fP"
+.ti -1c
+.RI "double \fBMATHNS::vector_dot\fP (std::vector< double > a, std::vector< double > b)"
+.br
+.RI "\fICompute dot product of two n-dimensional vectors 
+.br
+ $ \sum_{i}^{n} a_{i}*b_{i} $\&. \fP"
+.ti -1c
+.RI "double \fBMATHNS::angle\fP (std::vector< double > a, std::vector< double > b)"
+.br
+.RI "\fICompute angle, in radians, between two n-dimensional vectors 
+.br
+ $ \arccos \frac{\textbf{a} \cdot \textbf{b}}{|\textbf{a}||\textbf{b}|} $\&. \fP"
+.ti -1c
+.RI "std::vector< double > \fBMATHNS::vector_cross\fP (std::vector< double > a, std::vector< double > b)"
+.br
+.RI "\fICompute cross product of two 3-dimensional vectors 
+.br
+ $ \textbf{a} \times \textbf{b} = \textbf{c} $\&. \fP"
+.ti -1c
+.RI "std::vector< double > \fBMATHNS::mat_vec_mult\fP (int lda, double **A, std::vector< double > X)"
+.br
+.RI "\fICompute matrix-vector product, naive implementation 
+.br
+ $ \textbf{A}\textbf{X} = \textbf{B} $\&. \fP"
+.ti -1c
+.RI "std::vector< double > \fBMATHNS::rotate_vector\fP (std::vector< double > X, std::string axis, double angle)"
+.br
+.RI "\fIRotate a 3D \fCstd::vector\fP about an axis 
+.br
+\&. \fP"
+.in -1c
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Crystal Builder v 3\&.7\&.0 from the source code\&.

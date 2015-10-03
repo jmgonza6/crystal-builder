@@ -1,0 +1,519 @@
+.TH "Gui" 3 "Wed Sep 30 2015" "Crystal Builder v 3.7.0" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Gui \- 
+.SH SYNOPSIS
+.br
+.PP
+.SH "Detailed Description"
+.PP 
+
+.SH "\fBPurpose:\fP "
+.PP
+.PP
+.PP
+.nf
+/*****************************************************************************\
+/  Class which initializes, displays, and monitors all activity in the GUI    \
+/                                                                             \
+/*****************************************************************************\
+.fi
+.PP
+.PP
+\fBAuthor:\fP
+.RS 4
+Joseph M\&. Gonzalez
+.RE
+.PP
+\fBVersion:\fP
+.RS 4
+0\&.9
+.RE
+.PP
+\fBDate:\fP
+.RS 4
+Sep 13, 2015 19:16:20
+.RE
+.PP
+\fBContact\fP 
+.br
+ jmgonza6@mail.usf.edu 
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBGui\fP ()"
+.br
+.RI "\fIConstructor launches an instances of the parser class to handle the string maniupulations\&. It also defines all of the global variables to a reasonable value so that the app can be run with as little interaction as possible\&. \fP"
+.ti -1c
+.RI "\fB~Gui\fP ()"
+.br
+.ti -1c
+.RI "void \fBdisplay_in\fP (GtkWidget *window)"
+.br
+.RI "\fIInitialize the GTK environment and define layout of the gui\&. creates a notebook style gui with 4 main tabs and 4 buttons for rendering, building, reseting, and exiting\&. \fP"
+.ti -1c
+.RI "void \fBsave_settings\fP ()"
+.br
+.RI "\fIStore the global variables set by the callback functions layout of the gui\&. \fP"
+.in -1c
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "double \fBalat\fP"
+.br
+.RI "\fIlatttice parameter a (Å) \fP"
+.ti -1c
+.RI "double \fBblat\fP"
+.br
+.RI "\fIlattice parameter b (Å) \fP"
+.ti -1c
+.RI "double \fBclat\fP"
+.br
+.RI "\fIlattice parameter c (Å) \fP"
+.ti -1c
+.RI "double \fBalpha\fP"
+.br
+.RI "\fIangle beteween c & b \fP"
+.ti -1c
+.RI "double \fBbeta\fP"
+.br
+.RI "\fIangle between c & a \fP"
+.ti -1c
+.RI "double \fBgamma\fP"
+.br
+.RI "\fIangle between a & b \fP"
+.ti -1c
+.RI "double \fBcta\fP"
+.br
+.RI "\fIc/a ratio, for use with \fBHexagonal()\fP, h-BN(), Graphene() \fP"
+.ti -1c
+.RI "int \fBlbasis\fP"
+.br
+.RI "\fInumber of basis atoms for graphene \fP"
+.ti -1c
+.RI "int \fBnx\fP"
+.br
+.RI "\fIsupercell dimension along x \fP"
+.ti -1c
+.RI "int \fBny\fP"
+.br
+.RI "\fIsupercell dimension along y \fP"
+.ti -1c
+.RI "int \fBnz\fP"
+.br
+.RI "\fIsupercell dimension along z \fP"
+.ti -1c
+.RI "int \fBfractional\fP"
+.br
+.RI "\fIfractional coordinates, 1 = true, 0 = false \fP"
+.ti -1c
+.RI "int \fBgraphene\fP"
+.br
+.RI "\fIgraphene structure was built, 1 = true, 0 = false \fP"
+.ti -1c
+.RI "int \fBcustom\fP"
+.br
+.RI "\fIa custom structure was built, 1 = true, 0 = false \fP"
+.ti -1c
+.RI "int \fBresets\fP"
+.br
+.RI "\fIreset count \fP"
+.ti -1c
+.RI "int \fBrun_count\fP"
+.br
+.RI "\fIrun count, for debugging \fP"
+.ti -1c
+.RI "int \fBquit\fP"
+.br
+.RI "\fIquit signal \fP"
+.ti -1c
+.RI "int \fBview\fP"
+.br
+.RI "\fIrender+build signal \fP"
+.ti -1c
+.RI "char * \fBpfile\fP"
+.br
+.RI "\fIparameter file to define the crystal \fP"
+.ti -1c
+.RI "char * \fBout_name\fP"
+.br
+.RI "\fIfile name to write \fP"
+.ti -1c
+.RI "char * \fBfile_format\fP"
+.br
+.RI "\fItype of file to write \fP"
+.ti -1c
+.RI "char * \fBbravais\fP"
+.br
+.RI "\fIwhich lattice ? \fP"
+.ti -1c
+.RI "char * \fBlstyle\fP"
+.br
+.RI "\fIbravais lattice style, BCC \fP"
+.ti -1c
+.RI "char * \fBpd_struct\fP"
+.br
+.RI "\fIdefines a library structure to use \fP"
+.ti -1c
+.RI "char * \fBelement\fP"
+.br
+.RI "\fIwhich species ? \fP"
+.ti -1c
+.RI "std::vector< std::string > \fBelemList\fP"
+.br
+.RI "\fIdefine a custom stoichiometry (C,H,N,O) \fP"
+.ti -1c
+.RI "std::vector< int > \fBelemCount\fP"
+.br
+.RI "\fIdefine a custom stoichiometry (2,4,1,3) \fP"
+.ti -1c
+.RI "std::vector< std::vector< double > > \fBcustomBasis\fP"
+.br
+.RI "\fIcontainer for defining a custom basis set \fP"
+.ti -1c
+.RI "std::string \fBcustomName\fP"
+.br
+.RI "\fIchemical formula of a custom structure \fP"
+.in -1c
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "GtkWidget * \fBfill_dropdown\fP (const char *style)"
+.br
+.ti -1c
+.RI "void \fBdefine_basis_atoms\fP ()"
+.br
+.in -1c
+.SS "Static Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static void \fBopen_browser\fP (GtkWidget *button, gpointer window)"
+.br
+.ti -1c
+.RI "static void \fBsave_browser\fP (GtkWidget *button, gpointer window)"
+.br
+.ti -1c
+.RI "static void \fBbuild_crystal\fP (GtkWidget *button, gpointer window)"
+.br
+.ti -1c
+.RI "static void \fBreset_parameters\fP (GtkWidget *button, gpointer window)"
+.br
+.ti -1c
+.RI "static void \fBopen_dialog\fP (const char *syst, char message[\fBMAX_STRING_LENGTH\fP])"
+.br
+.ti -1c
+.RI "static void \fBreminder\fP ()"
+.br
+.ti -1c
+.RI "static void \fBgraphene_dialog\fP ()"
+.br
+.ti -1c
+.RI "static void \fBstructures_dialog\fP ()"
+.br
+.ti -1c
+.RI "static void \fBset_nx\fP (GtkWidget *entry, gpointer data)"
+.br
+.ti -1c
+.RI "static void \fBset_ny\fP (GtkWidget *entry, gpointer data)"
+.br
+.ti -1c
+.RI "static void \fBset_nz\fP (GtkWidget *entry, gpointer data)"
+.br
+.ti -1c
+.RI "static void \fBset_atom_species\fP (GtkComboBox *dropdown, gpointer data)"
+.br
+.ti -1c
+.RI "static void \fBset_write_style\fP (GtkComboBox *dropdown, gpointer data)"
+.br
+.ti -1c
+.RI "static void \fBset_bravais\fP (GtkComboBox *dropdown, gpointer data)"
+.br
+.ti -1c
+.RI "static void \fBset_lattice_style\fP (GtkComboBox *widget, gpointer data)"
+.br
+.ti -1c
+.RI "static void \fBquit_main\fP (GtkWidget *widget, gpointer data)"
+.br
+.ti -1c
+.RI "static void \fBrender_crystal\fP (GtkWidget *widget, gpointer data)"
+.br
+.ti -1c
+.RI "static void \fBset_pd_struct\fP (GtkComboBox *dropdown, gpointer data)"
+.br
+.ti -1c
+.RI "static void \fBset_custom_species\fP (GtkWidget *entry, gpointer data)"
+.br
+.ti -1c
+.RI "static void \fBset_alat\fP (GtkWidget *entry, gpointer data)"
+.br
+.ti -1c
+.RI "static void \fBset_blat\fP (GtkWidget *entry, gpointer data)"
+.br
+.ti -1c
+.RI "static void \fBset_clat\fP (GtkWidget *entry, gpointer data)"
+.br
+.ti -1c
+.RI "static void \fBset_alpha\fP (GtkWidget *entry, gpointer data)"
+.br
+.ti -1c
+.RI "static void \fBset_beta\fP (GtkWidget *entry, gpointer data)"
+.br
+.ti -1c
+.RI "static void \fBset_gamma\fP (GtkWidget *entry, gpointer data)"
+.br
+.ti -1c
+.RI "static void \fBset_graphene_basis\fP (GtkWidget *entry, gpointer data)"
+.br
+.ti -1c
+.RI "static void \fBset_cta\fP (GtkWidget *entry, gpointer data)"
+.br
+.ti -1c
+.RI "static void \fBopen_advanced\fP (GtkWidget *button, gpointer data)"
+.br
+.ti -1c
+.RI "static void \fBset_fract\fP (GtkToggleButton *swtch)"
+.br
+.ti -1c
+.RI "static void \fBset_cart\fP (GtkToggleButton *swtch)"
+.br
+.ti -1c
+.RI "static void \fBadd_atom_window\fP (GtkWidget *widget, gpointer data)"
+.br
+.ti -1c
+.RI "static void \fBadd_atom\fP (GtkWidget *entry, gpointer data)"
+.br
+.ti -1c
+.RI "static void \fBreset_basis\fP (GtkWidget *widget, gpointer data)"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBParser\fP * \fBparser\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Gui::Gui ()"
+
+.PP
+Constructor launches an instances of the parser class to handle the string maniupulations\&. It also defines all of the global variables to a reasonable value so that the app can be run with as little interaction as possible\&. 
+.SS "Gui::~Gui ()"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "static void Gui::add_atom (GtkWidget * entry, gpointer data)\fC [static]\fP, \fC [private]\fP"
+
+.SS "static void Gui::add_atom_window (GtkWidget * widget, gpointer data)\fC [static]\fP, \fC [private]\fP"
+
+.SS "static void Gui::build_crystal (GtkWidget * button, gpointer window)\fC [static]\fP, \fC [private]\fP"
+
+.SS "void Gui::define_basis_atoms ()\fC [private]\fP"
+
+.SS "void Gui::display_in (GtkWidget * window)"
+
+.PP
+Initialize the GTK environment and define layout of the gui\&. creates a notebook style gui with 4 main tabs and 4 buttons for rendering, building, reseting, and exiting\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIwindow\fP - In which window do we create the gui 
+.RE
+.PP
+
+.SS "GtkWidget* Gui::fill_dropdown (const char * style)\fC [private]\fP"
+
+.SS "static void Gui::graphene_dialog ()\fC [static]\fP, \fC [private]\fP"
+
+.SS "static void Gui::open_advanced (GtkWidget * button, gpointer data)\fC [static]\fP, \fC [private]\fP"
+
+.SS "static void Gui::open_browser (GtkWidget * button, gpointer window)\fC [static]\fP, \fC [private]\fP"
+
+.SS "static void Gui::open_dialog (const char * syst, char message[MAX_STRING_LENGTH])\fC [static]\fP, \fC [private]\fP"
+
+.SS "static void Gui::quit_main (GtkWidget * widget, gpointer data)\fC [static]\fP, \fC [private]\fP"
+
+.SS "static void Gui::reminder ()\fC [static]\fP, \fC [private]\fP"
+
+.SS "static void Gui::render_crystal (GtkWidget * widget, gpointer data)\fC [static]\fP, \fC [private]\fP"
+
+.SS "static void Gui::reset_basis (GtkWidget * widget, gpointer data)\fC [static]\fP, \fC [private]\fP"
+
+.SS "static void Gui::reset_parameters (GtkWidget * button, gpointer window)\fC [static]\fP, \fC [private]\fP"
+
+.SS "static void Gui::save_browser (GtkWidget * button, gpointer window)\fC [static]\fP, \fC [private]\fP"
+
+.SS "void Gui::save_settings ()"
+
+.PP
+Store the global variables set by the callback functions layout of the gui\&. 
+.SS "static void Gui::set_alat (GtkWidget * entry, gpointer data)\fC [static]\fP, \fC [private]\fP"
+
+.SS "static void Gui::set_alpha (GtkWidget * entry, gpointer data)\fC [static]\fP, \fC [private]\fP"
+
+.SS "static void Gui::set_atom_species (GtkComboBox * dropdown, gpointer data)\fC [static]\fP, \fC [private]\fP"
+
+.SS "static void Gui::set_beta (GtkWidget * entry, gpointer data)\fC [static]\fP, \fC [private]\fP"
+
+.SS "static void Gui::set_blat (GtkWidget * entry, gpointer data)\fC [static]\fP, \fC [private]\fP"
+
+.SS "static void Gui::set_bravais (GtkComboBox * dropdown, gpointer data)\fC [static]\fP, \fC [private]\fP"
+
+.SS "static void Gui::set_cart (GtkToggleButton * swtch)\fC [static]\fP, \fC [private]\fP"
+
+.SS "static void Gui::set_clat (GtkWidget * entry, gpointer data)\fC [static]\fP, \fC [private]\fP"
+
+.SS "static void Gui::set_cta (GtkWidget * entry, gpointer data)\fC [static]\fP, \fC [private]\fP"
+
+.SS "static void Gui::set_custom_species (GtkWidget * entry, gpointer data)\fC [static]\fP, \fC [private]\fP"
+
+.SS "static void Gui::set_fract (GtkToggleButton * swtch)\fC [static]\fP, \fC [private]\fP"
+
+.SS "static void Gui::set_gamma (GtkWidget * entry, gpointer data)\fC [static]\fP, \fC [private]\fP"
+
+.SS "static void Gui::set_graphene_basis (GtkWidget * entry, gpointer data)\fC [static]\fP, \fC [private]\fP"
+
+.SS "static void Gui::set_lattice_style (GtkComboBox * widget, gpointer data)\fC [static]\fP, \fC [private]\fP"
+
+.SS "static void Gui::set_nx (GtkWidget * entry, gpointer data)\fC [static]\fP, \fC [private]\fP"
+
+.SS "static void Gui::set_ny (GtkWidget * entry, gpointer data)\fC [static]\fP, \fC [private]\fP"
+
+.SS "static void Gui::set_nz (GtkWidget * entry, gpointer data)\fC [static]\fP, \fC [private]\fP"
+
+.SS "static void Gui::set_pd_struct (GtkComboBox * dropdown, gpointer data)\fC [static]\fP, \fC [private]\fP"
+
+.SS "static void Gui::set_write_style (GtkComboBox * dropdown, gpointer data)\fC [static]\fP, \fC [private]\fP"
+
+.SS "static void Gui::structures_dialog ()\fC [static]\fP, \fC [private]\fP"
+
+.SH "Field Documentation"
+.PP 
+.SS "double Gui::alat"
+
+.PP
+latttice parameter a (Å) 
+.SS "double Gui::alpha"
+
+.PP
+angle beteween c & b 
+.SS "double Gui::beta"
+
+.PP
+angle between c & a 
+.SS "double Gui::blat"
+
+.PP
+lattice parameter b (Å) 
+.SS "char* Gui::bravais"
+
+.PP
+which lattice ? 
+.SS "double Gui::clat"
+
+.PP
+lattice parameter c (Å) 
+.SS "double Gui::cta"
+
+.PP
+c/a ratio, for use with \fBHexagonal()\fP, h-BN(), Graphene() 
+.SS "int Gui::custom"
+
+.PP
+a custom structure was built, 1 = true, 0 = false 
+.SS "std::vector<std::vector<double> > Gui::customBasis"
+
+.PP
+container for defining a custom basis set 
+.SS "std::string Gui::customName"
+
+.PP
+chemical formula of a custom structure 
+.SS "std::vector<int> Gui::elemCount"
+
+.PP
+define a custom stoichiometry (2,4,1,3) 
+.SS "char* Gui::element"
+
+.PP
+which species ? 
+.SS "std::vector<std::string> Gui::elemList"
+
+.PP
+define a custom stoichiometry (C,H,N,O) 
+.SS "char* Gui::file_format"
+
+.PP
+type of file to write 
+.SS "int Gui::fractional"
+
+.PP
+fractional coordinates, 1 = true, 0 = false 
+.SS "double Gui::gamma"
+
+.PP
+angle between a & b 
+.SS "int Gui::graphene"
+
+.PP
+graphene structure was built, 1 = true, 0 = false 
+.SS "int Gui::lbasis"
+
+.PP
+number of basis atoms for graphene 
+.SS "char* Gui::lstyle"
+
+.PP
+bravais lattice style, BCC 
+.SS "int Gui::nx"
+
+.PP
+supercell dimension along x 
+.SS "int Gui::ny"
+
+.PP
+supercell dimension along y 
+.SS "int Gui::nz"
+
+.PP
+supercell dimension along z 
+.SS "char* Gui::out_name"
+
+.PP
+file name to write 
+.SS "\fBParser\fP* Gui::parser\fC [private]\fP"
+
+.SS "char* Gui::pd_struct"
+
+.PP
+defines a library structure to use 
+.SS "char* Gui::pfile"
+
+.PP
+parameter file to define the crystal 
+.SS "int Gui::quit"
+
+.PP
+quit signal 
+.SS "int Gui::resets"
+
+.PP
+reset count 
+.SS "int Gui::run_count"
+
+.PP
+run count, for debugging 
+.SS "int Gui::view"
+
+.PP
+render+build signal 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Crystal Builder v 3\&.7\&.0 from the source code\&.

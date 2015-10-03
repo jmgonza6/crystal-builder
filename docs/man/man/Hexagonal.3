@@ -1,0 +1,73 @@
+.TH "Hexagonal" 3 "Wed Sep 30 2015" "Crystal Builder v 3.7.0" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Hexagonal \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits \fBLATTICE\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBHexagonal\fP (double i_alat, char *i_element)"
+.br
+.RI "\fIConstructor for the \fBOrthorhombic\fP class when accessed from a gui session or when reading a parameters file\&. \fP"
+.ti -1c
+.RI "\fB~Hexagonal\fP ()"
+.br
+.in -1c
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBprimitive\fP ()"
+.br
+.RI "\fIDefines lattice vectors, lattice parameters, and basis atoms for HCP\&. \fP"
+.ti -1c
+.RI "void \fBBCC\fP ()"
+.br
+.RI "\fIDefines lattice vectors, lattice parameters, and basis atoms for Body Centered \fBCubic\fP\&. \fP"
+.ti -1c
+.RI "void \fBFCC\fP ()"
+.br
+.RI "\fIDefines lattice vectors, lattice parameters, and basis atoms for Face Centered \fBCubic\fP\&. \fP"
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Hexagonal::Hexagonal (double i_alat, char * i_element)"
+
+.PP
+Constructor for the \fBOrthorhombic\fP class when accessed from a gui session or when reading a parameters file\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIi_alat\fP - lattice parameter for \fCa\fP, in Å 
+.br
+\fIi_element\fP - which element to assign to the crystal 
+.RE
+.PP
+
+.SS "Hexagonal::~Hexagonal ()"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void Hexagonal::BCC ()\fC [private]\fP"
+
+.PP
+Defines lattice vectors, lattice parameters, and basis atoms for Body Centered \fBCubic\fP\&. 
+.SS "void Hexagonal::FCC ()\fC [private]\fP"
+
+.PP
+Defines lattice vectors, lattice parameters, and basis atoms for Face Centered \fBCubic\fP\&. 
+.SS "void Hexagonal::primitive ()\fC [private]\fP"
+
+.PP
+Defines lattice vectors, lattice parameters, and basis atoms for HCP\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Crystal Builder v 3\&.7\&.0 from the source code\&.

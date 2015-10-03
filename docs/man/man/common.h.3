@@ -1,0 +1,243 @@
+.TH "src/util/common.h" 3 "Wed Sep 30 2015" "Crystal Builder v 3.7.0" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/util/common.h \- 
+.SH SYNOPSIS
+.br
+.PP
+.SH "Detailed Description"
+.PP 
+
+.SH "\fBPurpose:\fP "
+.PP
+.PP
+.PP
+.nf
+/********************************************************************************\
+/  A place to define application wide constants, classes, and structures         \
+/  Classes declared within this header:  Errors, Memory, Parser                  \
+/********************************************************************************\
+.fi
+.PP
+.PP
+\fBAuthor:\fP
+.RS 4
+Joseph M\&. Gonzalez
+.RE
+.PP
+\fBVersion:\fP
+.RS 4
+0\&.2
+.RE
+.PP
+\fBDate:\fP
+.RS 4
+Sep 13, 2015 19:16:20
+.RE
+.PP
+\fBContact\fP 
+.br
+ jmgonza6@mail.usf.edu 
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBPeriodicTable\fP"
+.br
+.RI "\fIA structure containing strings representing up to element 110 and their associated masses in AMU\&. \fP"
+.ti -1c
+.RI "struct \fBatom_t\fP"
+.br
+.RI "\fIx,y,z point defining the atomic coordinates, and a vector for each atoms nearest neighbors \fP"
+.ti -1c
+.RI "struct \fBbasis_t\fP"
+.br
+.RI "\fIx,y,z point defining the basis coordinates, and the element type \fP"
+.ti -1c
+.RI "struct \fBPoint\fP"
+.br
+.RI "\fIx,y,z coordinates for a point in space \fP"
+.ti -1c
+.RI "struct \fBLine\fP"
+.br
+.RI "\fIx,y,z point defining two vertices, used for drawing the unit cell \fP"
+.ti -1c
+.RI "class \fBErrors\fP"
+.br
+.ti -1c
+.RI "class \fBMemory\fP"
+.br
+.ti -1c
+.RI "class \fBParser\fP"
+.br
+.in -1c
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBSOFT\fP   'crystal builder'"
+.br
+.RI "\fIapplication name \fP"
+.ti -1c
+.RI "#define \fBVERS\fP   '3\&.7\&.0'"
+.br
+.RI "\fIcurrent version of the application \fP"
+.ti -1c
+.RI "#define \fBMAX_LOG_ENTRIES\fP   30"
+.br
+.ti -1c
+.RI "#define \fBMAX_THERMO_LIST\fP   50"
+.br
+.ti -1c
+.RI "#define \fBMAX_STRING_LENGTH\fP   256"
+.br
+.RI "\fImax length of a string for allocating \fB\fCchar\fP[]\fP types \fP"
+.ti -1c
+.RI "#define \fBPI\fP   3\&.14159265359"
+.br
+.RI "\fIlong form of PI \fP"
+.ti -1c
+.RI "#define \fBR2D\fP   180/3\&.14159265359"
+.br
+.RI "\fIconvert radians to degrees \fP"
+.ti -1c
+.RI "#define \fBD2R\fP   3\&.14159265359/180"
+.br
+.RI "\fIconvert degrees to radians \fP"
+.ti -1c
+.RI "#define \fBFERR\fP   __FILE__"
+.br
+.RI "\fIfile where error happened \fP"
+.ti -1c
+.RI "#define \fBLERR\fP   __LINE__"
+.br
+.RI "\fIline where error happened \fP"
+.ti -1c
+.RI "#define \fBBERR\fP   101"
+.br
+.RI "\fIbasic error, print usage \fP"
+.ti -1c
+.RI "#define \fBRERR\fP   404"
+.br
+.RI "\fIreading error \fP"
+.ti -1c
+.RI "#define \fBWERR\fP   303"
+.br
+.RI "\fIwriting error\&. most likely fname==NULL \fP"
+.ti -1c
+.RI "#define \fBIERR\fP   909"
+.br
+.RI "\fIinitialization error \fP"
+.ti -1c
+.RI "#define \fBAERR\fP   666"
+.br
+.RI "\fIunknown argument error \fP"
+.ti -1c
+.RI "#define \fBMERR\fP   999"
+.br
+.RI "\fImemory error \fP"
+.ti -1c
+.RI "#define \fBFDEBUG\fP   stderr"
+.br
+.RI "\fIwhere to print debug messages \fP"
+.ti -1c
+.RI "#define \fBSMESG\fP   stdout"
+.br
+.ti -1c
+.RI "#define \fBWMESG\fP   stdout"
+.br
+.ti -1c
+.RI "#define \fBEMESG\fP   stderr"
+.br
+.ti -1c
+.RI "#define \fBDMSG\fP   0"
+.br
+.ti -1c
+.RI "#define \fBGMSG\fP   0"
+.br
+.ti -1c
+.RI "#define \fBRMSG\fP   0"
+.br
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define AERR   666"
+
+.PP
+unknown argument error 
+.SS "#define BERR   101"
+
+.PP
+basic error, print usage 
+.SS "#define D2R   3\&.14159265359/180"
+
+.PP
+convert degrees to radians 
+.SS "#define DMSG   0"
+
+.SS "#define EMESG   stderr"
+
+.SS "#define FDEBUG   stderr"
+
+.PP
+where to print debug messages 
+.SS "#define FERR   __FILE__"
+
+.PP
+file where error happened 
+.SS "#define GMSG   0"
+
+.SS "#define IERR   909"
+
+.PP
+initialization error 
+.SS "#define LERR   __LINE__"
+
+.PP
+line where error happened 
+.SS "#define MAX_LOG_ENTRIES   30"
+
+.SS "#define MAX_STRING_LENGTH   256"
+
+.PP
+max length of a string for allocating \fB\fCchar\fP[]\fP types 
+.SS "#define MAX_THERMO_LIST   50"
+
+.SS "#define MERR   999"
+
+.PP
+memory error 
+.SS "#define PI   3\&.14159265359"
+
+.PP
+long form of PI 
+.SS "#define R2D   180/3\&.14159265359"
+
+.PP
+convert radians to degrees 
+.SS "#define RERR   404"
+
+.PP
+reading error 
+.SS "#define RMSG   0"
+
+.SS "#define SMESG   stdout"
+
+.SS "#define SOFT   'crystal builder'"
+
+.PP
+application name 
+.SS "#define VERS   '3\&.7\&.0'"
+
+.PP
+current version of the application 
+.SS "#define WERR   303"
+
+.PP
+writing error\&. most likely fname==NULL 
+.SS "#define WMESG   stdout"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Crystal Builder v 3\&.7\&.0 from the source code\&.

@@ -1,0 +1,368 @@
+.TH "LATTICE" 3 "Wed Sep 30 2015" "Crystal Builder v 3.7.0" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+LATTICE \- 
+.SH SYNOPSIS
+.br
+.PP
+.SH "Detailed Description"
+.PP 
+
+.PP
+.RS 4
+
+.PP
+\fBPurpose:\fP 
+.PP
+.RE
+.PP
+.PP
+.nf
+*
+*  Base class for constructing an arbitrary crystal structure based 
+*  on the fractional coordinates of the basis atoms, lattice vectors
+*  and lattice parameters a,b,c.
+*
+* .fi
+.PP
+ 
+.PP
+.RS 4
+
+.PP
+\fBAuthor:\fP
+.RS 4
+Joseph M\&. Gonzalez
+.RE
+.PP
+\fBVersion:\fP
+.RS 4
+0\&.2
+.RE
+.PP
+\fBDate:\fP
+.RS 4
+Sep 13, 2015 19:16:20
+.RE
+.PP
+\fBContact\fP 
+.br
+ jmgonza6@mail.usf.edu
+.RE
+.PP
+
+.PP
+Inherited by \fBCubic\fP, \fBCustom\fP, \fBHexagonal\fP, \fBOrthorhombic\fP, \fBStructureLib\fP, and \fBTetragonal\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBatom_t\fP * \fBcopy_data\fP (\fBatom_t\fP *atomsI)"
+.br
+.ti -1c
+.RI "\fBLATTICE\fP ()"
+.br
+.ti -1c
+.RI "\fB~LATTICE\fP ()"
+.br
+.ti -1c
+.RI "void \fBshow_info\fP ()"
+.br
+.RI "\fIDisplay all parameters set during the GUI session\&. \fP"
+.ti -1c
+.RI "int \fBconvert_coordinates\fP (int \fBfractional\fP)"
+.br
+.RI "\fIConvert the cartesian atomic coordinates to fractional before writing the data\&. \fP"
+.ti -1c
+.RI "void \fBbuild_crystal\fP ()"
+.br
+.RI "\fIStart the build process using the parameters set during the GUI session\&. \fP"
+.in -1c
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "\fBMemory\fP * \fBmemory\fP"
+.br
+.RI "\fIpointer to memory allocation handler \fP"
+.ti -1c
+.RI "\fBatom_t\fP * \fBatoms\fP"
+.br
+.RI "\fIinternal structure to hold atomic info \fP"
+.ti -1c
+.RI "\fBatom_t\fP * \fBatomsOut\fP"
+.br
+.RI "\fIstructure for output atomic info \fP"
+.ti -1c
+.RI "\fBbasis_t\fP * \fBbasis\fP"
+.br
+.RI "\fIstructure for basis atoms in single unit cell \fP"
+.ti -1c
+.RI "double \fBalat\fP"
+.br
+.RI "\fIa lattice constant \fP"
+.ti -1c
+.RI "double \fBblat\fP"
+.br
+.RI "\fIb lattice constant \fP"
+.ti -1c
+.RI "double \fBclat\fP"
+.br
+.RI "\fIc lattice constant \fP"
+.ti -1c
+.RI "double \fBalpha\fP"
+.br
+.RI "\fIangle between \fCb & c\fP \fP"
+.ti -1c
+.RI "double \fBbeta\fP"
+.br
+.RI "\fIangle between \fCa & c\fP \fP"
+.ti -1c
+.RI "double \fBgamma\fP"
+.br
+.RI "\fIangle between \fCa & b\fP \fP"
+.ti -1c
+.RI "std::vector< double > \fBa1\fP"
+.br
+.RI "\fIa lattice vector, along [100] \fP"
+.ti -1c
+.RI "std::vector< double > \fBa2\fP"
+.br
+.RI "\fIb lattice vector, somewhere along [110] \fP"
+.ti -1c
+.RI "std::vector< double > \fBa3\fP"
+.br
+.RI "\fIc lattice vector, somewhere along [111] \fP"
+.ti -1c
+.RI "int * \fBatom_type\fP"
+.br
+.RI "\fIpointer to hold all unique types \fP"
+.ti -1c
+.RI "int \fBnatom\fP"
+.br
+.RI "\fItotal atoms created \fP"
+.ti -1c
+.RI "int \fBapcell\fP"
+.br
+.RI "\fInumber of atoms in a single unit cell \fP"
+.ti -1c
+.RI "int \fBntype\fP"
+.br
+.RI "\fInumber of atoms and atomic types in a unit cell \fP"
+.ti -1c
+.RI "int \fBnx\fP"
+.br
+.RI "\fInumber of unit along a1 \fP"
+.ti -1c
+.RI "int \fBny\fP"
+.br
+.RI "\fInumber of unit along a2 \fP"
+.ti -1c
+.RI "int \fBnz\fP"
+.br
+.RI "\fInumber of unit along a3 \fP"
+.ti -1c
+.RI "int \fBfractional\fP"
+.br
+.RI "\fI\fC1\fP if the output coordinates are fractional, \fC0\fP otherwise \fP"
+.ti -1c
+.RI "char * \fBfformat\fP"
+.br
+.RI "\fIoutput file format, lammps, vasp, dmol \fP"
+.ti -1c
+.RI "char * \fBname\fP"
+.br
+.RI "\fIname of the Bravais lattice, \fBCubic\fP, \fBTetragonal\fP, Graphene \&.\&.\&. \fP"
+.ti -1c
+.RI "char * \fBlstyle\fP"
+.br
+.RI "\fIstyle of the Bravais lattice \fP"
+.ti -1c
+.RI "std::vector< std::string > \fBspecies\fP"
+.br
+.RI "\fIvector containing unique element symbols \fP"
+.ti -1c
+.RI "std::vector< int > \fBelemCount\fP"
+.br
+.ti -1c
+.RI "std::vector< int > \fBtypeCount\fP"
+.br
+.RI "\fIkeep track of how many of each type, \fCtypeCount[0] -> type 1 \&.\&.\&.\fP \fP"
+.in -1c
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBatom_t\fP * \fBcart2fract\fP (std::vector< double > \fBa1\fP, std::vector< double > \fBa2\fP, std::vector< double > \fBa3\fP, \fBatom_t\fP *atomsI)"
+.br
+.RI "\fIConvert the cartesian coordinates to fractional before writing the data\&. \fP"
+.ti -1c
+.RI "void \fBnn_search\fP ()"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "LATTICE::LATTICE ()"
+
+.SS "LATTICE::~LATTICE ()"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void LATTICE::build_crystal ()"
+
+.PP
+Start the build process using the parameters set during the GUI session\&. 
+.SS "\fBatom_t\fP* LATTICE::cart2fract (std::vector< double > a1, std::vector< double > a2, std::vector< double > a3, \fBatom_t\fP * atomsI)\fC [private]\fP"
+
+.PP
+Convert the cartesian coordinates to fractional before writing the data\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIa1\fP - major lattice vector, in cartesian coordinates 
+.br
+\fIa2\fP - lattice vector, in \fCxy plane\fP, in cartesian coordinates 
+.br
+\fIa3\fP - lattice vector, in \fCxyz plane\fP, in cartesian coordinates 
+.br
+\fIatomsI\fP - 1D struct containing the atomic coordinates in 
+.RE
+.PP
+
+.SS "int LATTICE::convert_coordinates (int fractional)"
+
+.PP
+Convert the cartesian atomic coordinates to fractional before writing the data\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIfractional\fP - \fI1\fP if fractional \fI0\fP otherwise 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+1 if successful 
+.RE
+.PP
+
+.SS "\fBatom_t\fP* LATTICE::copy_data (\fBatom_t\fP * atomsI)"
+
+.SS "void LATTICE::nn_search ()\fC [private]\fP"
+
+.SS "void LATTICE::show_info ()"
+
+.PP
+Display all parameters set during the GUI session\&. 
+.SH "Field Documentation"
+.PP 
+.SS "std::vector<double> LATTICE::a1"
+
+.PP
+a lattice vector, along [100] 
+.SS "std::vector<double> LATTICE::a2"
+
+.PP
+b lattice vector, somewhere along [110] 
+.SS "std::vector<double> LATTICE::a3"
+
+.PP
+c lattice vector, somewhere along [111] 
+.SS "double LATTICE::alat"
+
+.PP
+a lattice constant 
+.SS "double LATTICE::alpha"
+
+.PP
+angle between \fCb & c\fP 
+.SS "int LATTICE::apcell"
+
+.PP
+number of atoms in a single unit cell 
+.SS "int* LATTICE::atom_type"
+
+.PP
+pointer to hold all unique types 
+.SS "\fBatom_t\fP* LATTICE::atoms"
+
+.PP
+internal structure to hold atomic info 
+.SS "\fBatom_t\fP* LATTICE::atomsOut"
+
+.PP
+structure for output atomic info 
+.SS "\fBbasis_t\fP* LATTICE::basis"
+
+.PP
+structure for basis atoms in single unit cell 
+.SS "double LATTICE::beta"
+
+.PP
+angle between \fCa & c\fP 
+.SS "double LATTICE::blat"
+
+.PP
+b lattice constant 
+.SS "double LATTICE::clat"
+
+.PP
+c lattice constant 
+.SS "std::vector<int> LATTICE::elemCount"
+
+.SS "char* LATTICE::fformat"
+
+.PP
+output file format, lammps, vasp, dmol 
+.SS "int LATTICE::fractional"
+
+.PP
+\fC1\fP if the output coordinates are fractional, \fC0\fP otherwise 
+.SS "double LATTICE::gamma"
+
+.PP
+angle between \fCa & b\fP 
+.SS "char* LATTICE::lstyle"
+
+.PP
+style of the Bravais lattice 
+.SS "\fBMemory\fP* LATTICE::memory"
+
+.PP
+pointer to memory allocation handler 
+.SS "char* LATTICE::name"
+
+.PP
+name of the Bravais lattice, \fBCubic\fP, \fBTetragonal\fP, Graphene \&.\&.\&. 
+.SS "int LATTICE::natom"
+
+.PP
+total atoms created 
+.SS "int LATTICE::ntype"
+
+.PP
+number of atoms and atomic types in a unit cell 
+.SS "int LATTICE::nx"
+
+.PP
+number of unit along a1 
+.SS "int LATTICE::ny"
+
+.PP
+number of unit along a2 
+.SS "int LATTICE::nz"
+
+.PP
+number of unit along a3 
+.SS "std::vector<std::string> LATTICE::species"
+
+.PP
+vector containing unique element symbols 
+.SS "std::vector<int> LATTICE::typeCount"
+
+.PP
+keep track of how many of each type, \fCtypeCount[0] -> type 1 \&.\&.\&.\fP 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Crystal Builder v 3\&.7\&.0 from the source code\&.

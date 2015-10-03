@@ -1,0 +1,110 @@
+.TH "Custom" 3 "Wed Sep 30 2015" "Crystal Builder v 3.7.0" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Custom \- 
+.SH SYNOPSIS
+.br
+.PP
+.SH "Detailed Description"
+.PP 
+
+.SH "\fBPurpose:\fP "
+.PP
+.PP
+.PP
+.nf
+/***************************************************************************************\
+/  Class to create a custom lattice from scratch by specifying the lattice              \
+/  parameters, (a, b, c) and the lattice angles (α, β, γ )                              \
+/  Additionally, the basis can be defined on the fly with any number of                 \
+/  atomic species within the unit cell.  The basis coordinates are assumed              \
+/  to be in fractional units, and in the correct stoichiometric order,                  \
+/  i.e. PETN = C10 H16 8N 24O ==> 1-11 basis atoms to C, 12-28 basis atoms to H, etc..  \
+/                                                                                       \ 
+/  The orientation of the crystal is such that a1 is colinear with the x-axis.          \
+/  a2 is obtained by rotating a1 by γ about the z-axis                                  \
+/  a3 is obtained by rotating a1 by -β about the y-axis                                 \
+/***************************************************************************************\
+.fi
+.PP
+.PP
+\fBAuthor:\fP
+.RS 4
+Joseph M\&. Gonzalez
+.RE
+.PP
+\fBVersion:\fP
+.RS 4
+0\&.1
+.RE
+.PP
+\fBDate:\fP
+.RS 4
+Sep 20, 2015 15:16:20
+.RE
+.PP
+\fBContact\fP 
+.br
+ jmgonza6@mail.usf.edu 
+.PP
+Inherits \fBLATTICE\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBCustom\fP (double latPars[3], double latAngles[3], std::vector< std::vector< double > > positions, std::string customName, std::vector< std::string > elemList, std::vector< int > \fBelemCount\fP)"
+.br
+.RI "\fIConstructor for creating a custom crystal when accessed from a gui session or when reading a parameters file\&. \fP"
+.ti -1c
+.RI "\fB~Custom\fP ()"
+.br
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Custom::Custom (double latPars[3], double latAngles[3], std::vector< std::vector< double > > positions, std::string customName, std::vector< std::string > elemList, std::vector< int > elemCount)"
+
+.PP
+Constructor for creating a custom crystal when accessed from a gui session or when reading a parameters file\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIlatPars\fP - array containing the lattice parameters in (Å) 
+.PD 0
+
+.IP "\(bu" 2
+latPars[0] = \fCa\fP, 
+.IP "\(bu" 2
+latPars[1] = \fCb\fP, 
+.IP "\(bu" 2
+latPars[2] = \fCc\fP 
+.PP
+.br
+\fIlatAngles\fP - array containing the lattice angles in (˚) 
+.PD 0
+
+.IP "\(bu" 2
+latAngles[0] = \fCα\fP, 
+.IP "\(bu" 2
+latAngles[1] = \fCβ\fP, 
+.IP "\(bu" 2
+latAngles[2] = \fCγ\fP 
+.PP
+.br
+\fIpositions\fP - basis atom positions 
+.br
+\fIcustomName\fP - name given to the custom lattice, currently this is the formula unit, i\&.e\&. MoS2 
+.br
+\fIelemList\fP - list of the atomic species specified by the user 
+.br
+\fIelemCount\fP - list containing the stoichiometric coefficients for elements in \fCelemList\fP 
+.RE
+.PP
+
+.SS "Custom::~Custom ()"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Crystal Builder v 3\&.7\&.0 from the source code\&.

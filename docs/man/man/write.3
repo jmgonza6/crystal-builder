@@ -1,0 +1,186 @@
+.TH "Write" 3 "Wed Sep 30 2015" "Crystal Builder v 3.7.0" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Write \- 
+.SH SYNOPSIS
+.br
+.PP
+.SH "Detailed Description"
+.PP 
+
+.SH "\fBPurpose:\fP "
+.PP
+.PP
+.PP
+.nf
+/********************************************************************************\
+/  Class for writing atomic crystal structure data in various DFT and MD formats \
+/  Currently, this class supports the following file formats:                    \
+/          MSI/DMol .car format,                                                 \
+/          LAMMPS input format,                                                  \
+/          VASP 5.x.x POSCAR format, Direct or Cartesian, no Selective Dynamics  \
+/                                                                                \
+/********************************************************************************\
+.fi
+.PP
+.PP
+\fBAuthor:\fP
+.RS 4
+Joseph M\&. Gonzalez
+.RE
+.PP
+\fBVersion:\fP
+.RS 4
+0\&.1
+.RE
+.PP
+\fBDate:\fP
+.RS 4
+Sep 13, 2015 19:16:20
+.RE
+.PP
+\fBContact\fP 
+.br
+ jmgonza6@mail.usf.edu 
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBWrite\fP ()"
+.br
+.ti -1c
+.RI "\fB~Write\fP ()"
+.br
+.ti -1c
+.RI "void \fBdmol\fP (char outname[], int natoms, std::vector< double > a1, std::vector< double > a2, std::vector< double > a3, \fBatom_t\fP *atoms, std::vector< std::string > speciesList, std::vector< int > speciesCount)"
+.br
+.RI "\fI\fBWrite\fP the crystal structure defined by the user in the DMol \fC\&.car\fP format\&. \fP"
+.ti -1c
+.RI "void \fBlammps\fP (char outname[], char comment[], int natoms, std::vector< double > a1, std::vector< double > a2, std::vector< double > a3, \fBatom_t\fP *atoms, std::vector< std::string > speciesList)"
+.br
+.RI "\fI\fBWrite\fP the crystal structure defined by the user in the LAMMPS \fC\&.input\fP format\&. \fP"
+.ti -1c
+.RI "void \fBposcar\fP (char comment[], int natoms, std::vector< double > a1, std::vector< double > a2, std::vector< double > a3, \fBatom_t\fP *atoms, int fractional, std::vector< std::string > speciesList, std::vector< int > speciesCount)"
+.br
+.RI "\fI\fBWrite\fP the crystal structure defined by the user in the VASP \fCPOSCAR\fP format\&. \fP"
+.in -1c
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "std::string \fBmass2elem\fP (double mass)"
+.br
+.ti -1c
+.RI "double \fBelem2mass\fP (std::string element)"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBMemory\fP * \fBmemory\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Write::Write ()"
+
+.SS "Write::~Write ()"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void Write::dmol (char outname[], int natoms, std::vector< double > a1, std::vector< double > a2, std::vector< double > a3, \fBatom_t\fP * atoms, std::vector< std::string > speciesList, std::vector< int > speciesCount)"
+
+.PP
+\fBWrite\fP the crystal structure defined by the user in the DMol \fC\&.car\fP format\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIoutname\fP - name of the regular file for writing 
+.br
+\fInatoms\fP - total number of atoms created 
+.br
+\fIa1\fP - major lattice vector along x 
+.br
+\fIa2\fP - lattice vector in xy plane 
+.br
+\fIa3\fP - lattice vector in xyz plane 
+.br
+\fIatoms\fP - Structure containing the atomic positions, and atomic type numbers 
+.br
+\fIspeciesList\fP - list of all unique elements 
+.br
+\fIspeciesCount\fP - 1D vector containing the count of each type in \fCspeciesList\fP 
+.RE
+.PP
+
+.SS "double Write::elem2mass (std::string element)\fC [private]\fP"
+
+.SS "void Write::lammps (char outname[], char comment[], int natoms, std::vector< double > a1, std::vector< double > a2, std::vector< double > a3, \fBatom_t\fP * atoms, std::vector< std::string > speciesList)"
+
+.PP
+\fBWrite\fP the crystal structure defined by the user in the LAMMPS \fC\&.input\fP format\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIoutname\fP - name of the regular file for writing 
+.br
+\fIcomment\fP - a comment line describing the crystal 
+.br
+\fInatoms\fP - total number of atoms created 
+.br
+\fIa1\fP - major lattice vector along x 
+.br
+\fIa2\fP - lattice vector in xy plane 
+.br
+\fIa3\fP - lattice vector in xyz plane 
+.br
+\fIatoms\fP - Structure containing the atomic positions, and atomic type numbers 
+.br
+\fIspeciesList\fP - list of all unique element strings 
+.RE
+.PP
+
+.SS "std::string Write::mass2elem (double mass)\fC [private]\fP"
+
+.SS "void Write::poscar (char comment[], int natoms, std::vector< double > a1, std::vector< double > a2, std::vector< double > a3, \fBatom_t\fP * atoms, int fractional, std::vector< std::string > speciesList, std::vector< int > speciesCount)"
+
+.PP
+\fBWrite\fP the crystal structure defined by the user in the VASP \fCPOSCAR\fP format\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIcomment\fP - a comment line describing the crystal 
+.br
+\fInatoms\fP - total number of atoms created 
+.br
+\fIa1\fP - major lattice vector along x 
+.br
+\fIa2\fP - lattice vector in xy plane 
+.br
+\fIa3\fP - lattice vector in xyz plane 
+.br
+\fIatoms\fP - Structure containing the atomic positions, and atomic type numbers 
+.br
+\fIfractional\fP - \fCcoords\fP is in fractional units 
+.PD 0
+
+.IP "\(bu" 2
+\fC1\fP = fractional \fC0\fP = cartesian 
+.PP
+.br
+\fIspeciesList\fP - list of all unique element strings 
+.br
+\fIspeciesCount\fP - 1D vector containing the count of each type in \fCspeciesList\fP 
+.RE
+.PP
+
+.SH "Field Documentation"
+.PP 
+.SS "\fBMemory\fP* Write::memory\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Crystal Builder v 3\&.7\&.0 from the source code\&.

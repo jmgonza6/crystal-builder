@@ -1,0 +1,128 @@
+\hypertarget{class_errors}{}\section{Errors Class Reference}
+\label{class_errors}\index{Errors@{Errors}}
+
+
+\subsection{Detailed Description}
+\subsection*{{\bfseries Purpose\+:} }
+
+\begin{DoxyVerb}/*****************************************************************************\
+/  Class to process different types of warnings, errors and usage info        \
+/                                                                             \
+/*****************************************************************************\
+\end{DoxyVerb}
+
+
+\begin{DoxyAuthor}{Author}
+Joseph M. Gonzalez
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+Sep 13, 2015 19\+:16\+:20
+\end{DoxyDate}
+{\bfseries Contact} ~\newline
+ \href{mailto:jmgonza6@mail.usf.edu}{\tt jmgonza6@mail.\+usf.\+edu} \subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_errors_aa266bfe6d658cd3e169b18277b902e56}{Errors} ()
+\item 
+\hyperlink{class_errors_ae7e127294d7af8814b4141eb82cdf80e}{$\sim$\+Errors} ()
+\item 
+void \hyperlink{class_errors_a7edc156cbfe343a26fbae1d6f6bdd215}{kill} (const char $\ast$file, const char $\ast$subroutine, int line, const char $\ast$message)
+\begin{DoxyCompactList}\small\item\em Throw a fatal error and kill the entire run. \end{DoxyCompactList}\item 
+void \hyperlink{class_errors_a7f4042d6992ae40907919a2494cf2c80}{warn} (const char $\ast$file, const char $\ast$subroutine, int line, const char $\ast$message)
+\begin{DoxyCompactList}\small\item\em Throw a warning, print a message and continue on. \end{DoxyCompactList}\item 
+void \hyperlink{class_errors_a3fbf3565c28224fe193828677cb8a277}{show\+\_\+usage\+\_\+info} (const char $\ast$func\+Name)
+\begin{DoxyCompactList}\small\item\em Show a list of the possible parameters and operational modes of the program. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_errors_aa266bfe6d658cd3e169b18277b902e56}{}\index{Errors@{Errors}!Errors@{Errors}}
+\index{Errors@{Errors}!Errors@{Errors}}
+\subsubsection[{Errors}]{\setlength{\rightskip}{0pt plus 5cm}Errors\+::\+Errors (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_errors_aa266bfe6d658cd3e169b18277b902e56}
+\hypertarget{class_errors_ae7e127294d7af8814b4141eb82cdf80e}{}\index{Errors@{Errors}!````~Errors@{$\sim$\+Errors}}
+\index{````~Errors@{$\sim$\+Errors}!Errors@{Errors}}
+\subsubsection[{$\sim$\+Errors}]{\setlength{\rightskip}{0pt plus 5cm}Errors\+::$\sim$\+Errors (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_errors_ae7e127294d7af8814b4141eb82cdf80e}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_errors_a7edc156cbfe343a26fbae1d6f6bdd215}{}\index{Errors@{Errors}!kill@{kill}}
+\index{kill@{kill}!Errors@{Errors}}
+\subsubsection[{kill}]{\setlength{\rightskip}{0pt plus 5cm}void Errors\+::kill (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{file, }
+\item[{const char $\ast$}]{subroutine, }
+\item[{int}]{line, }
+\item[{const char $\ast$}]{message}
+\end{DoxyParamCaption}
+)}\label{class_errors_a7edc156cbfe343a26fbae1d6f6bdd215}
+
+
+Throw a fatal error and kill the entire run. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file} & -\/ file in which error occured \\
+\hline
+{\em subroutine} & -\/ subroutine throwing the error \\
+\hline
+{\em line} & -\/ line on which the error occured \\
+\hline
+{\em message} & -\/ message to the user with the details of the error \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_errors_a3fbf3565c28224fe193828677cb8a277}{}\index{Errors@{Errors}!show\+\_\+usage\+\_\+info@{show\+\_\+usage\+\_\+info}}
+\index{show\+\_\+usage\+\_\+info@{show\+\_\+usage\+\_\+info}!Errors@{Errors}}
+\subsubsection[{show\+\_\+usage\+\_\+info}]{\setlength{\rightskip}{0pt plus 5cm}void Errors\+::show\+\_\+usage\+\_\+info (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{func\+Name}
+\end{DoxyParamCaption}
+)}\label{class_errors_a3fbf3565c28224fe193828677cb8a277}
+
+
+Show a list of the possible parameters and operational modes of the program. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em func\+Name} & -\/ name of the calling function \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_errors_a7f4042d6992ae40907919a2494cf2c80}{}\index{Errors@{Errors}!warn@{warn}}
+\index{warn@{warn}!Errors@{Errors}}
+\subsubsection[{warn}]{\setlength{\rightskip}{0pt plus 5cm}void Errors\+::warn (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{file, }
+\item[{const char $\ast$}]{subroutine, }
+\item[{int}]{line, }
+\item[{const char $\ast$}]{message}
+\end{DoxyParamCaption}
+)}\label{class_errors_a7f4042d6992ae40907919a2494cf2c80}
+
+
+Throw a warning, print a message and continue on. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file} & -\/ file in which warning occured \\
+\hline
+{\em subroutine} & -\/ subroutine throwing the warning \\
+\hline
+{\em line} & -\/ line on which the warning occured \\
+\hline
+{\em message} & -\/ message to the user with the details of the warning \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/util/\hyperlink{common_8h}{common.\+h}\end{DoxyCompactItemize}
