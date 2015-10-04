@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['reader',['Reader',['../class_reader.html',1,'']]]
+  ['structurelib',['StructureLib',['../class_structure_lib.html',1,'']]]
 ];
