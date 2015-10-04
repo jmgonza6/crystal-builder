@@ -218,8 +218,8 @@ After following the steps in **1)**, **2)**, or **3)**, you can chose to simply 
         '1'                   view the xz "a-c" plane of the crystal
         '2'                   view the yz "b-c" plane of the crystal
         '3'                   rotate crystal about x by -45˚, and then -45˚ about z, 'psuedo' perspective view
-        '+'                   increase the particle radius uniformly
-        '-'                   decrease the particle radius uniformly
+        '+'                   increase the bond radius uniformly
+        '-'                   decrease the bond radius uniformly
    
         Up arrow              Shift the crystal in positive vertical screen direction
         Down arrow            Shift the crystal in negative vertical screen direction
