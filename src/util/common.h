@@ -199,7 +199,7 @@ class Errors {
 };
 
 /**
- * \class MEMORY common.h "common.h"
+ * \class Memory common.h "common.h"
  * \b Purpose:
   *  =============
   \verbatim 

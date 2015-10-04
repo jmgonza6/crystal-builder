@@ -240,8 +240,8 @@ render_init(int                               natom,
 	// pradii = memory->new_1d<float>(110);
 	float minr,maxr;
 
-	minr = 0.1;
-	maxr = 0.7;
+	minr = 0.2;
+	maxr = 0.8;
 	float dx = (maxr-minr)/(float(110-1));
 	for (int d=0;d<110;d++) {
 		pradii[d] = minr + d * dx;
