@@ -35,10 +35,10 @@
             <p>Build a <a href="#standard"> standard</a> crystal using the GUI</p>
           </li>
           <li>
-            <p>Select a <a href="#library"> library</a> structure using the GUI</p>
+            <p>Build a <a href="#library"> library</a> structure using the GUI</p>
           </li>
           <li>
-            <p>Select a <a href="#custom"> custom</a> structure using the GUI</p>
+            <p>Build a <a href="#custom"> custom</a> structure using the GUI</p>
           </li>
           <li>
             <p>Drive the application from the <a href="#cmdline"> command line</a> using a parameters file</p>
@@ -51,13 +51,13 @@
             <li>
               <h3><a id="standard" class="anchor" href="#standard" aria-hidden="true"><span class="octicon octicon-link"></span></a>Standard</h3>
               <p>
-                To begin, select one of the crystals from the drop down and fill in the relevant parameters presented in the pop-up menu. Then nvaigate to the <i>Modify</i> tab to define a chemical element. If you wish to create a supercell, then fill in any of the three empty boxes. By default, these are set to 1x1x1, and so any of can of them be left empty. To finish, navigate to the <i>Output</i> tab, and select a format from the dropdown. If choosing the <i>LAMMPS</i> or <i>DMol</i> format, then you must specify a file name, using the Save as button, for the <i>VASP</i> format, this is unnecessary since the file written is named <i>POSCAR</i>.  At any time, if a mistake has been made, the <i>Reset</i> tab in the lower portion of the GUI window can be hit which will erase all parameters.
+                To begin, select one of the crystals from the drop down and fill in the relevant parameters presented in the pop-up menu. Then nvaigate to the <i>Modify</i> tab to define a chemical element. If you wish to create a supercell, then fill in any of the three empty boxes. By default, these are set to 1x1x1, and so any of can of them be left empty. To finish, navigate to the <i>Output</i> tab, and select a format from the dropdown. If choosing the <i>LAMMPS</i> or <i>DMol</i> format, then you must specify a file name, by using the <i>Save as</i> button. If using the <i>VASP</i> format, this is unnecessary since the file written is named <i>POSCAR</i>.  At any time, if a mistake has been made, the <i>Reset</i> tab in the lower portion of the GUI window can be hit which will erase all parameters.
             </p>
           </li>
           <li>
             <h3><a id="library" class="anchor" href="#library" aria-hidden="true"><span class="octicon octicon-link"></span></a>Library</h3>
             <p>
-              To begin, select <i>Library</i> from the <i>Crystals</i> dropdown menu. If building one of the 2D materials, some interaction may be necessary. In the case of graphene, the <i>a</i> lattice parameter is required. For the layered (T)MDC structures, the default is to use MoS2, and <i>a</i> lattice parameters of 3.19 Å for all four cases. If you wish to build a different crystal, then define the stoichiometry on the bottom of the <i>Modify</i> tab. The syntax for defining the stoichiometry is the following:
+              To begin, select <i>Library</i> from the <i>Crystals</i> dropdown menu. If building one of the 2D materials, some interaction may be necessary. In the case of graphene, the <i>a</i> lattice parameter is required. For the layered MDC structures, the default is to use SnS<sub>2</sub>, and <i>a</i> lattice parameters of 3.684 Å for both polytypes. For the layered TMDC structures, the default is to use MoS<sub>2</sub>, and <i>a</i> lattice parameters of 3.19 Å for both polytypes. If you wish to build a different crystal, then define the stoichiometry on the bottom of the <i>Modify</i> tab. The syntax for defining the stoichiometry is the following:
             </p>
             <code>Type1:n1,Type2:n2 i.e. Mo:1,S:2 or Sn:1,Se:2</code>
             <p>
