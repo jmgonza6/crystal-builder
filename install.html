@@ -22,18 +22,18 @@
       <h1>
       <a id="building-the-libraries" class="anchor" href="#building-the-libraries" aria-hidden="true"><span class="octicon octicon-link"></span></a>Build options</h1>
 
-      <p>This application is designed to be driven by a GUI with the final crystal structure being rendered in 3D and displayed on the screen.  However, there a 4 ways in which the application can be built:</p>
+      <p>This application is designed to be driven by a GUI with the final crystal structure being rendered in 3D and displayed on the screen.  However, there are 4 ways in which the application can be built:</p>
 
       <ol> 
-        <li><p>GUI + 3D graphics rendering</p></li>
+        <li><p>GUI + 3D graphics rendering, <b>default</b></p></li>
         <li><p>GUI only, no 3D graphics rendering</p>
         <li><p>Command line interface + 3D graphics rendering</p>
         <li><p>Command line interface only, no 3D graphics rendering</p>
       </ol>
 
-      <p>For option 1, the GTK+ 2.0 and Open GL libraries must be installed and in the usual path.  If they are not, see the section below on <a href="#dependencies"> Dependencies</a>.</p>
+      <p>For <b>option 1</b>, the GTK+ 2.0 and Open GL libraries must be installed and in the usual path.  If they are not, see the section below on <a href="#dependencies"> Dependencies</a>.</p>
 
-      <p>For option 2, only the GTK+ 2.0 libraries are required and in the usual path.  If they are not, see the section below on <a href="#gtk"> GTK dependencies</a>.  Additionally, you must comment out the line defining the Open GL libraries in the Makefile, see below</p>
+      <p>For <b>option 2</b>, only the GTK+ 2.0 libraries are required and in the usual path.  If they are not, see the section below on <a href="#gtk"> GTK dependencies</a>.  Additionally, you must comment out the line defining the Open GL libraries in the Makefile, see below</p>
       
 <pre><code>## Mac OS X uses "frameworks"
 ifeq ($(OSTYPE), Darwin)
@@ -44,13 +44,13 @@ ifeq ($(OSTYPE), Linux)
 GL = -lGL -lGLU -lglut -DOGL
 endif</code></pre>
 
-    <p>For option 3, only the Open GL libraries are required and in the usual path.  If they are not, see the section below on <a href="#gl"> GL dependencies</a>.  Additionally, you must comment out the line defining the GTK libraries in the Makefile, see below</p>
+    <p>For <b>option 3</b>, only the Open GL libraries are required and in the usual path.  If they are not, see the section below on <a href="#gl"> GL dependencies</a>.  Additionally, you must comment out the line defining the GTK libraries in the Makefile, see below</p>
       
 <pre><code>## Load the GTK.  Use pkg-config to define the proper
 ## CFLAGS and LD_LIB parameters
 GTK=`pkg-config --cflags --libs gtk+-2.0` -DUSE_GTK</code></pre>
 
-    <p>For option 4, none of the external libraries are required.  Additionally, you must comment out the line defining the GTK and Open GL libraries in the Makefile, see below</p>
+    <p>For <b>option 4</b>, none of the external libraries are required.  Additionally, you must comment out the line defining the GTK and Open GL libraries in the Makefile, see below</p>
 
 <pre><code>## Mac OS X uses "frameworks"
 ifeq ($(OSTYPE), Darwin)
