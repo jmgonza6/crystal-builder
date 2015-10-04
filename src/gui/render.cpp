@@ -12,6 +12,7 @@
 // backround color changing
 // translation of crystal via arrow keys
 //
+float   bradius = 0.3;
 
 float   pradius = 0.2;                   // starting particle radius
 float   MINRADIUS = 0.05f;               // minimum radius for particles, prevents using a negative radius
