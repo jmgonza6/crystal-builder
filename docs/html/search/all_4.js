@@ -6,5 +6,5 @@ var searchData=
   ['elements',['elements',['../struct_periodic_table.html#ab11add4b0907eeaabe309791f8c2a4a4',1,'PeriodicTable']]],
   ['elemlist',['elemList',['../class_reader.html#a81df051804ba55004944e2d6f9a43cf7',1,'Reader::elemList()'],['../class_gui.html#a33f327cf44f8231253a244d582cc7a9c',1,'Gui::elemList()']]],
   ['emesg',['EMESG',['../common_8h.html#a1663ba4617996e53c5287e05398f81ef',1,'common.h']]],
-  ['errors',['Errors',['../class_errors.html',1,'Errors'],['../class_i_n_t_e_r_f_a_c_e.html#aeff8d391b9df980974a10c25b7667b33',1,'INTERFACE::errors()'],['../class_errors.html#aa266bfe6d658cd3e169b18277b902e56',1,'Errors::Errors()']]]
+  ['errors',['Errors',['../class_errors.html',1,'Errors'],['../class_errors.html#aa266bfe6d658cd3e169b18277b902e56',1,'Errors::Errors()'],['../class_i_n_t_e_r_f_a_c_e.html#aeff8d391b9df980974a10c25b7667b33',1,'INTERFACE::errors()']]]
 ];

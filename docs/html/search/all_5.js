@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['fcc',['FCC',['../class_cubic.html#a699d8d8aec47dc6a32b05543024f1f3c',1,'Cubic::FCC()'],['../class_hexagonal.html#adb86bd086e5ee120214a2bf246f96c16',1,'Hexagonal::FCC()'],['../class_orthorhombic.html#af070eba51ade7d800bfc5adae33604e5',1,'Orthorhombic::FCC()'],['../class_tetragonal.html#a1a795789398fdc7ede8c0a997c72abd0',1,'Tetragonal::FCC()']]],
+  ['fcc',['FCC',['../class_cubic.html#a699d8d8aec47dc6a32b05543024f1f3c',1,'Cubic::FCC()'],['../class_orthorhombic.html#af070eba51ade7d800bfc5adae33604e5',1,'Orthorhombic::FCC()'],['../class_tetragonal.html#a1a795789398fdc7ede8c0a997c72abd0',1,'Tetragonal::FCC()']]],
   ['fdebug',['FDEBUG',['../common_8h.html#ac625558bd55437fa91ea938ca9bb4fb1',1,'common.h']]],
   ['ferr',['FERR',['../common_8h.html#aafe1f6745f2c0a01f867c686bd69e5c7',1,'common.h']]],
   ['fformat',['fformat',['../class_l_a_t_t_i_c_e.html#ac1c63af3a896cf4d443347cd202698f7',1,'LATTICE']]],
